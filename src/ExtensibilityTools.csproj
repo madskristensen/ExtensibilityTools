@@ -137,6 +137,8 @@
     <Compile Include="Pkgdef\Classify\PkgdefClassifier.cs" />
     <Compile Include="Pkgdef\Classify\PkgdefClassifierProvider.cs" />
     <Compile Include="Pkgdef\ContentType\PkgdefContentTypeDefinition.cs" />
+    <Compile Include="Pkgdef\Tagger\BraceMatchingTagger.cs" />
+    <Compile Include="Pkgdef\Tagger\BraceMatchingTaggerProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

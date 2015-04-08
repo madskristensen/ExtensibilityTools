@@ -46,10 +46,10 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     var group = match.Groups["path"];
                     string path = group.Value;
 
-                    if (cspan.Span.Snapshot.Length < span.Start + group.Index + group.Length)
-                        continue;
+                    if (span.Snapshot.Length <= span.Start + group.Index + group.Length)
+                        break;
 
-                    var hit = new SnapshotSpan(cspan.Span.Snapshot, span.Start + group.Index, group.Length);
+                    var hit = new SnapshotSpan(span.Snapshot, span.Start + group.Index, group.Length);
 
                     if (path.Trim().Length < path.Length)
                         yield return CreateError(line, hit, "Remove whitespace around the registry key path");

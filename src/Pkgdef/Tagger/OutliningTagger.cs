@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Threading;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
 
@@ -49,12 +50,19 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
+        private static bool _isParsing;
+
         void BufferChanged(object sender, TextContentChangedEventArgs e)
         {
-            if (e.After != buffer.CurrentSnapshot)
+            if (e.After != buffer.CurrentSnapshot || _isParsing)
                 return;
 
-            this.ReParse();
+            _isParsing = true;
+            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+            {
+                this.ReParse();
+                _isParsing = false;
+            }), DispatcherPriority.ApplicationIdle, null);
         }
 
         void ReParse()
@@ -118,8 +126,16 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             {
                 var start = regions.First().StartOffset;
                 var end = regions.Last().EndOffset;
-                this.TagsChanged(this, new SnapshotSpanEventArgs(
-                    new SnapshotSpan(this.snapshot, Span.FromBounds(start, end - start))));
+
+                if (this.snapshot.Length < end)
+                    return;
+
+                Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+                {
+                    this.TagsChanged(this, new SnapshotSpanEventArgs(
+                        new SnapshotSpan(this.snapshot, start, end - start))
+                    );
+                }), DispatcherPriority.ApplicationIdle, null);
             }
         }
     }

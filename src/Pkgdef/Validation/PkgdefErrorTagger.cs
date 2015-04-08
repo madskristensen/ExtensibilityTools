@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Shell;
@@ -35,7 +36,21 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             foreach (var cspan in classificationSpans)
             {
-                if (cspan.ClassificationType.IsOfType(PkgdefClassificationTypes.RegKey))
+
+                if (cspan.ClassificationType.IsOfType(PredefinedClassificationTypeNames.SymbolDefinition))
+                {
+                    string text = cspan.Span.GetText();
+
+                    if (text.StartsWith("$", StringComparison.Ordinal))
+                    {
+                        string word = text.Trim('$');
+
+                        if (!CompletionItem.Items.Any(i => i.Name == word))
+                            yield return CreateError(line, cspan.Span, "The keyword '$" + word + "$' doesn't exist");
+                    }
+                }
+
+                else if (cspan.ClassificationType.IsOfType(PkgdefClassificationTypes.RegKey))
                 {
                     string lineText = line.GetText();
 
@@ -57,11 +72,13 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                         yield return CreateError(line, hit, "Specify a registry key path");
                     else if (!match.Value.EndsWith("]"))
                         yield return CreateError(line, hit, "Unclosed registry key entry");
+                    else if (match.Value.Contains("/"))
+                        yield return CreateError(line, hit, "Use the backslash character as delimiter instead of forward slash.");
 
-                    break;
+                    //break;
                 }
 
-                if (cspan.ClassificationType.IsOfType(PredefinedClassificationTypeNames.String))
+                else if (cspan.ClassificationType.IsOfType(PredefinedClassificationTypeNames.String))
                 {
                     string lineText = line.GetText();
 
@@ -74,16 +91,21 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                         if (text.Length <= 1 || text[text.Length - 1] != '"')
                         {
                             yield return CreateError(line, hit, "Newline in constant");
-                            yield break;
+                            //yield break;
                         }
                     }
-
                 }
             }
         }
 
         private TagSpan<ErrorTag> CreateError(ITextSnapshotLine line, SnapshotSpan span, string message)
         {
+            foreach (ErrorTask existing in _errorlist.Tasks)
+            {
+                if (existing.Line == line.LineNumber && existing.Text.EndsWith(message))
+                    return null;
+            }
+
             ErrorTask task = CreateErrorTask(line, span, "Extensibility Tools: " + message);
             _errorlist.Tasks.Add(task);
 
@@ -129,7 +151,6 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 }
             }
         }
-
 
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged
         {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Microsoft.VisualStudio.Language.StandardClassification;
@@ -9,7 +10,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 {
     class PkgdefClassifier : IClassifier
     {
-        private IClassificationType _dword, _comment, _regkey, _string, _equals, _keyword;
+        private IClassificationType _dword, _comment, _regkey, _string, _equals, _keyword, _guid;
 
         public PkgdefClassifier(IClassificationTypeRegistryService registry)
         {
@@ -19,51 +20,68 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             _string = registry.GetClassificationType(PredefinedClassificationTypeNames.String);
             _equals = registry.GetClassificationType(PredefinedClassificationTypeNames.Operator);
             _keyword = registry.GetClassificationType(PredefinedClassificationTypeNames.SymbolDefinition);
+            _guid = registry.GetClassificationType(PkgdefClassificationTypes.Guid);
         }
 
-        public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)
+        public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span2)
         {
             IList<ClassificationSpan> list = new List<ClassificationSpan>();
+            //string[] lines = span.GetText().Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var lines = span2.Snapshot.Lines;
 
-            string text = span.GetText();
 
-            foreach (Match match in Variables.Comment.Matches(text))
+            foreach (var line in lines)
             {
-                var comment = match.Groups["comment"];
-                SnapshotSpan commentSpan = new SnapshotSpan(span.Snapshot, span.Start + comment.Index, comment.Length);
-                list.Add(new ClassificationSpan(commentSpan, _comment));
+                SnapshotSpan span = line.Extent;
+                string text = span.GetText();                
+                bool isCommentLine = false;
 
-                if (match.Index == 0)
-                    return list;
-            }
+                foreach (Match match in Variables.Comment.Matches(text))
+                {
+                    var comment = match.Groups["comment"];
+                    SnapshotSpan commentSpan = new SnapshotSpan(span.Snapshot, span.Start + comment.Index, comment.Length);
+                    list.Add(new ClassificationSpan(commentSpan, _comment));
 
-            foreach (Match match in Variables.Keyword.Matches(text))
-            {
-                SnapshotSpan keywordSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
-                list.Add(new ClassificationSpan(keywordSpan, _keyword));
-            }
+                    isCommentLine = match.Index == 0;
+                }
 
-            foreach (Match match in Variables.RegKey.Matches(text))
-            {
-                SnapshotSpan regSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
-                list.Add(new ClassificationSpan(regSpan, _regkey));
-            }
+                if (isCommentLine)
+                    continue;
 
-            foreach (Match match in Variables.String.Matches(text))
-            {
-                SnapshotSpan stringSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
-                list.Add(new ClassificationSpan(stringSpan, _string));
-            }
+                foreach (Match match in Variables.Keyword.Matches(text))
+                {
+                    SnapshotSpan keywordSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
+                    list.Add(new ClassificationSpan(keywordSpan, _keyword));
+                }
 
-            foreach (Match match in Variables.Dword.Matches(text))
-            {
-                var dword = match.Groups["dword"];
-                SnapshotSpan dwordSpan = new SnapshotSpan(span.Snapshot, span.Start + dword.Index, dword.Length);
-                list.Add(new ClassificationSpan(dwordSpan, _dword));
+                foreach (Match match in Variables.RegKey.Matches(text))
+                {
+                    SnapshotSpan regSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
+                    list.Add(new ClassificationSpan(regSpan, _regkey));
+                }
 
-                var equals = match.Groups["operator"];
-                SnapshotSpan equalsSpan = new SnapshotSpan(span.Snapshot, span.Start + equals.Index, equals.Length);
-                list.Add(new ClassificationSpan(equalsSpan, _equals));
+                foreach (Match match in Variables.String.Matches(text))
+                {
+                    SnapshotSpan stringSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
+                    list.Add(new ClassificationSpan(stringSpan, _string));
+                }
+
+                foreach (Match match in Variables.Guid.Matches(text))
+                {
+                    SnapshotSpan guidSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
+                    list.Add(new ClassificationSpan(guidSpan, _guid));
+                }
+
+                foreach (Match match in Variables.Dword.Matches(text))
+                {
+                    var dword = match.Groups["dword"];
+                    SnapshotSpan dwordSpan = new SnapshotSpan(span.Snapshot, span.Start + dword.Index, dword.Length);
+                    list.Add(new ClassificationSpan(dwordSpan, _dword));
+
+                    var equals = match.Groups["operator"];
+                    SnapshotSpan equalsSpan = new SnapshotSpan(span.Snapshot, span.Start + equals.Index, equals.Length);
+                    list.Add(new ClassificationSpan(equalsSpan, _equals));
+                }
             }
 
             return list;

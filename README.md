@@ -1,3 +1,4 @@
+
 ## Extensibility Tools for Visual Studio
 
 [![Build status](https://ci.appveyor.com/api/projects/status/hv6uyc059rqbc6fj?svg=true)](https://ci.appveyor.com/project/madskristensen/extensibilitytools)
@@ -10,5 +11,11 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
 #### Syntax highlighting
 Colorizes registry keys, strings, keywords, comments and more.
 
+#### Intellisense
+Intellisense is provided for tokens and GUIDs
+
 #### Brace matching
 Matches parantheses and square brackets.
+
+#### Validation
+Validates various common mistakes like unclosed strings and braces.

@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.Language.Intellisense;
+using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
@@ -34,6 +35,12 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             if (_errorList == null)
                 return;
+
+            CommandFilter filter = new CommandFilter(view, CompletionBroker);
+
+            IOleCommandTarget next;
+            textViewAdapter.AddCommandFilter(filter, out next);
+            filter.Next = next;
 
             view.Closed += OnViewClosed;
         }

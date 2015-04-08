@@ -10,12 +10,16 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
     {
         public const string Dword = "Pkgdef_dword";
         public const string RegKey = "Pkgdef_regkey";
+        public const string Guid = "Pkgdef_guid";
 
         [Export, Name(PkgdefClassificationTypes.Dword)]
         public static ClassificationTypeDefinition PkgdefDwordClassification { get; set; }
 
         [Export, Name(PkgdefClassificationTypes.RegKey)]
         public static ClassificationTypeDefinition PkgdefRegKeyClassification { get; set; }
+
+        [Export, Name(PkgdefClassificationTypes.Guid)]
+        public static ClassificationTypeDefinition PkgdefGuidClassification { get; set; }
     }
 
     [Export(typeof(EditorFormatDefinition))]
@@ -43,6 +47,19 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         {
             IsBold = true;
             DisplayName = "Pkgdef Registry Key";
+        }
+    }
+
+    [Export(typeof(EditorFormatDefinition))]
+    [ClassificationType(ClassificationTypeNames = PkgdefClassificationTypes.Guid)]
+    [Name(PkgdefClassificationTypes.Guid)]
+    [Order(After = Priority.High)]
+    [UserVisible(true)]
+    internal sealed class PkgdefGuidFormatDefinition : ClassificationFormatDefinition
+    {
+        public PkgdefGuidFormatDefinition()
+        {
+            DisplayName = "Pkgdef Guid";
         }
     }
 }

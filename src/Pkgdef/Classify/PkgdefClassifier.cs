@@ -10,11 +10,6 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
     class PkgdefClassifier : IClassifier
     {
         private IClassificationType _dword, _comment, _regkey, _string, _equals, _keyword;
-        private static Regex _rxComment = new Regex(@"(^([\s]+)?(?<comment>;.+))|(?<comment>//.+)", RegexOptions.Compiled);
-        private static Regex _rxRegKey = new Regex(@"(\[)([^\]]+)(\])", RegexOptions.Compiled);
-        private static Regex _rxString = new Regex(@"("")([^""]+)?("")", RegexOptions.Compiled);
-        private static Regex _rxDword = new Regex(@"^([\s]+)?(?<dword>(@)|("")([^""]+)(""))(?<operator>([\s]+)?=)", RegexOptions.Compiled);
-        private static Regex _rxKeyword = new Regex(@"\$([^\$]+)\$|(?(?<==)([\s]+)?(dword|hex)(?=:))", RegexOptions.Compiled);
 
         public PkgdefClassifier(IClassificationTypeRegistryService registry)
         {
@@ -32,7 +27,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             string text = span.GetText();
 
-            foreach (Match match in _rxComment.Matches(text))
+            foreach (Match match in Variables.Comment.Matches(text))
             {
                 var comment = match.Groups["comment"];
                 SnapshotSpan commentSpan = new SnapshotSpan(span.Snapshot, span.Start + comment.Index, comment.Length);
@@ -42,19 +37,25 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     return list;
             }
 
-            foreach (Match match in _rxRegKey.Matches(text))
+            foreach (Match match in Variables.Keyword.Matches(text))
+            {
+                SnapshotSpan keywordSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
+                list.Add(new ClassificationSpan(keywordSpan, _keyword));
+            }
+
+            foreach (Match match in Variables.RegKey.Matches(text))
             {
                 SnapshotSpan regSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
                 list.Add(new ClassificationSpan(regSpan, _regkey));
             }
 
-            foreach (Match match in _rxString.Matches(text))
+            foreach (Match match in Variables.String.Matches(text))
             {
                 SnapshotSpan stringSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
                 list.Add(new ClassificationSpan(stringSpan, _string));
             }
 
-            foreach (Match match in _rxDword.Matches(text))
+            foreach (Match match in Variables.Dword.Matches(text))
             {
                 var dword = match.Groups["dword"];
                 SnapshotSpan dwordSpan = new SnapshotSpan(span.Snapshot, span.Start + dword.Index, dword.Length);
@@ -63,12 +64,6 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 var equals = match.Groups["operator"];
                 SnapshotSpan equalsSpan = new SnapshotSpan(span.Snapshot, span.Start + equals.Index, equals.Length);
                 list.Add(new ClassificationSpan(equalsSpan, _equals));
-            }
-
-            foreach (Match match in _rxKeyword.Matches(text))
-            {
-                SnapshotSpan keywordSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
-                list.Add(new ClassificationSpan(keywordSpan, _keyword));
             }
 
             return list;

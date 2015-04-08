@@ -53,8 +53,18 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 currentChar = currentChar.TranslateTo(spans[0].Snapshot, PointTrackingMode.Positive);
             }
 
-            //get the current char and the previous char
-            char currentText = currentChar.GetChar();
+            char currentText;
+            
+            try
+            {
+                //get the current char and the previous char
+                currentText = currentChar.GetChar();
+            }
+            catch (Exception)
+            {
+                yield break;
+            }
+
             SnapshotPoint lastChar = currentChar == 0 ? currentChar : currentChar - 1; //if currentChar is 0 (beginning of buffer), don't move it back
             char lastText = lastChar.GetChar();
             SnapshotSpan pairSpan = new SnapshotSpan();

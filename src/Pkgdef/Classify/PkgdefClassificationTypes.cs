@@ -41,7 +41,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
     {
         public PkgdefRegKeyFormatDefinition()
         {
-            IsBold = true;            
+            IsBold = true;
             DisplayName = "Pkgdef Registry Key";
         }
     }

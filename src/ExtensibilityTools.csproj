@@ -138,6 +138,7 @@
     <Compile Include="Pkgdef\Classify\PkgdefClassificationTypes.cs" />
     <Compile Include="Pkgdef\Classify\PkgdefClassifier.cs" />
     <Compile Include="Pkgdef\Classify\PkgdefClassifierProvider.cs" />
+    <Compile Include="Pkgdef\Tagger\OutliningTaggerProvider.cs" />
     <Compile Include="Pkgdef\Tagger\OutliningTagger.cs" />
     <Compile Include="Pkgdef\Variables.cs" />
     <Compile Include="Pkgdef\ContentType\PkgdefContentTypeDefinition.cs" />

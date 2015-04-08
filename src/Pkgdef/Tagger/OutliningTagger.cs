@@ -21,7 +21,6 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
     internal sealed class RegionTagger : ITagger<IOutliningRegionTag>
     {
-        string hoverText = "hover text"; //the contents of the tooltip for the collapsed span
         ITextBuffer buffer;
         ITextSnapshot snapshot;
         IEnumerable<Region> regions;
@@ -52,10 +51,11 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 {
                     var startLine = currentSnapshot.GetLineFromLineNumber(region.StartLine);
                     string text = startLine.GetText();
+                    string hover = entire.Snapshot.GetText(region.StartOffset, region.EndOffset - region.StartOffset);
 
                     yield return new TagSpan<IOutliningRegionTag>(
                         new SnapshotSpan(currentSnapshot, region.StartOffset, region.EndOffset - region.StartOffset),
-                        new OutliningRegionTag(false, true, text, hoverText));
+                        new OutliningRegionTag(false, true, text, hover));
                 }
             }
         }

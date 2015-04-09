@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using System.Windows.Threading;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Tagging;
@@ -12,6 +13,9 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         ITextBuffer buffer;
         ITextSnapshot snapshot;
         IEnumerable<Region> regions;
+        private bool _hasBufferchanged;
+        private Timer _timer;
+        private bool _isParsing;
 
         public OutliningTagger(ITextBuffer buffer)
         {
@@ -20,6 +24,26 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             this.regions = new List<Region>();
             this.ReParse();
             this.buffer.Changed += BufferChanged;
+            
+            // Replace this with OnIdle logic
+            _timer = new Timer(1000);
+            _timer.Elapsed += timer_Elapsed;
+            _timer.Start();
+        }
+
+        void timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (!_hasBufferchanged || _isParsing)
+                return;
+
+            _isParsing = true;
+            _timer.Stop();
+
+            ReParse();
+
+            _timer.Start();
+            _hasBufferchanged = false;
+            _isParsing = false;
         }
 
         public IEnumerable<ITagSpan<IOutliningRegionTag>> GetTags(NormalizedSnapshotSpanCollection spans)
@@ -50,19 +74,12 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
-        private static bool _isParsing;
-
         void BufferChanged(object sender, TextContentChangedEventArgs e)
         {
             if (e.After != buffer.CurrentSnapshot || _isParsing)
                 return;
 
-            _isParsing = true;
-            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
-            {
-                this.ReParse();
-                _isParsing = false;
-            }), DispatcherPriority.ApplicationIdle, null);
+            _hasBufferchanged = true;
         }
 
         void ReParse()

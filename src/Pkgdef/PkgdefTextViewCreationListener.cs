@@ -36,11 +36,15 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             if (_errorList == null)
                 return;
 
-            CommandFilter filter = new CommandFilter(view, CompletionBroker);
+            PkgdefCompletionController completion = new PkgdefCompletionController(view, CompletionBroker);
+            IOleCommandTarget completionNext;
+            textViewAdapter.AddCommandFilter(completion, out completionNext);
+            completion.Next = completionNext;
 
-            IOleCommandTarget next;
-            textViewAdapter.AddCommandFilter(filter, out next);
-            filter.Next = next;
+            PkgdefFormatter formatter = new PkgdefFormatter(view);
+            IOleCommandTarget formatterNext;
+            textViewAdapter.AddCommandFilter(formatter, out formatterNext);
+            formatter.Next = formatterNext;
 
             view.Closed += OnViewClosed;
         }

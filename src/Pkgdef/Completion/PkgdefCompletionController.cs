@@ -8,11 +8,11 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace MadsKristensen.ExtensibilityTools.Pkgdef
 {
-    internal sealed class CommandFilter : IOleCommandTarget
+    internal sealed class PkgdefCompletionController : IOleCommandTarget
     {
         private ICompletionSession _currentSession;
 
-        public CommandFilter(IWpfTextView textView, ICompletionBroker broker)
+        public PkgdefCompletionController(IWpfTextView textView, ICompletionBroker broker)
         {
             _currentSession = null;
 

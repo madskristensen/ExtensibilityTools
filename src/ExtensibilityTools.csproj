@@ -142,13 +142,14 @@
     <Compile Include="Pkgdef\Completion\PkgdefCompletionController.cs" />
     <Compile Include="Pkgdef\Completion\PkgdefCompletionSourceProvider.cs" />
     <Compile Include="Pkgdef\Completion\PkgdefCompletionSource.cs" />
+    <Compile Include="Pkgdef\Formatting\PkgdefFormatter.cs" />
     <Compile Include="Pkgdef\Tagger\OutliningTaggerProvider.cs" />
     <Compile Include="Pkgdef\Tagger\OutliningTagger.cs" />
     <Compile Include="Pkgdef\Variables.cs" />
     <Compile Include="Pkgdef\ContentType\PkgdefContentTypeDefinition.cs" />
     <Compile Include="Pkgdef\Tagger\BraceMatchingTagger.cs" />
     <Compile Include="Pkgdef\Tagger\BraceMatchingTaggerProvider.cs" />
-    <Compile Include="Pkgdef\Validation\PkgdefTextViewCreationListener.cs" />
+    <Compile Include="Pkgdef\PkgdefTextViewCreationListener.cs" />
     <Compile Include="Pkgdef\Validation\PkgdefErrorTagger.cs" />
     <Compile Include="Pkgdef\Validation\PkgdefErrorTaggerProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -35,3 +35,6 @@ Matches parantheses and square brackets.
 Validates various common mistakes like unknown tokens and unclosed strings and braces.
 
 ![Pkgdef validation](art/pkgdef-validation.png)
+
+#### Formatting
+Format the entire document or just the selected lines.

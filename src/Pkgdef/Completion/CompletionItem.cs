@@ -18,7 +18,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             {new CompletionItem("RootKey", "The root registry key for the application. By default the root is in HKEY_CURRENT_USER\\Software\\CompanyName\\ProjectName\\VersionNumber (when the application is running, _Config is appended to this key). It is set by the RegistryRoot value in the SolutionName.pkgdef file.")},
             {new CompletionItem("ShellFolder", "The full path of the location where Visual Studio was installed.")},
             {new CompletionItem("System", "The Windows\\system32 folder.")},
-            {new CompletionItem("WINDIRS", "The Windows folder.")},
+            {new CompletionItem("WinDir", "The Windows folder.")},
         };
 
         private CompletionItem(string name, string description)

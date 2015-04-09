@@ -45,7 +45,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     {
                         string word = text.Trim('$');
 
-                        if (!CompletionItem.Items.Any(i => i.Name == word))
+                        if (!CompletionItem.Items.Any(i => i.Name.Equals(word, StringComparison.OrdinalIgnoreCase)))
                             yield return CreateError(line, cspan.Span, "The keyword '$" + word + "$' doesn't exist");
                     }
                 }
@@ -120,8 +120,8 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 Line = line.LineNumber,
                 Column = span.Start.Position - line.Start.Position,
                 Category = TaskCategory.Misc,
-                ErrorCategory = TaskErrorCategory.Warning,
-                Priority = TaskPriority.Low,
+                ErrorCategory = TaskErrorCategory.Error,
+                Priority = TaskPriority.Normal,
                 Document = _document.FilePath
             };
 

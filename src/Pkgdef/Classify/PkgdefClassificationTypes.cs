@@ -32,7 +32,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         public PkgdefDwordFormatDefinition()
         {
             IsBold = true;
-            DisplayName = "Pkgdef Dword";
+            DisplayName = "Pkgdef Entry Key";
         }
     }
 
@@ -46,14 +46,14 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         public PkgdefRegKeyFormatDefinition()
         {
             IsBold = true;
-            DisplayName = "Pkgdef Registry Key";
+            DisplayName = "Pkgdef Registry Path";
         }
     }
 
     [Export(typeof(EditorFormatDefinition))]
     [ClassificationType(ClassificationTypeNames = PkgdefClassificationTypes.Guid)]
     [Name(PkgdefClassificationTypes.Guid)]
-    [Order(After = Priority.High)]
+    [Order(Before = Priority.Low)]
     [UserVisible(true)]
     internal sealed class PkgdefGuidFormatDefinition : ClassificationFormatDefinition
     {

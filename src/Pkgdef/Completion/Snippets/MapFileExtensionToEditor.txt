@@ -1,0 +1,6 @@
+﻿[$RootKey$\Languages\File Extensions\.md]
+@="{<Language service GUID>}"
+
+[$RootKey$\Editors\{<Editor factory GUID>}\Extensions]
+"htm"=dword:32
+"html"=dword:32

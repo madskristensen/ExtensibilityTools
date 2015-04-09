@@ -1,0 +1,12 @@
+﻿[$RootKey$\Languages\Language Services\JSON]
+@="{<Language service GUID>}"
+"Package"="{<Package GUID>}"
+"LangResID"=dword:00000065
+"ShowSmartIndent"=dword:00000001
+"DefaultToInsertSpaces"=dword:00000001
+"ShowBraceCompletion"=dword:00000001
+"ShowCompletion"=dword:00000001
+
+[$RootKey$\Services\{Language service GUID}]
+@="{Package GUID}"
+"Name"="JSON Language Service"

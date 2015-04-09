@@ -1,6 +1,6 @@
 ﻿[$RootKey$\UserSettings\CoffeeScript_Advanced]
 @="204"
-"Package"="{52244c9d-db46-4905-bda0-b3406c46d2a4}"
+"Package"="{<Package GUID>}"
 "Category"="{9a5ed2f4-b737-4876-9b7f-7a94e634e74f}"
 "ToolsOptionsPath"="CoffeeScript"
 "AlternateParent"="AutomationProperties\TextEditor"

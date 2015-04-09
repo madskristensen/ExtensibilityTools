@@ -165,43 +165,43 @@
       <Link>Resources\LICENSE</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterMenus.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterMenus.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterDiffViewSupportedContentTypes.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterDiffViewSupportedContentTypes.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\AddEditorAutomationProperties.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\AddEditorAutomationProperties.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\AutoLoadPackages.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\AutoLoadPackages.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterLanguageService.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterLanguageService.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterUserSettings.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterUserSettings.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterRoamingSettings.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterRoamingSettings.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterEditorFactory.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterEditorFactory.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterPackage.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterPackage.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterSnippets.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterSnippets.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\RegisterToolsOptionsPage.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\RegisterToolsOptionsPage.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\MapImageMonikerToFileExtension.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\MapImageMonikerToFileExtension.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Pkgdef\Completion\Snippets\MapFileExtensionToEditor.pkgdef">
+    <Content Include="Pkgdef\Completion\Snippets\MapFileExtensionToEditor.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Resources\Preview.png">

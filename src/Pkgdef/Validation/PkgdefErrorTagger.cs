@@ -36,7 +36,6 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             foreach (var cspan in classificationSpans)
             {
-
                 if (cspan.ClassificationType.IsOfType(PredefinedClassificationTypeNames.SymbolDefinition))
                 {
                     string text = cspan.Span.GetText();
@@ -47,6 +46,17 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
                         if (!CompletionItem.Items.Any(i => i.Name.Equals(word, StringComparison.OrdinalIgnoreCase)))
                             yield return CreateError(line, cspan.Span, "The keyword '$" + word + "$' doesn't exist");
+                    }
+                }
+
+                if (cspan.ClassificationType.IsOfType(PkgdefClassificationTypes.Guid))
+                {
+                    string text = cspan.Span.GetText();
+                    Guid guid;
+
+                    if (!Guid.TryParse(text, out guid))
+                    {
+                        yield return CreateError(line, cspan.Span, "\"" + text + "\" is not a valid GUID.");
                     }
                 }
 

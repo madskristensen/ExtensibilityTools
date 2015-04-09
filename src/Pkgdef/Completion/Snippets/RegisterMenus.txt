@@ -1,0 +1,2 @@
+﻿[$RootKey$\Menus]
+"{<Package GUID>}"=", Menus.ctmenu, 1"

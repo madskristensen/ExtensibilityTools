@@ -1,2 +1,2 @@
 ﻿[$RootKey$\AutoLoadPackages\{349c5852-65df-11da-9384-00065b846f21}]
-"{30db8f9b-ec9f-44d6-b377-83c7c27a1a8b}"=dword:00000000 // Package GUID
+"{<Package GUID>}"=dword:00000000

@@ -119,7 +119,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             string folder = Path.GetDirectoryName(assembly).ToLowerInvariant();
             string snippetDir = Path.Combine(folder, "Pkgdef\\Completion\\Snippets");
 
-            foreach (string snippet in Directory.EnumerateFiles(snippetDir, "*.pkgdef"))
+            foreach (string snippet in Directory.EnumerateFiles(snippetDir, "*.txt"))
             {
                 string name = Path.GetFileNameWithoutExtension(snippet);
                 string insertion = File.ReadAllText(snippet);
@@ -134,7 +134,9 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             foreach (string guid in allGuids)
             {
-                list.Add(CreateCompletion(guid, guid));
+                Guid check;
+                if (Guid.TryParse(guid, out check))
+                    list.Add(CreateCompletion(guid, guid));
             }
         }
 

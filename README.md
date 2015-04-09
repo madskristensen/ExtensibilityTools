@@ -11,11 +11,25 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
 #### Syntax highlighting
 Colorizes registry keys, strings, keywords, comments and more.
 
+![Pkgdef colorization](art/pkgdef-colorization.png)
+
 #### Intellisense
-Intellisense is provided for tokens and GUIDs
+Intellisense is provided for tokens and GUIDs.
+
+![Pkgdef token Intellisense](art/pkgdef-intellisense-tokens.png)
+
+![Pkgdef token Intellisense](art/pkgdef-intellisense-guids.png)
+
+#### Snippets
+By typing a question mark on an empty line, a list of snippets appear.
+Hit `Tab` on the snippet you want and it will be inserted.
+
+![Pkgdef snippets](art/pkgdef-snippets.gif)
 
 #### Brace matching
 Matches parantheses and square brackets.
 
 #### Validation
-Validates various common mistakes like unclosed strings and braces.
+Validates various common mistakes like unknown tokens and unclosed strings and braces.
+
+![Pkgdef validation](art/pkgdef-validation.png)

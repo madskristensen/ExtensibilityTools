@@ -1,0 +1,7 @@
+﻿[$RootKey$\Editors\{a5401142-f49d-43db-90b1-f57ba349e55c}]
+@="CssEditorFactory"
+"DisplayName"="#201"
+"Package"="{5330c67f-305c-4b17-a3dc-fbb7aee69c09}"
+"EditorTrustLevel"=dword:00000001
+"CommonPhysicalViewAttributes"=dword:00000002
+"LinkedEditorGuid"="{40d31677-cbc0-4297-a9ef-89d907823a98}" // May not apply

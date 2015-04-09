@@ -164,6 +164,45 @@
       <Link>Resources\LICENSE</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterMenus.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterDiffViewSupportedContentTypes.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\AddEditorAutomationProperties.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\AutoLoadPackages.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterLanguageService.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterUserSettings.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterRoamingSettings.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterEditorFactory.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterPackage.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterSnippets.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\RegisterToolsOptionsPage.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\MapImageMonikerToFileExtension.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Pkgdef\Completion\Snippets\MapFileExtensionToEditor.pkgdef">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\Preview.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>

@@ -24,8 +24,8 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             this.regions = new List<Region>();
             this.ReParse();
             this.buffer.Changed += BufferChanged;
-            
-            // Replace this with OnIdle logic
+
+            // TODO: Replace this with OnIdle logic
             _timer = new Timer(1000);
             _timer.Elapsed += timer_Elapsed;
             _timer.Start();

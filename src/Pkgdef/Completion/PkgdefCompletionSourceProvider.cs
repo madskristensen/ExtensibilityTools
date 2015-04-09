@@ -26,10 +26,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
         public ICompletionSource TryCreateCompletionSource(ITextBuffer textBuffer)
         {
-            if (_glyph == null)
-            _glyph = GlyphService.GetGlyph(StandardGlyphGroup.GlyphGroupProperty, StandardGlyphItem.GlyphItemPublic);
-
-           return new PkgdefCompletionSource(textBuffer, ClassifierAggregatorService, NavigatorService, _glyph);
+           return new PkgdefCompletionSource(textBuffer, ClassifierAggregatorService, NavigatorService, GlyphService);
         }
     }
 }

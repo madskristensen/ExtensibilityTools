@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Media;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Language.StandardClassification;
@@ -17,14 +19,16 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         private bool _disposed = false;
         private IClassifier _classifier;
         private ITextStructureNavigatorSelectorService _navigator;
-        private ImageSource _glyph;
+        private ImageSource _defaultGlyph;
+        private ImageSource _snippetGlyph;
 
-        public PkgdefCompletionSource(ITextBuffer buffer, IClassifierAggregatorService classifier, ITextStructureNavigatorSelectorService navigator, ImageSource glyph)
+        public PkgdefCompletionSource(ITextBuffer buffer, IClassifierAggregatorService classifier, ITextStructureNavigatorSelectorService navigator, IGlyphService glyphService)
         {
             _buffer = buffer;
             _classifier = classifier.GetClassifier(buffer);
             _navigator = navigator;
-            _glyph = glyph;
+            _defaultGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupProperty, StandardGlyphItem.GlyphItemPublic);
+            _snippetGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphCSharpExpansion, StandardGlyphItem.GlyphItemPublic);
         }
 
         public void AugmentCompletionSession(ICompletionSession session, IList<CompletionSet> completionSets)
@@ -56,7 +60,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     extent = span.Span;
 
                     foreach (var key in CompletionItem.Items)
-                        list.Add(CreateCompletion(key.Name, "$" + key.Name + "$", key.Description));
+                        list.Add(CreateCompletion(key.Name, "$" + key.Name + "$", _defaultGlyph, key.Description));
                 }
                 else if (extent.GetText().StartsWith("$"))
                 {
@@ -66,7 +70,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     extent = new SnapshotSpan(snapshot, extent.Start, 1);
 
                     foreach (var key in CompletionItem.Items)
-                        list.Add(CreateCompletion(key.Name, "$" + key.Name + "$", key.Description));
+                        list.Add(CreateCompletion(key.Name, "$" + key.Name + "$", _defaultGlyph, key.Description));
                 }
                 else if (span.ClassificationType.IsOfType(PkgdefClassificationTypes.Guid))
                 {
@@ -97,9 +101,30 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 }
             }
 
-            var applicableTo = snapshot.CreateTrackingSpan(extent, SpanTrackingMode.EdgeInclusive);
+            if (spans.Count == 0 && extent.GetText() == "?")
+            {
+                HandleSnippets(list);
+            }
 
-            completionSets.Add(new CompletionSet("All", "All", applicableTo, list, Enumerable.Empty<Intel.Completion>()));
+            if (list.Count > 0)
+            {
+                var applicableTo = snapshot.CreateTrackingSpan(extent, SpanTrackingMode.EdgeInclusive);
+                completionSets.Add(new CompletionSet("All", "All", applicableTo, list, Enumerable.Empty<Intel.Completion>()));
+            }
+        }
+
+        private void HandleSnippets(List<Intel.Completion> list)
+        {
+            string assembly = Assembly.GetExecutingAssembly().Location;
+            string folder = Path.GetDirectoryName(assembly).ToLowerInvariant();
+            string snippetDir = Path.Combine(folder, "Pkgdef\\Completion\\Snippets");
+
+            foreach (string snippet in Directory.EnumerateFiles(snippetDir, "*.pkgdef"))
+            {
+                string name = Path.GetFileNameWithoutExtension(snippet);
+                string insertion = File.ReadAllText(snippet);
+                list.Add(CreateCompletion(name, insertion, _snippetGlyph));
+            }
         }
 
         private void AddAllGuids(ITextSnapshot snapshot, List<Intel.Completion> list)
@@ -113,9 +138,12 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             }
         }
 
-        private Completion CreateCompletion(string name, string insertion, string description = null)
+        private Completion CreateCompletion(string name, string insertion, ImageSource glyph = null, string description = null)
         {
-            return new Completion(name, insertion, description, _glyph, null);
+            if (glyph == null)
+                glyph = _defaultGlyph;
+
+            return new Completion(name, insertion, description, glyph, null);
         }
 
         private ITrackingSpan FindTokenSpanAtPosition(ICompletionSession session)

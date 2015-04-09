@@ -68,14 +68,15 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
                     if (path.Trim().Length < path.Length)
                         yield return CreateError(line, hit, "Remove whitespace around the registry key path");
-                    else if (string.IsNullOrWhiteSpace(path))
-                        yield return CreateError(line, hit, "Specify a registry key path");
-                    else if (!match.Value.EndsWith("]"))
-                        yield return CreateError(line, hit, "Unclosed registry key entry");
-                    else if (match.Value.Contains("/"))
-                        yield return CreateError(line, hit, "Use the backslash character as delimiter instead of forward slash.");
 
-                    //break;
+                    else if (string.IsNullOrWhiteSpace(path))
+                        yield return CreateError(line, cspan.Span, "You must specify a registry key path");
+
+                    else if (!match.Value.EndsWith("]"))
+                        yield return CreateError(line, hit, "Unclosed registry key entry. Add the missing ] character");
+
+                    else if (cspan.Span.GetText().Contains("/"))
+                        yield return CreateError(line, cspan.Span, "Use the backslash character as delimiter instead of forward slash.");
                 }
 
                 else if (cspan.ClassificationType.IsOfType(PredefinedClassificationTypeNames.String))
@@ -90,8 +91,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
                         if (text.Length <= 1 || text[text.Length - 1] != '"')
                         {
-                            yield return CreateError(line, hit, "Newline in constant");
-                            //yield break;
+                            yield return CreateError(line, hit, "Unclosed string. Add the missing \" character.");
                         }
                     }
                 }

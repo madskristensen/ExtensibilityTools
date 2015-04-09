@@ -1,0 +1,5 @@
+﻿[$RootKey$\Packages\{5330c67f-305c-4b17-a3dc-fbb7aee69c09}]
+@="CssPackage"
+"InprocServer32"="$WinDir$\SYSTEM32\MSCOREE.DLL"
+"Class"="Microsoft.VisualStudio.Html.Package.Package.CSS.CssPackage"
+"CodeBase"="$PackageFolder$\Microsoft.VisualStudio.Html.Package.dll"

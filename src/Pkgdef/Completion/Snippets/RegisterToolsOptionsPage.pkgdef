@@ -1,0 +1,8 @@
+﻿[$RootKey$\ToolsOptionsPages\MyMainPage]
+@="#101"
+"Package"="{5fb7364d-2e8c-44a4-95eb-2a382e30fec9}"
+[$RootKey$\ToolsOptionsPages\MyMainPage\MySubPage]
+@="#102"
+"Package"="{5fb7364d-2e8c-44a4-95eb-2a382e30fec9}"
+"Page"="{bbaa5d3e-6cf6-34c5-a83c-51a89b5cec34}"
+"Keywords"="Keyword1;Keyword2;Keyword3"

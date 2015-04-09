@@ -69,19 +69,19 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                         char ch = GetTypeChar(pvaIn);
                         if (ch == '=' || ch == ' ' || ch == '\\')
                             Cancel();
-                        if (ch == '$' || ch == '{')
+                        if (ch == '$' || ch == '{' || ch == '?')
                             StartSession();
                         else if (!char.IsPunctuation(ch) && !char.IsControl(ch))
                             StartSession();
                         else if (_currentSession != null)
                             Filter();
                         break;
-                    case VSConstants.VSStd2KCmdID.BACKSPACE:
-                        if (_currentSession == null)
-                            StartSession();
+                    //case VSConstants.VSStd2KCmdID.BACKSPACE:
+                    //    if (_currentSession == null)
+                    //        StartSession();
 
-                        Filter();
-                        break;
+                    //    Filter();
+                    //    break;
                     }
                 }
             }

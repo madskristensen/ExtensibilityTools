@@ -41,6 +41,10 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             ReParse();
 
+            this.TagsChanged(this, new SnapshotSpanEventArgs(
+                    new SnapshotSpan(this.snapshot, 0, this.snapshot.Length))
+                );
+
             _timer.Start();
             _hasBufferchanged = false;
             _isParsing = false;
@@ -135,25 +139,6 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             this.snapshot = newSnapshot;
             this.regions = newRegions.Where(line => line.StartLine != line.EndLine);
-
-            if (!regions.Any())
-                return;
-
-            if (this.TagsChanged != null)
-            {
-                var start = regions.First().StartOffset;
-                var end = regions.Last().EndOffset;
-
-                if (this.snapshot.Length < end)
-                    return;
-
-                Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
-                {
-                    this.TagsChanged(this, new SnapshotSpanEventArgs(
-                        new SnapshotSpan(this.snapshot, start, end - start))
-                    );
-                }), DispatcherPriority.ApplicationIdle, null);
-            }
         }
     }
 

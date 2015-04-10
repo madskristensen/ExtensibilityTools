@@ -71,7 +71,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     var group = match.Groups["path"];
                     string path = group.Value;
 
-                    if (span.Snapshot.Length <= span.Start + group.Index + group.Length)
+                    if (span.Snapshot.Length <= span.Start.Position + group.Index + group.Length)
                         break;
 
                     var hit = new SnapshotSpan(span.Snapshot, span.Start + group.Index, group.Length);
@@ -85,8 +85,8 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     else if (!match.Value.EndsWith("]"))
                         yield return CreateError(line, hit, "Unclosed registry key entry. Add the missing ] character");
 
-                    else if (cspan.Span.GetText().Contains("/"))
-                        yield return CreateError(line, cspan.Span, "Use the backslash character as delimiter instead of forward slash.");
+                    //else if (cspan.Span.GetText().Contains("/"))
+                    //    yield return CreateError(line, cspan.Span, "Use the backslash character as delimiter instead of forward slash.");
                 }
 
                 else if (cspan.ClassificationType.IsOfType(PredefinedClassificationTypeNames.String))

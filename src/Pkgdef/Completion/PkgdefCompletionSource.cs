@@ -21,12 +21,14 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         private ITextStructureNavigatorSelectorService _navigator;
         private ImageSource _defaultGlyph;
         private ImageSource _snippetGlyph;
+        private IGlyphService _glyphService;
 
         public PkgdefCompletionSource(ITextBuffer buffer, IClassifierAggregatorService classifier, ITextStructureNavigatorSelectorService navigator, IGlyphService glyphService)
         {
             _buffer = buffer;
             _classifier = classifier.GetClassifier(buffer);
             _navigator = navigator;
+            _glyphService = glyphService;
             _defaultGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupProperty, StandardGlyphItem.GlyphItemPublic);
             _snippetGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphCSharpExpansion, StandardGlyphItem.GlyphItemPublic);
         }
@@ -108,8 +110,9 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             if (list.Count > 0)
             {
+                var entries = list.OrderBy(entry => entry.Description);
                 var applicableTo = snapshot.CreateTrackingSpan(extent, SpanTrackingMode.EdgeInclusive);
-                completionSets.Add(new CompletionSet("All", "All", applicableTo, list, Enumerable.Empty<Intel.Completion>()));
+                completionSets.Add(new CompletionSet("All", "All", applicableTo, entries, Enumerable.Empty<Intel.Completion>()));
             }
         }
 
@@ -129,14 +132,63 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
         private void AddAllGuids(ITextSnapshot snapshot, List<Intel.Completion> list)
         {
-            var guidSpans = _classifier.GetClassificationSpans(new SnapshotSpan(snapshot, 0, snapshot.Length));
-            var allGuids = guidSpans.Where(g => g.ClassificationType.IsOfType(PkgdefClassificationTypes.Guid)).Select(s => s.Span.GetText()).Distinct();
+            var guidSpans = _classifier.GetClassificationSpans(new SnapshotSpan(snapshot, 0, snapshot.Length)).Where(g => g.ClassificationType.IsOfType(PkgdefClassificationTypes.Guid));
+            Dictionary<string, Tuple<string, ImageSource>> dic = new Dictionary<string, Tuple<string, ImageSource>>();
+            var unknown = _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupModule, StandardGlyphItem.TotalGlyphItems);
 
-            foreach (string guid in allGuids)
+            foreach (var cspan in guidSpans)
             {
+                string guid = cspan.Span.GetText();
+                string lineText = snapshot.GetLineFromPosition(cspan.Span.Start.Position).GetText();
                 Guid check;
-                if (Guid.TryParse(guid, out check))
-                    list.Add(CreateCompletion(guid, guid));
+
+                if (!dic.ContainsKey(guid) && Guid.TryParse(guid, out check))
+                {
+                    dic[guid] = null;
+                }
+
+                if (lineText.Contains("\"Package\"") || lineText.Contains("\\Packages\\") || lineText.Contains("\\AutoLoadPackages\\") || lineText.Contains("\"ResourcePackage\"") || lineText.Contains("\"ProjectFactoryPackage\""))
+                    dic[guid] = Tuple.Create("Package", _glyphService.GetGlyph(StandardGlyphGroup.GlyphJSharpProject, StandardGlyphItem.GlyphItemPublic));
+
+                if (lineText.Contains("\"LinkedEditorGuid\"") || lineText.Contains("\\Editors\\"))
+                    dic[guid] = Tuple.Create("Editor", _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupStruct, StandardGlyphItem.TotalGlyphItems));
+
+                if (lineText.Contains("\"Page\"") || lineText.Contains("\"Category\""))
+                    dic[guid] = Tuple.Create("Options page", _glyphService.GetGlyph(StandardGlyphGroup.GlyphDialogId, StandardGlyphItem.GlyphItemPublic));
+
+                if (lineText.Contains("\\Services\\"))
+                    dic[guid] = Tuple.Create("Service", _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupField, StandardGlyphItem.TotalGlyphItems));
+
+                if (lineText.Contains("\\codeBase\\"))
+                    dic[guid] = Tuple.Create("Assembly", _glyphService.GetGlyph(StandardGlyphGroup.GlyphAssembly, StandardGlyphItem.GlyphItemFriend));
+
+                if (lineText.Contains("\\Projects\\"))
+                    dic[guid] = Tuple.Create("Project", _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupModule, StandardGlyphItem.GlyphItemFriend));
+
+                if (lineText.Contains("\\TemplateDirs\\"))
+                    dic[guid] = Tuple.Create("Template", _glyphService.GetGlyph(StandardGlyphGroup.GlyphCSharpExpansion, StandardGlyphItem.GlyphItemFriend));
+
+                if (lineText.Contains("\\CLSID\\"))
+                    dic[guid] = Tuple.Create("CLSID", unknown);
+
+                if (lineText.Contains("\\ProjectGenerators\\"))
+                    dic[guid] = Tuple.Create("Project generators", unknown);
+            }
+
+            foreach (string guid in dic.Keys)
+            {
+                string description = "Unknown type";
+                ImageSource glyph = unknown;
+
+                if (dic[guid] != null)
+                {
+                    description = dic[guid].Item1;
+
+                    if (dic[guid].Item2 != null)
+                        glyph = dic[guid].Item2;
+                }
+
+                list.Add(CreateCompletion(guid, guid, glyph, description));
             }
         }
 

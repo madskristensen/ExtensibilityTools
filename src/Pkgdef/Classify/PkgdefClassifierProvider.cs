@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace MadsKristensen.ExtensibilityTools.Pkgdef
 {
-
     [Export(typeof(IClassifierProvider))]
     [ContentType(PkgdefContentTypeDefinition.PkgdefContentType)]
     class PkgdefClassifierProvider : IClassifierProvider

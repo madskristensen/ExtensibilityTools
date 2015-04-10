@@ -70,8 +70,15 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                _lblEncoding.Value = doc.Encoding.BodyName + " (" + doc.Encoding.CodePage + ")";
-                _lblEncoding.SetTooltip(doc.FilePath);
+                byte[] preamble = doc.Encoding.GetPreamble();
+                string bom = preamble != null && preamble.Length > 2 ? " - BOM" : string.Empty;
+
+                _lblEncoding.Value = doc.Encoding.EncodingName + bom;
+                _lblEncoding.SetTooltip("Codepage:         " + doc.Encoding.CodePage + Environment.NewLine +
+                                        "Windows codepage: " + doc.Encoding.CodePage + Environment.NewLine +
+                                        "Header name:      " + doc.Encoding.HeaderName + Environment.NewLine +
+                                        "Body name:        " + doc.Encoding.BodyName,
+                                        true);
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
         }

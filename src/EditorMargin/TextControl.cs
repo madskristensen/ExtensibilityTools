@@ -39,9 +39,19 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
             }
         }
 
-        public void SetTooltip(string tooltip)
+        public void SetTooltip(string tooltip, bool preserveFormatting = false)
         {
-            _lblValue.ToolTip = tooltip;
+            if (preserveFormatting)
+            {
+                Label label = new Label();
+                label.Content = tooltip;
+                label.FontFamily = new FontFamily("Lucida Console");
+                _lblValue.ToolTip = label;
+            }
+            else
+            {
+                _lblValue.ToolTip = tooltip;
+            }
         }
     }
 }

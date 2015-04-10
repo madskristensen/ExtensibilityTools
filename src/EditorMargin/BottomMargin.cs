@@ -123,10 +123,6 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
 
                 SnapshotPoint? point;
                 ITextBuffer buffer = GetTextBuffer(out point);
-
-                if (!point.HasValue)
-                    return;
-
                 int position = point.Value.Position;
 
                 if (position == buffer.CurrentSnapshot.Length)

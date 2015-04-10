@@ -36,10 +36,14 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             if (_errorList == null)
                 return;
 
-            PkgdefCompletionController completion = new PkgdefCompletionController(view, CompletionBroker);
-            IOleCommandTarget completionNext;
-            textViewAdapter.AddCommandFilter(completion, out completionNext);
-            completion.Next = completionNext;
+            if (ExtensibilityToolsPackage.Options.PkgdefShowIntellisense)
+            {
+
+                PkgdefCompletionController completion = new PkgdefCompletionController(view, CompletionBroker);
+                IOleCommandTarget completionNext;
+                textViewAdapter.AddCommandFilter(completion, out completionNext);
+                completion.Next = completionNext;
+            }
 
             PkgdefFormatter formatter = new PkgdefFormatter(view);
             IOleCommandTarget formatterNext;

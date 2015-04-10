@@ -13,7 +13,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
     {
         public ITagger<T> CreateTagger<T>(ITextView textView, ITextBuffer buffer) where T : ITag
         {
-            if (textView == null)
+            if (!ExtensibilityToolsPackage.Options.PkgdefEnableBraceMatching || textView == null)
                 return null;
 
             //provide highlighting only on the top-level buffer

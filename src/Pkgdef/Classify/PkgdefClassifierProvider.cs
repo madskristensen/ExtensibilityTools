@@ -15,6 +15,9 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
         public IClassifier GetClassifier(ITextBuffer textBuffer)
         {
+            if (!ExtensibilityToolsPackage.Options.PkgdefEnableColorizer)
+                return null;
+
             return textBuffer.Properties.GetOrCreateSingletonProperty(() => new PkgdefClassifier(Registry));
         }
     }

@@ -22,8 +22,8 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
         {
-            if (buffer == null)
-                throw new ArgumentException("Buffer is null");
+            if (!ExtensibilityToolsPackage.Options.PkgdefEnableValidation)
+                return null;
 
             var errorlist = buffer.Properties.GetProperty(typeof(ErrorListProvider)) as ErrorListProvider;
             var view = buffer.Properties.GetProperty(typeof(IWpfTextView)) as IWpfTextView;

@@ -12,6 +12,9 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
     {
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
         {
+            if (!ExtensibilityToolsPackage.Options.PkgdefEnableOutlining)
+                return null;
+
             return buffer.Properties.GetOrCreateSingletonProperty(() => new OutliningTagger(buffer)) as ITagger<T>;
         }
     }

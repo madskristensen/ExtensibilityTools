@@ -21,9 +21,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
         [Import]
         IGlyphService GlyphService = null;
-
-        private static ImageSource _glyph;
-
+        
         public ICompletionSource TryCreateCompletionSource(ITextBuffer textBuffer)
         {
            return new PkgdefCompletionSource(textBuffer, ClassifierAggregatorService, NavigatorService, GlyphService);

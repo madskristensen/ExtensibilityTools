@@ -8,14 +8,14 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 {
     static class PkgdefClassificationTypes
     {
-        public const string Dword = "Pkgdef_dword";
-        public const string RegKey = "Pkgdef_regkey";
-        public const string Guid = "Pkgdef_guid";
+        public const string EntryKey = "Pkgdef Entry Key";
+        public const string RegistryPath = "Pkgdef Registry Path";
+        public const string Guid = "Pkgdef Guid";
 
-        [Export, Name(PkgdefClassificationTypes.Dword)]
+        [Export, Name(PkgdefClassificationTypes.EntryKey)]
         public static ClassificationTypeDefinition PkgdefDwordClassification { get; set; }
 
-        [Export, Name(PkgdefClassificationTypes.RegKey)]
+        [Export, Name(PkgdefClassificationTypes.RegistryPath)]
         public static ClassificationTypeDefinition PkgdefRegKeyClassification { get; set; }
 
         [Export, Name(PkgdefClassificationTypes.Guid)]
@@ -23,8 +23,8 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
     }
 
     [Export(typeof(EditorFormatDefinition))]
-    [ClassificationType(ClassificationTypeNames = PkgdefClassificationTypes.Dword)]
-    [Name(PkgdefClassificationTypes.Dword)]
+    [ClassificationType(ClassificationTypeNames = PkgdefClassificationTypes.EntryKey)]
+    [Name(PkgdefClassificationTypes.EntryKey)]
     [Order(After = Priority.High)]
     [UserVisible(true)]
     internal sealed class PkgdefDwordFormatDefinition : ClassificationFormatDefinition
@@ -32,13 +32,13 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         public PkgdefDwordFormatDefinition()
         {
             IsBold = true;
-            DisplayName = "Pkgdef Entry Key";
+            DisplayName = PkgdefClassificationTypes.EntryKey;
         }
     }
 
     [Export(typeof(EditorFormatDefinition))]
-    [ClassificationType(ClassificationTypeNames = PkgdefClassificationTypes.RegKey)]
-    [Name(PkgdefClassificationTypes.RegKey)]
+    [ClassificationType(ClassificationTypeNames = PkgdefClassificationTypes.RegistryPath)]
+    [Name(PkgdefClassificationTypes.RegistryPath)]
     [Order(After = Priority.High)]
     [UserVisible(true)]
     internal sealed class PkgdefRegKeyFormatDefinition : ClassificationFormatDefinition
@@ -46,7 +46,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         public PkgdefRegKeyFormatDefinition()
         {
             IsBold = true;
-            DisplayName = "Pkgdef Registry Path";
+            DisplayName = PkgdefClassificationTypes.RegistryPath;
         }
     }
 
@@ -59,7 +59,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
     {
         public PkgdefGuidFormatDefinition()
         {
-            DisplayName = "Pkgdef Guid";
+            DisplayName = PkgdefClassificationTypes.Guid;
         }
     }
 }

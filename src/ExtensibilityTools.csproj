@@ -66,13 +66,16 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.12.0" />
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -133,6 +136,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditorMargin\BottomMargin.cs" />
+    <Compile Include="EditorMargin\BottomMarginFactory.cs" />
+    <Compile Include="EditorMargin\TextControl.cs" />
     <Compile Include="Guids.cs" />
     <Compile Include="ExtensibilityToolsPackage.cs" />
     <Compile Include="Pkgdef\Classify\PkgdefClassificationTypes.cs" />

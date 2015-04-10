@@ -60,11 +60,11 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     }
                 }
 
-                else if (cspan.ClassificationType.IsOfType(PkgdefClassificationTypes.RegKey))
+                else if (cspan.ClassificationType.IsOfType(PkgdefClassificationTypes.RegistryPath))
                 {
                     string lineText = line.GetText();
 
-                    var match = Variables.RegKey.Match(lineText);
+                    var match = Variables.RegistryPath.Match(lineText);
                     if (!match.Success)
                         break;
 

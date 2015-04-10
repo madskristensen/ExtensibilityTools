@@ -10,15 +10,15 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 {
     class PkgdefClassifier : IClassifier
     {
-        private IClassificationType _dword, _comment, _regkey, _string, _equals, _keyword, _guid;
+        private IClassificationType _entryKey, _comment, _registryPath, _string, _operator, _keyword, _guid;
 
         public PkgdefClassifier(IClassificationTypeRegistryService registry)
         {
-            _dword = registry.GetClassificationType(PkgdefClassificationTypes.Dword);
+            _entryKey = registry.GetClassificationType(PkgdefClassificationTypes.EntryKey);
             _comment = registry.GetClassificationType(PredefinedClassificationTypeNames.Comment);
-            _regkey = registry.GetClassificationType(PkgdefClassificationTypes.RegKey);
+            _registryPath = registry.GetClassificationType(PkgdefClassificationTypes.RegistryPath);
             _string = registry.GetClassificationType(PredefinedClassificationTypeNames.String);
-            _equals = registry.GetClassificationType(PredefinedClassificationTypeNames.Operator);
+            _operator = registry.GetClassificationType(PredefinedClassificationTypeNames.Operator);
             _keyword = registry.GetClassificationType(PredefinedClassificationTypeNames.SymbolDefinition);
             _guid = registry.GetClassificationType(PkgdefClassificationTypes.Guid);
         }
@@ -26,9 +26,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span2)
         {
             IList<ClassificationSpan> list = new List<ClassificationSpan>();
-            //string[] lines = span.GetText().Split(new[] { Environment.NewLine }, StringSplitOptions.None);
             var lines = span2.Snapshot.Lines;
-
 
             foreach (var line in lines)
             {
@@ -54,10 +52,10 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     list.Add(new ClassificationSpan(keywordSpan, _keyword));
                 }
 
-                foreach (Match match in Variables.RegKey.Matches(text))
+                foreach (Match match in Variables.RegistryPath.Matches(text))
                 {
                     SnapshotSpan regSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
-                    list.Add(new ClassificationSpan(regSpan, _regkey));
+                    list.Add(new ClassificationSpan(regSpan, _registryPath));
                 }
 
                 foreach (Match match in Variables.String.Matches(text))
@@ -72,15 +70,15 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     list.Add(new ClassificationSpan(guidSpan, _guid));
                 }
 
-                foreach (Match match in Variables.Dword.Matches(text))
+                foreach (Match match in Variables.EntryKey.Matches(text))
                 {
                     var dword = match.Groups["dword"];
                     SnapshotSpan dwordSpan = new SnapshotSpan(span.Snapshot, span.Start + dword.Index, dword.Length);
-                    list.Add(new ClassificationSpan(dwordSpan, _dword));
+                    list.Add(new ClassificationSpan(dwordSpan, _entryKey));
 
                     var equals = match.Groups["operator"];
                     SnapshotSpan equalsSpan = new SnapshotSpan(span.Snapshot, span.Start + equals.Index, equals.Length);
-                    list.Add(new ClassificationSpan(equalsSpan, _equals));
+                    list.Add(new ClassificationSpan(equalsSpan, _operator));
                 }
             }
 

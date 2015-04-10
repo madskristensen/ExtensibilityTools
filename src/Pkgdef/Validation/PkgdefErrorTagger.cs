@@ -85,8 +85,8 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     else if (!match.Value.EndsWith("]"))
                         yield return CreateError(line, hit, "Unclosed registry key entry. Add the missing ] character");
 
-                    //else if (cspan.Span.GetText().Contains("/"))
-                    //    yield return CreateError(line, cspan.Span, "Use the backslash character as delimiter instead of forward slash.");
+                    else if (cspan.Span.GetText().Contains("/") && !cspan.Span.GetText().Contains("\\/"))
+                        yield return CreateError(line, cspan.Span, "Use the backslash character as delimiter instead of forward slash.");
                 }
 
                 else if (cspan.ClassificationType.IsOfType(PredefinedClassificationTypeNames.String))
@@ -97,7 +97,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     {
                         string text = match.Value;
 
-                        var hit = new SnapshotSpan(cspan.Span.Snapshot, span.Start + match.Index, match.Length);
+                        var hit = new SnapshotSpan(cspan.Span.Snapshot, span.Start.Position + match.Index, match.Length);
 
                         if (text.Length <= 1 || text[text.Length - 1] != '"')
                         {

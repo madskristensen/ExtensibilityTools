@@ -9,7 +9,8 @@ Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.m
 or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8fc0-7f19febeb897/).
 
 ### Editor margin
-The margin is located below the bottom scrollbar.
+The margin is located below the bottom scrollbar. This comes in handy
+when writing extensions that extends the VS editor.
 
 ![Bottom margin](art/margin.png)
 

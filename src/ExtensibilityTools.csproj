@@ -223,49 +223,49 @@
     <Content Include="Resources\Preview.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\snippets.pkgdef">
+    <Content Include="VSCT\Snippets\snippets.pkgdef">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-menu.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-menu.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-menus.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-menus.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-group.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-group.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-groups.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-groups.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-commandplacement.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-commandplacement.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-commandplacements.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-commandplacements.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-keybinding.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-keybinding.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-keybindings.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-keybindings.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-bitmap.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-bitmap.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-bitmaps.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-bitmaps.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-button.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-button.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-buttons.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-buttons.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-guidsymbol.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-guidsymbol.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Snippets\XML\Extensibility Tools\vsct-symbols.snippet">
+    <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-symbols.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <None Include="source.extension.vsixmanifest">

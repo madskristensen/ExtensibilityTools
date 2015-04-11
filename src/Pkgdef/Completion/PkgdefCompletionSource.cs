@@ -70,10 +70,10 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     if (!span.Span.Contains(extent.Start))
                         continue;
 
-                    extent = new SnapshotSpan(snapshot, extent.Start, 1);
+                    extent = new SnapshotSpan(snapshot, extent.Start + 1, 0);
 
                     foreach (var key in CompletionItem.Items)
-                        list.Add(CreateCompletion(key.Name, "$" + key.Name + "$", _defaultGlyph, key.Description));
+                        list.Add(CreateCompletion(key.Name, key.Name + "$", _defaultGlyph, key.Description));
                 }
                 else if (span.ClassificationType.IsOfType(PkgdefClassificationTypes.Guid))
                 {

@@ -67,8 +67,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                     {
                     case VSConstants.VSStd2KCmdID.TYPECHAR:
                         char ch = GetTypeChar(pvaIn);
-                        //if (ch == '=')
-                        //    StartSession();
+
                         if (!char.IsPunctuation(ch) && !char.IsControl(ch))
                         {
                             StartSession();
@@ -77,12 +76,12 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                         else if (_currentSession != null)
                             Filter();
                         break;
-                    //case VSConstants.VSStd2KCmdID.BACKSPACE:
-                    //    if (_currentSession == null)
-                    //        StartSession();
+                    case VSConstants.VSStd2KCmdID.BACKSPACE:
+                        if (_currentSession == null)
+                            StartSession();
 
-                    //    Filter();
-                    //    break;
+                        Filter();
+                        break;
                     }
                 }
             }
@@ -95,8 +94,12 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
             if (_currentSession == null || _currentSession.SelectedCompletionSet == null)
                 return;
 
-            _currentSession.SelectedCompletionSet.SelectBestMatch();
-            //_currentSession.SelectedCompletionSet.Recalculate();
+            _currentSession.Dismiss();
+            _currentSession = null;
+            StartSession();
+
+            if (_currentSession != null)
+                _currentSession.Filter();
         }
 
         bool Cancel()

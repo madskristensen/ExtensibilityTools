@@ -141,14 +141,14 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 string guid = cspan.Span.GetText();
                 ITextSnapshotLine line = snapshot.GetLineFromPosition(cspan.Span.Start.Position);
                 string lineText = line.GetText();
-                Guid check;
+                Guid check = Guid.Empty;
 
                 if (!dic.ContainsKey(guid) && Guid.TryParse(guid, out check))
                 {
                     dic[guid] = null;
                 }
 
-                if (dic[guid] == null || !dic[guid].Item1.Contains("\\"))
+                if (check != Guid.Empty && (!dic.ContainsKey(guid) || dic[guid] == null || !dic[guid].Item1.Contains("\\")))
                 {
                     string before = lineText.Substring(0, lineText.IndexOf(guid)).Trim();
                     string text = before;

@@ -113,7 +113,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
             if (list.Count > 0)
             {
                 var applicableTo = snapshot.CreateTrackingSpan(extent, SpanTrackingMode.EdgeInclusive);
-                completionSets.Add(new CompletionSet("All", "All", applicableTo, list, Enumerable.Empty<Intel.Completion>()));
+                completionSets.Add(new VsctCompletionSet("All", "All", applicableTo, list, Enumerable.Empty<Intel.Completion>()));
             }
         }
 

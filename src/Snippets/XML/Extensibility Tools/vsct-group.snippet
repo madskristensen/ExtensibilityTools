@@ -1,0 +1,40 @@
+﻿<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>Group element</Title>
+        <Author>Mads Kristensen</Author>
+        <Shortcut>Group</Shortcut>
+        <Description>Code snippet for VSCT file Group element</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>guid</ID>
+                <ToolTip>Guid</ToolTip>
+                <Default>Guid</Default>
+            </Literal>
+            <Literal>
+                <ID>id</ID>
+                <ToolTip>id</ToolTip>
+                <Default>MyMenuGroup</Default>
+            </Literal>
+            <Literal>
+                <ID>parentGuid</ID>
+                <ToolTip>Parent GUID</ToolTip>
+                <Default>guidSHLMainMenu</Default>
+            </Literal>
+            <Literal>
+                <ID>parentId</ID>
+                <ToolTip>Parent ID</ToolTip>
+                <Default>IDM_VS_MENU_EDIT</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="XML">
+            <![CDATA[<Group guid="$guid$" id="$id$" priority="0x0200">
+    <Parent guid="$parentGuid$" id="$parentId$"/>
+</Group>$end$]]>
+        </Code>
+    </Snippet>
+</CodeSnippet>

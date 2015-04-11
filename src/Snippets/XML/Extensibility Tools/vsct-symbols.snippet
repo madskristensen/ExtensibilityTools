@@ -1,0 +1,37 @@
+﻿<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>Symbols element</Title>
+        <Author>Mads Kristensen</Author>
+        <Shortcut>Symbols</Shortcut>
+        <Description>Code snippet for VSCT file Symbols element</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>name</ID>
+                <ToolTip>Name of the symbol.</ToolTip>
+                <Default>MyMenuGroup</Default>
+            </Literal>
+            <Literal>
+                <ID>guid</ID>
+                <ToolTip>Guid</ToolTip>
+                <Default>{31947ebe-91b7-45f9-96cf-401bfc671aa2}</Default>
+            </Literal>
+            <Literal>
+                <ID>idName</ID>
+                <ToolTip>Name of the ID symbol</ToolTip>
+                <Default>MyMenuGroup</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="XML">
+            <![CDATA[<Symbols>
+    <GuidSymbol name="$name$" value="$guid$">
+        <IDSymbol name="$idName$" value="0x0001" />
+    </GuidSymbol>
+</Symbols>$end$]]>
+        </Code>
+    </Snippet>
+</CodeSnippet>

@@ -1,0 +1,28 @@
+﻿<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>KeyBinding element</Title>
+        <Author>Mads Kristensen</Author>
+        <Shortcut>KeyBinding</Shortcut>
+        <Description>Code snippet for VSCT file KeyBinding element</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>guid</ID>
+                <ToolTip>Guid</ToolTip>
+                <Default>Guid</Default>
+            </Literal>
+            <Literal>
+                <ID>id</ID>
+                <ToolTip>id</ToolTip>
+                <Default>MyMenuGroup</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="XML">
+            <![CDATA[<KeyBinding guid="$guid$" id="$id$" mod1="Shift Alt" key1="R" editor="guidVSStd97"/>$end$]]>
+        </Code>
+    </Snippet>
+</CodeSnippet>

@@ -162,6 +162,12 @@
     <Compile Include="Settings\Options.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="VSCT\Completion\VsctBuiltInCache.cs" />
+    <Compile Include="VSCT\Completion\VsctCompletionController.cs" />
+    <Compile Include="VSCT\Completion\VsctCompletionSource.cs" />
+    <Compile Include="VSCT\Completion\VsctCompletionSourceProvider.cs" />
+    <Compile Include="VSCT\ContentType\VsctContentTypeDefinition.cs" />
+    <Compile Include="VSCT\VsctTextViewCreationListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="VSPackage.resx">

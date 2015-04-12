@@ -7,7 +7,7 @@
     <License>Resources\LICENSE</License>
     <Icon>Resources\Icon.png</Icon>
     <PreviewImage>Resources\Preview.png</PreviewImage>
-    <Tags>VSIX, extensibility, pkgdef, Intellisense</Tags>
+    <Tags>VSIX, Extensibility, pkgdef, Intellisense, VSCT, Snippets, Cncoding, Classification, ContentType</Tags>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="12.0" />

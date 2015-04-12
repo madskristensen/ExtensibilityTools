@@ -30,7 +30,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             _classifier = classifier.GetClassifier(buffer);
             _navigator = navigator;
             _glyphService = glyphService;
-            _defaultGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupProperty, StandardGlyphItem.GlyphItemPublic);
+            _defaultGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupField, StandardGlyphItem.GlyphItemPublic);
             _snippetGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphCSharpExpansion, StandardGlyphItem.GlyphItemPublic);
         }
 

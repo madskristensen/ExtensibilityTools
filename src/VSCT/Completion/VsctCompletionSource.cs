@@ -31,7 +31,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
             _classifier = classifier.GetClassifier(buffer);
             _navigator = navigator;
             _glyphService = glyphService;
-            _defaultGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupProperty, StandardGlyphItem.GlyphItemPublic);
+            _defaultGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupField, StandardGlyphItem.GlyphItemPublic);
             _builtInGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupProperty, StandardGlyphItem.TotalGlyphItems);
         }
 

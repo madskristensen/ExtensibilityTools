@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.OLE.Interop;
@@ -20,15 +19,13 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
 
         [Import]
         ICompletionBroker CompletionBroker = null;
-
-        [Import]
-        internal SVsServiceProvider ServiceProvider = null;
-
+        
         public void VsTextViewCreated(IVsTextView textViewAdapter)
         {
-            IWpfTextView view = AdaptersFactory.GetWpfTextView(textViewAdapter);
+            if (ExtensibilityToolsPackage.Options.VsctEnableIntellisense)
+                return;
 
-            //view.TextBuffer.Properties.GetOrCreateSingletonProperty(() => view);
+            IWpfTextView view = AdaptersFactory.GetWpfTextView(textViewAdapter);
 
             VsctCompletionController completion = new VsctCompletionController(view, CompletionBroker);
             IOleCommandTarget completionNext;

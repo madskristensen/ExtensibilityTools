@@ -13,6 +13,7 @@ namespace MadsKristensen.ExtensibilityTools.Settings
             PkgdefEnableColorizer = true;
             PkgdefEnableOutlining = true;
             PkgdefEnableBraceMatching = true;
+            VsctEnableIntellisense = true;
         }
 
         [Category("General")]
@@ -50,6 +51,12 @@ namespace MadsKristensen.ExtensibilityTools.Settings
         [Description("Highlights the matching start- or end brace, paranthesis or quotation mark.")]
         [DefaultValue(true)]
         public bool PkgdefEnableBraceMatching { get; set; }
+
+        [Category("VSCT files")]
+        [DisplayName("Enable Intellisense")]
+        [Description("Gives Intellisense for 'guid' and 'id' attributes.")]
+        [DefaultValue(true)]
+        public bool VsctEnableIntellisense { get; set; }
 
         public override void SaveSettingsToStorage()
         {

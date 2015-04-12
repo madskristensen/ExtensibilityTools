@@ -92,20 +92,8 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
 
                 _lblContentType.Value = buffer.ContentType.TypeName;
 
-                List<string> typeNames = new List<string>();
-                var baseTypes = buffer.ContentType.BaseTypes;
-
-                while (baseTypes.Any())
-                {
-                    var basetype = buffer.ContentType.BaseTypes.FirstOrDefault(b => typeNames.LastOrDefault() != b.DisplayName);
-
-                    if (basetype == null)
-                        break;
-
-                    baseTypes = basetype.BaseTypes;
-                    typeNames.Add(basetype.DisplayName);
-                }
-
+                var typeNames = buffer.ContentType.BaseTypes.Select(t => t.DisplayName);
+                
                 if (typeNames.Any())
                 {
                     _lblContentType.SetTooltip("base types: " + string.Join(" >", typeNames));

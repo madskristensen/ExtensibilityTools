@@ -19,10 +19,10 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
 
         [Import]
         ICompletionBroker CompletionBroker = null;
-        
+
         public void VsTextViewCreated(IVsTextView textViewAdapter)
         {
-            if (ExtensibilityToolsPackage.Options.VsctEnableIntellisense)
+            if (!ExtensibilityToolsPackage.Options.VsctEnableIntellisense)
                 return;
 
             IWpfTextView view = AdaptersFactory.GetWpfTextView(textViewAdapter);

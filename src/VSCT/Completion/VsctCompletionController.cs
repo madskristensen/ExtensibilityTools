@@ -117,7 +117,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
             if (_currentSession == null)
                 return false;
 
-            if (!_currentSession.SelectedCompletionSet.SelectionStatus.IsSelected && !force)
+            if (_currentSession.SelectedCompletionSet != null && _currentSession.SelectedCompletionSet.SelectionStatus != null && !_currentSession.SelectedCompletionSet.SelectionStatus.IsSelected && !force)
             {
                 _currentSession.Dismiss();
                 return false;

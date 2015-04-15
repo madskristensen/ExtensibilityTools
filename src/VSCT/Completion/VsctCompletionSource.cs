@@ -85,8 +85,10 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                     if (guidMatch.Success)
                         guid = guidMatch.Groups["guid"].Value;
 
-                    XmlDocument doc = new XmlDocument();
-                    doc.LoadXml(Regex.Replace(snapshot.GetText(), " xmlns(:[^\"]+)?=\"([^\"]+)\"", string.Empty));
+                    XmlDocument doc = ReadXmlDocument(snapshot);
+
+                    if (doc == null)
+                        return;
 
                     if (current == "id" && !string.IsNullOrEmpty(guid))
                     {
@@ -114,6 +116,21 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
             {
                 var applicableTo = snapshot.CreateTrackingSpan(extent, SpanTrackingMode.EdgeInclusive);
                 completionSets.Add(new VsctCompletionSet("All", "All", applicableTo, list, Enumerable.Empty<Intel.Completion>()));
+            }
+        }
+
+        private static XmlDocument ReadXmlDocument(ITextSnapshot snapshot)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            try
+            {
+                doc.LoadXml(Regex.Replace(snapshot.GetText(), " xmlns(:[^\"]+)?=\"([^\"]+)\"", string.Empty));
+                return doc;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 

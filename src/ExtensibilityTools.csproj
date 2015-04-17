@@ -65,6 +65,7 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.12.0" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.VSHost.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -169,6 +170,8 @@
     <Compile Include="VSCT\Completion\VsctCompletionSource.cs" />
     <Compile Include="VSCT\Completion\VsctCompletionSourceProvider.cs" />
     <Compile Include="VSCT\ContentType\VsctContentTypeDefinition.cs" />
+    <Compile Include="VSCT\Generator\BaseCodeGenerator.cs" />
+    <Compile Include="VSCT\Generator\VsctCodeGenerator.cs" />
     <Compile Include="VSCT\VsctTextViewCreationListener.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -145,6 +145,7 @@
     <Compile Include="Pkgdef\Classify\PkgdefClassifier.cs" />
     <Compile Include="Pkgdef\Classify\PkgdefClassifierProvider.cs" />
     <Compile Include="Pkgdef\Completion\CompletionItem.cs" />
+    <Compile Include="Pkgdef\Completion\ExtensionMethods.cs" />
     <Compile Include="Pkgdef\Completion\PkgdefCompletionController.cs" />
     <Compile Include="Pkgdef\Completion\PkgdefCompletionSourceProvider.cs" />
     <Compile Include="Pkgdef\Completion\PkgdefCompletionSource.cs" />

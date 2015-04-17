@@ -152,6 +152,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 {
                     string before = lineText.Substring(0, lineText.IndexOf(guid)).Trim();
                     string text = before;
+                    var glyph = unknown;
 
                     Match entryKey = Regex.Match(text, "\"(?<key>[^\"]+)\"");
                     if (entryKey.Success)
@@ -159,7 +160,16 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                         text = entryKey.Value + "=";
                     }
 
-                    dic[guid] = Tuple.Create(text + Environment.NewLine + "Line: " + line.LineNumber, unknown);
+                    string name;
+                    glyph = GetGlyph(lineText, glyph, out name);
+
+                    if (glyph == null || text == "\"")
+                        continue;
+
+                    if (!string.IsNullOrEmpty(name))
+                        name += Environment.NewLine;
+
+                    dic[guid] = Tuple.Create(name + text + Environment.NewLine + "Line: " + line.LineNumber, glyph);
                 }
             }
 
@@ -167,10 +177,72 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
             foreach (string guid in dic.Keys)
             {
-                entries.Add(CreateCompletion(guid, guid, dic[guid].Item2, dic[guid].Item1));
+                if (dic[guid] != null)
+                    entries.Add(CreateCompletion(guid, guid, dic[guid].Item2, dic[guid].Item1));
             }
 
-            list.AddRange(entries.OrderBy(e => e.DisplayText));
+            list.AddRange(entries.OrderByDescending(e => e.Description));
+        }
+
+        private ImageSource GetGlyph(string line, ImageSource glyph, out string name)
+        {
+            name = "";
+
+            if (line.HasString("package"))
+            {
+                name = "Package";
+                glyph = _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupDelegate, StandardGlyphItem.GlyphItemPublic);
+            }
+
+            else if (line.HasString("Project"))
+            {
+                name = "Package";
+                glyph = _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupDelegate, StandardGlyphItem.GlyphItemPublic);
+            }
+
+            else if (line.HasString("Editors"))
+            {
+                name = "Editor";
+                glyph = _glyphService.GetGlyph(StandardGlyphGroup.GlyphJSharpDocument, StandardGlyphItem.GlyphItemPublic);
+            }
+
+            else if (line.HasString("Expansion"))
+            {
+                name = "Snippet expansion";
+                glyph = _glyphService.GetGlyph(StandardGlyphGroup.GlyphCSharpExpansion, StandardGlyphItem.GlyphItemPublic);
+            }
+
+            else if (line.HasString("Services"))
+            {
+                name = "Service";
+                glyph = _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupEvent, StandardGlyphItem.GlyphItemPublic);
+            }
+
+            else if (line.HasString("page"))
+            {
+                name = "Options page";
+                glyph = _glyphService.GetGlyph(StandardGlyphGroup.GlyphDialogId, StandardGlyphItem.GlyphItemPublic);
+            }
+
+            else if (line.HasString("template"))
+            {
+                name = "Template";
+                glyph = _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupTypedef, StandardGlyphItem.GlyphItemPublic);
+            }
+
+            else if (line.HasString("theme"))
+            {
+                name = "Template";
+                glyph = _glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupOperator, StandardGlyphItem.GlyphItemPublic);
+            }
+
+            // Removes certain GUIDs from completion
+            else if (!line.Trim().StartsWith("[") || line.HasString("CLSID") || line.HasString("@=") || line.HasString("dependentAssembly"))
+            {
+                glyph = null;
+            }
+
+            return glyph;
         }
 
         private Completion CreateCompletion(string name, string insertion, ImageSource glyph = null, string description = null)

@@ -42,7 +42,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                 case VSConstants.VSStd2KCmdID.AUTOCOMPLETE:
                 case VSConstants.VSStd2KCmdID.COMPLETEWORD:
                 case VSConstants.VSStd2KCmdID.SHOWMEMBERLIST:
-                    handled = StartSession();
+                    StartSession();
                     break;
                 case VSConstants.VSStd2KCmdID.RETURN:
                     handled = Complete(false);

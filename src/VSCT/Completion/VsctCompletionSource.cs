@@ -72,13 +72,14 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
 
                     string current = currentAttr.Span.GetText();
                     string guid = null;
-                    string id = null;
+                    //string id = null;
+                    //string attrName = null;
                     string lineText = line.GetText();
 
-                    Match idMatch = Regex.Match(lineText, " id=\"(?<id>[^\"]+)\"");
+                    //Match idMatch = Regex.Match(lineText, " id=\"(?<id>[^\"]+)\"");
 
-                    if (idMatch.Success)
-                        id = idMatch.Groups["id"].Value;
+                    //if (idMatch.Success)
+                    //    id = idMatch.Groups["id"].Value;
 
                     Match guidMatch = Regex.Match(lineText, " guid=\"(?<guid>[^\"]+)\"");
 
@@ -90,7 +91,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                     if (doc == null)
                         return;
 
-                    if (current == "id" && !string.IsNullOrEmpty(guid))
+                    if ((current == "id" || current == "idCommandList"))
                     {
                         if (guid == "guidSHLMainMenu")
                         {
@@ -104,10 +105,21 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                             GetNameValueCompletion(list, doc, "//GuidSymbol[@name='" + guid + "']//IDSymbol");
                         }
                     }
-                    else if (current == "guid")
+                    else if (current == "guid" || current == "package")
                     {
                         list.Add(CreateCompletion("guidSHLMainMenu", "guidSHLMainMenu", _builtInGlyph, "Guid for Shell's group and menu ids."));
                         GetNameValueCompletion(list, doc, "//GuidSymbol");
+                    }
+                    else if (current == "editor")
+                    {
+                        list.Add(CreateCompletion("guidVSStd97", "guidVSStd97", _builtInGlyph));
+                        list.Add(CreateCompletion("guidVSStd2K", "guidVSStd2K", _builtInGlyph));
+                        GetNameValueCompletion(list, doc, "//GuidSymbol");
+                    }
+                    else if (current == "usedList")
+                    {
+                        extent = span.Span;
+                        GetUsedListCompletion(list, doc, "//GuidSymbol[@name='" + guid + "']//IDSymbol");
                     }
                 }
             }
@@ -152,6 +164,28 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                     list.Add(CreateCompletion(name.InnerText, name.InnerText, _defaultGlyph, description));
                 }
             }
+        }
+
+        private void GetUsedListCompletion(List<Intel.Completion> list, XmlDocument doc, string xpath)
+        {
+            var nodes = doc.SelectNodes(xpath);
+            if (nodes.Count == 0)
+                return;
+
+            List<string> names = new List<string>();
+
+            foreach (XmlNode node in nodes)
+            {
+                XmlAttribute name = node.Attributes["name"];
+
+                if (name != null)
+                {
+                    names.Add(name.InnerText);
+                }
+            }
+
+            string displayText = String.Join(", ", names);
+            list.Add(CreateCompletion(displayText, displayText, _defaultGlyph));
         }
 
         private Completion CreateCompletion(string name, string insertion, ImageSource glyph = null, string description = null)

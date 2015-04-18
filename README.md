@@ -39,6 +39,13 @@ them and can be invoked by hitting the Tab key.
 
 ![VSCT snippets](art/vsct-snippets.gif)
 
+#### Auto-sync VSCT commands
+Auto-generate the `GuidList` and `PackageCommand` classes every time
+you save the VSCT file. This keeps your code in sync with the VSCT file
+at all times.
+
+![VSCT auto-sync](art/vsct-autosync.png)
+
 ### Editor margin
 The margin is located below the bottom scrollbar and comes in handy
 when writing extensions that extends the VS editor.

@@ -112,7 +112,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Generator
             globalNamespace.Types.Add(classPkgCmdIDList);
 
             // generate source code:
-            return GenerateFromNamespace(GetCodeProvider(), globalNamespace, true);
+            return GenerateFromNamespace(GetCodeProvider(), globalNamespace, false);
         }
 
         private void InterpreteArguments(string[] args, out string globalNamespaceName, out string guidClassName, out string cmdIdListClassName, out string supporterPostfix, out bool isPublic)

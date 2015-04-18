@@ -140,6 +140,11 @@
     <Compile Include="EditorMargin\BottomMargin.cs" />
     <Compile Include="EditorMargin\BottomMarginFactory.cs" />
     <Compile Include="EditorMargin\TextControl.cs" />
+    <Compile Include="ExtensibilityTools.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExtensibilityTools.vsct</DependentUpon>
+    </Compile>
     <Compile Include="Guids.cs" />
     <Compile Include="ExtensibilityToolsPackage.cs" />
     <Compile Include="Pkgdef\Classify\PkgdefClassificationTypes.cs" />
@@ -164,6 +169,7 @@
     <Compile Include="Settings\Options.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="VSCT\Commands\AddCustomToolCommand.cs" />
     <Compile Include="VSCT\Completion\VsctBuiltInCache.cs" />
     <Compile Include="VSCT\Completion\VsctCompletionController.cs" />
     <Compile Include="VSCT\Completion\VsctCompletionSet.cs" />
@@ -279,13 +285,12 @@
   <ItemGroup>
     <VSCTCompile Include="ExtensibilityTools.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <Generator>VsctGenerator</Generator>
+      <LastGenOutput>ExtensibilityTools.cs</LastGenOutput>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Icon.png">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="Resources\Images.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
   </ItemGroup>

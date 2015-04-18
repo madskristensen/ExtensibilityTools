@@ -46,7 +46,7 @@ at all times.
 
 ![VSCT auto-sync](art/vsct-autosync.png)
 
-*Feature contributed by @phofman*
+*Feature contributed by [phofman](https://github.com/phofman/)*
 
 ### Editor margin
 The margin is located below the bottom scrollbar and comes in handy

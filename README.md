@@ -45,6 +45,7 @@ you save the VSCT file. This keeps your code in sync with the VSCT file
 at all times.
 
 ![VSCT auto-sync](art/vsct-autosync.png)
+
 *Feature contributed by @phofman*
 
 ### Editor margin

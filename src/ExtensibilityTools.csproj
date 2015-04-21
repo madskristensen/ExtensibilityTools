@@ -170,6 +170,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VSCT\Commands\AddCustomToolCommand.cs" />
+    <Compile Include="VSCT\Commands\BaseCommand.cs" />
+    <Compile Include="VSCT\Commands\SignBinaryCommand.cs" />
     <Compile Include="VSCT\Completion\VsctBuiltInCache.cs" />
     <Compile Include="VSCT\Completion\VsctCompletionController.cs" />
     <Compile Include="VSCT\Completion\VsctCompletionSet.cs" />

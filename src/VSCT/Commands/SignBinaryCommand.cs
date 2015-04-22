@@ -76,19 +76,80 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
         private string GetPackagePath()
         {
-            var activeConfiguration = _project.ConfigurationManager != null ? _project.ConfigurationManager.ActiveConfiguration : null;
+            var activeConfiguration = _project != null && _project.ConfigurationManager != null ? _project.ConfigurationManager.ActiveConfiguration : null;
             if (activeConfiguration == null)
                 return null;
 
             var properties = activeConfiguration.Properties;
-            var outputPath = properties.Item("OutputPath").Value.ToString();
-
+            var outputPath = properties.Item("OutputPath").Value.ToString(); // the path set in project properties
 
             properties = _project.Properties;
             var projectFolder = properties.Item("FullPath").Value.ToString();
             var assemblyName = properties.Item("AssemblyName").Value.ToString();
 
-            return Path.Combine(projectFolder, outputPath, assemblyName + ".vsix");
+            return GetTargetFullName(projectFolder, outputPath, assemblyName + ".vsix");
+        }
+
+        /// <summary>
+        /// Gets the full path to the target outcome of specified Visual C++ project.
+        /// </summary>
+        private static string GetTargetFullName(string projectFolder, string outputPath, string targetName)
+        {
+            if (string.IsNullOrEmpty(targetName))
+                return null;
+
+            if (!string.IsNullOrEmpty(projectFolder))
+            {
+                projectFolder = projectFolder.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            }
+
+            // The output folder can be anything, let's assume it's any of these patterns:
+            // 1) "\\server\folder"
+            // 2) "drive:\folder"
+            // 3) "..\..\folder"
+            // 4) "folder"
+            // 5) ""
+            if (string.IsNullOrEmpty(outputPath))
+            {
+                // 5) ""
+                if (string.IsNullOrEmpty(projectFolder))
+                    return targetName;
+                return Path.Combine(projectFolder, targetName);
+            }
+
+            if (outputPath.Length >= 2 && outputPath[0] == Path.DirectorySeparatorChar && outputPath[1] == Path.DirectorySeparatorChar)
+            {
+                // 1) "\\server\folder"
+                return Path.Combine(outputPath, targetName);
+            }
+
+            if (outputPath.Length >= 3 && outputPath[1] == Path.VolumeSeparatorChar && outputPath[2] == Path.DirectorySeparatorChar)
+            {
+                // 2) "drive:\folder"
+                return Path.Combine(outputPath, targetName);
+            }
+
+            if (outputPath.StartsWith("..\\") || outputPath.StartsWith("../"))
+            {
+                // 3) "..\..\folder"
+                while (outputPath.StartsWith("..\\") || outputPath.StartsWith("../"))
+                {
+                    outputPath = outputPath.Substring(3);
+                    if (!string.IsNullOrEmpty(projectFolder))
+                    {
+                        projectFolder = Path.GetDirectoryName(projectFolder);
+                    }
+                }
+
+                if (string.IsNullOrEmpty(projectFolder))
+                    return Path.Combine(outputPath, targetName);
+                return Path.Combine(projectFolder, outputPath, targetName);
+            }
+
+            // 4) "folder"
+            if (string.IsNullOrEmpty(projectFolder))
+                return Path.Combine(outputPath, targetName);
+            return Path.Combine(projectFolder, outputPath, targetName);
         }
     }
 }

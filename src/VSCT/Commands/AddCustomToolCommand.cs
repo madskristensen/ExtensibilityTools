@@ -3,6 +3,7 @@ using System.IO;
 using EnvDTE;
 using MadsKristensen.ExtensibilityTools.VSCT.Generator;
 using Microsoft.VisualStudio.Shell;
+using VSLangProj;
 
 namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 {
@@ -44,6 +45,9 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
             _item = uiItem.Object as ProjectItem;
             if (_item == null)
+                return;
+
+            if (_item.ContainingProject.Kind != PrjKind.prjKindCSharpProject && _item.ContainingProject.Kind != PrjKind.prjKindVBProject)
                 return;
 
             string fullPath = _item.Properties.Item("FullPath").Value.ToString();

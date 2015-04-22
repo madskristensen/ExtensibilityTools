@@ -170,6 +170,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VSCT\Commands\AddCustomToolCommand.cs" />
+    <Compile Include="VSCT\Commands\BaseCommand.cs" />
+    <Compile Include="VSCT\Commands\SignBinaryCommand.cs" />
     <Compile Include="VSCT\Completion\VsctBuiltInCache.cs" />
     <Compile Include="VSCT\Completion\VsctCompletionController.cs" />
     <Compile Include="VSCT\Completion\VsctCompletionSet.cs" />
@@ -178,9 +180,22 @@
     <Compile Include="VSCT\ContentType\VsctContentTypeDefinition.cs" />
     <Compile Include="VSCT\Generator\BaseCodeGenerator.cs" />
     <Compile Include="VSCT\Generator\VsctCodeGenerator.cs" />
+    <Compile Include="VSCT\Signing\CertificateHelper.cs" />
+    <Compile Include="VSCT\Signing\ComboBoxItem.cs" />
+    <Compile Include="VSCT\Signing\DialogHelper.cs" />
+    <Compile Include="VSCT\Signing\SignerHelper.cs" />
+    <Compile Include="VSCT\Signing\SignForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VSCT\Signing\SignForm.Designer.cs">
+      <DependentUpon>SignForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="VSCT\VsctTextViewCreationListener.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="VSCT\Signing\SignForm.resx">
+      <DependentUpon>SignForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>
       <ManifestResourceName>VSPackage</ManifestResourceName>

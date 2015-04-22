@@ -1,8 +1,6 @@
 ﻿using System.Runtime.InteropServices;
-using EnvDTE;
-using EnvDTE80;
 using MadsKristensen.ExtensibilityTools.Settings;
-using MadsKristensen.ExtensibilityTools.VSCT;
+using MadsKristensen.ExtensibilityTools.VSCT.Commands;
 using MadsKristensen.ExtensibilityTools.VSCT.Generator;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -28,6 +26,7 @@ namespace MadsKristensen.ExtensibilityTools
 
             Options = (Options)GetDialogPage(typeof(Options));
             AddCustomToolCommand.Initialize(this);
+            SignBinaryCommand.Initialize(this);
         }
     }
 }

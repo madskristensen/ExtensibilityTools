@@ -14,6 +14,15 @@
                     <ButtonText>Auto-sync VSCT commands</ButtonText>
                 </Strings>
             </Button>
+
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdSignBinary" priority="0x0410" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD"/>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Sign VSIX package...</ButtonText>
+                </Strings>
+            </Button>
         </Buttons>
     </Commands>
 
@@ -24,6 +33,7 @@
         <!-- This is the guid used to group the menu commands together -->
         <GuidSymbol name="guidExtensibilityToolsCmdSet" value="{5dbd2975-75e4-4f09-8b6d-1183b0c83762}">
             <IDSymbol name="cmdAddCustomTool" value="1" />
+            <IDSymbol name="cmdSignBinary" value="2" />
         </GuidSymbol>
     </Symbols>
 

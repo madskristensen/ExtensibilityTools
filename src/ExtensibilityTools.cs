@@ -25,5 +25,7 @@ namespace MadsKristensen.ExtensibilityTools
     {
         
         public const int cmdAddCustomTool = 0x0001;
+        
+        public const int cmdSignBinary = 0x0002;
     }
 }

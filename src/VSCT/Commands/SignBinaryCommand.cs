@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using EnvDTE;
+using MadsKristensen.ExtensibilityTools.VSCT.Signing;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -37,6 +39,8 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
         private void ShowSignBinaryUI(object sender, EventArgs e)
         {
+            var form = new SignForm(GetPackagePath());
+            form.ShowDialog();
         }
 
         private void CheckForExtensibilityPackageFlavorBeforeQueryStatus(object sender, EventArgs e)
@@ -68,6 +72,23 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
             ErrorHandler.ThrowOnFailure(aggregatableProject.GetAggregateProjectTypeGuids(out projectTypeGuids));
 
             button.Visible = projectTypeGuids != null && projectTypeGuids.IndexOf(ExtensibilityProjectGuid, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private string GetPackagePath()
+        {
+            var activeConfiguration = _project.ConfigurationManager != null ? _project.ConfigurationManager.ActiveConfiguration : null;
+            if (activeConfiguration == null)
+                return null;
+
+            var properties = activeConfiguration.Properties;
+            var outputPath = properties.Item("OutputPath").Value.ToString();
+
+
+            properties = _project.Properties;
+            var projectFolder = properties.Item("FullPath").Value.ToString();
+            var assemblyName = properties.Item("AssemblyName").Value.ToString();
+
+            return Path.Combine(projectFolder, outputPath, assemblyName + ".vsix");
         }
     }
 }

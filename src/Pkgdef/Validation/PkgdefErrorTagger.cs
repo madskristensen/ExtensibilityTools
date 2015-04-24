@@ -97,6 +97,9 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                     {
                         string text = match.Value;
 
+                        if (cspan.Span.Snapshot.Length < span.Start.Position + match.Index + match.Length)
+                            continue;
+
                         var hit = new SnapshotSpan(cspan.Span.Snapshot, span.Start.Position + match.Index, match.Length);
 
                         if (text.Length <= 1 || text[text.Length - 1] != '"')

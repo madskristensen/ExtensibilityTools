@@ -39,8 +39,26 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
         private void ShowSignBinaryUI(object sender, EventArgs e)
         {
-            var form = new SignForm(GetPackagePath());
+            var form = new SignForm(GetPackagePath(), BuildProjectToSign);
             form.ShowDialog();
+        }
+
+        private void BuildProjectToSign(object sender, EventArgs e)
+        {
+            Solution solution = DTE.Solution;
+            var selectedItem = GetSelectedItem();
+            Project project = selectedItem != null ? selectedItem.Object as Project : null;
+
+            // build the whole solution or only the selected project the command was invoked against:
+            if (project == null)
+            {
+                solution.SolutionBuild.Build(true);
+            }
+            else
+            {
+                // use the currently selected configuration and architecture:
+                solution.SolutionBuild.BuildProject(solution.SolutionBuild.ActiveConfiguration.Name, project.UniqueName, true);
+            }
         }
 
         private void CheckForExtensibilityPackageFlavorBeforeQueryStatus(object sender, EventArgs e)

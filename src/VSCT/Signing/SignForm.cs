@@ -13,10 +13,13 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Signing
     {
         public const string AppTitle = "Extensibility Tools";
 
-        public SignForm(string packagePath)
+        private EventHandler _buildHandler;
+
+        public SignForm(string packagePath, EventHandler buildHandler)
         {
             InitializeComponent();
 
+            _buildHandler = buildHandler;
             radioInstalled.Checked = true;
             txtSubjectFilter.Text = "Open Source Developer";
             txtPackagePath.Text = packagePath;
@@ -84,22 +87,45 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Signing
         {
             if (string.IsNullOrEmpty(txtPackagePath.Text) || !File.Exists(txtPackagePath.Text))
             {
-                MessageBox.Show("You must specify path to existing VSIX package to sign", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!string.IsNullOrEmpty(txtPackagePath.Text) && _buildHandler != null)
+                {
+                    if (MessageBox.Show("You must specify path to the existing VSIX package to sign.\r\n\r\nDid you forget to build the project and want to perform it now?", AppTitle,
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                    {
+                        _buildHandler(this, EventArgs.Empty);
+
+                        // check, if the VSIX to sign exists after build:
+                        if (File.Exists(txtPackagePath.Text))
+                        {
+                            bttOK_Click(sender, e);
+                            return;
+                        }
+
+                        MessageBox.Show("Building the project didn't help much. VSIX can't still be found at given location.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ActiveControl = txtPackagePath;
+                        return;
+                    }
+
+                    ActiveControl = txtPackagePath;
+                    return;
+                }
+
+                MessageBox.Show("You must specify path to the existing VSIX package to sign.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ActiveControl = txtPackagePath;
                 return;
             }
 
             if (txtCertificatePath.Enabled && (string.IsNullOrEmpty(txtCertificatePath.Text) || !File.Exists(txtCertificatePath.Text)))
             {
-                MessageBox.Show("You must specify valid certificate PFX file", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You must specify valid certificate PFX file.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ActiveControl = txtCertificatePath;
                 return;
             }
 
-            var certificate = cmbCertificates.SelectedItem != null ? ((ComboBoxItem)cmbCertificates.SelectedItem).Data as X509Certificate2 : null;
+            var certificate = cmbCertificates.SelectedItem != null ? ((ComboBoxItem) cmbCertificates.SelectedItem).Data as X509Certificate2 : null;
             if (cmbCertificates.Enabled && certificate == null)
             {
-                MessageBox.Show("You must select a valid certificate", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You must select a valid certificate.", AppTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ActiveControl = cmbCertificates;
                 return;
             }
@@ -115,10 +141,15 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Signing
                 result = SignerHelper.Sign(txtPackagePath.Text, null, txtCertificatePath.Text, txtCertificatePassword.Text);
             }
 
-            ShowMessageBox(result ? "The VSIX package has been digitally signed." : "There was an issue, while signing. Please try again.", AppTitle, result);
             if (result)
             {
+                DialogHelper.StartExplorerForFile(txtPackagePath.Text);
+                ShowMessageBox("The VSIX package has been digitally signed.", AppTitle, true);
                 Close();
+            }
+            else
+            {
+                ShowMessageBox("There was an issue, while signing. Please try again.", AppTitle, false);
             }
         }
 

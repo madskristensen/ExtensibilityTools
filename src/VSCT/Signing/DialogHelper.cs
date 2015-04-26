@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 
 namespace MadsKristensen.ExtensibilityTools.VSCT.Signing
@@ -70,7 +71,23 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Signing
             if (Directory.Exists(path))
                 return path;
 
+            var parentPath = Path.GetDirectoryName(path);
+            if (!string.IsNullOrEmpty(parentPath) && Directory.Exists(parentPath))
+                return parentPath;
+
             return null;
+        }
+
+        /// <summary>
+        /// Opens Windows Explorer window with specified file selected.
+        /// </summary>
+        public static void StartExplorerForFile(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return;
+
+            // open Explorer window with specified file selected:
+            Process.Start("Explorer.exe", "/select,\"" + path + "\"");
         }
     }
 }

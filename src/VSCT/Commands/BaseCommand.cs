@@ -27,6 +27,14 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
         }
 
         /// <summary>
+        /// Gets the IDE object wrapper.
+        /// </summary>
+        protected DTE2 DTE
+        {
+            get { return _dte; }
+        }
+
+        /// <summary>
         /// Setups new menu command with handlers.
         /// </summary>
         protected OleMenuCommand AddCommand(Guid menuGroup, int commandID, EventHandler invokeHandler, EventHandler beforeQueryHandler)

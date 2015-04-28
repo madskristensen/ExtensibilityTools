@@ -14,6 +14,7 @@ namespace MadsKristensen.ExtensibilityTools
     [ProvideOptionPage(typeof(Options), "Extensibility Tools", "General", 101, 101, true, new[] { "pkgdef", "vsct" })]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
+    [ProvideAutoLoad(UIContextGuids80.NoSolution)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [Guid(GuidList.guidExtensibilityToolsPkgString)]
     public sealed class ExtensibilityToolsPackage : Package

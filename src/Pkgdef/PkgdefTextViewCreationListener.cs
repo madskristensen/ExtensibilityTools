@@ -36,7 +36,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
             if (_errorList == null)
                 return;
 
-            if (ExtensibilityToolsPackage.Instance.Options.PkgdefShowIntellisense)
+            if (ExtensibilityToolsPackage.Options.PkgdefShowIntellisense)
             {
 
                 PkgdefCompletionController completion = new PkgdefCompletionController(view, CompletionBroker);

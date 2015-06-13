@@ -22,7 +22,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
         {
-            if (!ExtensibilityToolsPackage.Instance.Options.PkgdefEnableValidation)
+            if (!ExtensibilityToolsPackage.Options.PkgdefEnableValidation)
                 return null;
 
             var errorlist = buffer.Properties.GetProperty(typeof(ErrorListProvider)) as ErrorListProvider;

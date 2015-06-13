@@ -5,7 +5,7 @@ namespace MadsKristensen.ExtensibilityTools.Settings
 {
     public class ExtensibilityOptions : DialogPage
     {
-        public ExtensibilityOptions()
+        public ExtensibilityOptions() : base()
         {
             ShowBottomMargin = true;
             PkgdefShowIntellisense = true;

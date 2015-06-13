@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Windows.Threading;
 using MadsKristensen.ExtensibilityTools.Settings;
 using MadsKristensen.ExtensibilityTools.VSCT.Commands;
 using MadsKristensen.ExtensibilityTools.VSCT.Generator;
@@ -19,24 +21,15 @@ namespace MadsKristensen.ExtensibilityTools
     public sealed class ExtensibilityToolsPackage : Package
     {
         public const string Version = "0.1";
-        public static ExtensibilityToolsPackage Instance;
-        private ExtensibilityOptions _options;
-
-        public ExtensibilityOptions Options
-        {
-            get
-            {
-                if (_options == null)
-                    _options = GetDialogPage(typeof(ExtensibilityOptions)) as ExtensibilityOptions;
-
-                return _options;
-            }
-        }
+        public static ExtensibilityOptions Options;
 
         protected override void Initialize()
         {
-            _options = (ExtensibilityOptions)GetDialogPage(typeof(ExtensibilityOptions));
-            Instance = this;
+            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+            {
+                Options = (ExtensibilityOptions)GetDialogPage(typeof(ExtensibilityOptions));
+
+            }), DispatcherPriority.ApplicationIdle, null);
 
             AddCustomToolCommand.Initialize(this);
             SignBinaryCommand.Initialize(this);

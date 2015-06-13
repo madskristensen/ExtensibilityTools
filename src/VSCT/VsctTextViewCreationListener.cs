@@ -22,7 +22,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
 
         public void VsTextViewCreated(IVsTextView textViewAdapter)
         {
-            if (!ExtensibilityToolsPackage.Instance.Options.VsctEnableIntellisense)
+            if (!ExtensibilityToolsPackage.Options.VsctEnableIntellisense)
                 return;
 
             IWpfTextView view = AdaptersFactory.GetWpfTextView(textViewAdapter);

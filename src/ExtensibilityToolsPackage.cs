@@ -25,11 +25,7 @@ namespace MadsKristensen.ExtensibilityTools
 
         protected override void Initialize()
         {
-            Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
-            {
-                Options = (ExtensibilityOptions)GetDialogPage(typeof(ExtensibilityOptions));
-
-            }), DispatcherPriority.ApplicationIdle, null);
+            Options = (ExtensibilityOptions)GetDialogPage(typeof(ExtensibilityOptions));
 
             AddCustomToolCommand.Initialize(this);
             SignBinaryCommand.Initialize(this);

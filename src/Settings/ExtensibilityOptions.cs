@@ -5,7 +5,7 @@ namespace MadsKristensen.ExtensibilityTools.Settings
 {
     public class ExtensibilityOptions : DialogPage
     {
-        public ExtensibilityOptions() : base()
+        public ExtensibilityOptions()
         {
             ShowBottomMargin = true;
             PkgdefShowIntellisense = true;
@@ -58,14 +58,14 @@ namespace MadsKristensen.ExtensibilityTools.Settings
         [DefaultValue(true)]
         public bool VsctEnableIntellisense { get; set; }
 
-        public override void SaveSettingsToStorage()
-        {
-            if (!PkgdefEnableColorizer)
-            {
-                PkgdefShowIntellisense = false;
-            }
+        //public override void SaveSettingsToStorage()
+        //{
+        //    if (!PkgdefEnableColorizer)
+        //    {
+        //        PkgdefShowIntellisense = false;
+        //    }
 
-            base.SaveSettingsToStorage();
-        }
+        //    base.SaveSettingsToStorage();
+        //}
     }
 }

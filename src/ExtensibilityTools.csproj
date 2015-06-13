@@ -169,7 +169,7 @@
     <Compile Include="Pkgdef\Validation\PkgdefErrorTagger.cs" />
     <Compile Include="Pkgdef\Validation\PkgdefErrorTaggerProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\Options.cs">
+    <Compile Include="Settings\ExtensibilityOptions.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VSCT\Commands\AddCustomToolCommand.cs" />

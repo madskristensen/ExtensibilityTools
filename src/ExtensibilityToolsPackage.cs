@@ -11,7 +11,7 @@ namespace MadsKristensen.ExtensibilityTools
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideOptionPage(typeof(Options), "Extensibility Tools", "General", 101, 101, true, new[] { "pkgdef", "vsct" })]
+    [ProvideOptionPage(typeof(ExtensibilityOptions), "Extensibility Tools", "General", 101, 101, true, new[] { "pkgdef", "vsct" })]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
@@ -20,14 +20,14 @@ namespace MadsKristensen.ExtensibilityTools
     {
         public const string Version = "0.1";
         public static ExtensibilityToolsPackage Instance;
-        private Options _options;
+        private ExtensibilityOptions _options;
 
-        public Options Options
+        public ExtensibilityOptions Options
         {
             get
             {
                 if (_options == null)
-                    _options = (Options)GetDialogPage(typeof(Options));
+                    _options = GetDialogPage(typeof(ExtensibilityOptions)) as ExtensibilityOptions;
 
                 return _options;
             }
@@ -35,6 +35,7 @@ namespace MadsKristensen.ExtensibilityTools
 
         protected override void Initialize()
         {
+            _options = (ExtensibilityOptions)GetDialogPage(typeof(ExtensibilityOptions));
             Instance = this;
 
             AddCustomToolCommand.Initialize(this);

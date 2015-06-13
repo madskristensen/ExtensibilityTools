@@ -3,9 +3,9 @@ using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.ExtensibilityTools.Settings
 {
-    public class Options : DialogPage
+    public class ExtensibilityOptions : DialogPage
     {
-        public Options()
+        public ExtensibilityOptions()
         {
             ShowBottomMargin = true;
             PkgdefShowIntellisense = true;

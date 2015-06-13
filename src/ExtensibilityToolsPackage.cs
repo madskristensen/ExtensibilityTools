@@ -20,15 +20,28 @@ namespace MadsKristensen.ExtensibilityTools
     public sealed class ExtensibilityToolsPackage : Package
     {
         public const string Version = "0.1";
-        public static Options Options;
+        public static ExtensibilityToolsPackage Instance;
+        private Options _options;
+
+        public Options Options
+        {
+            get
+            {
+                if (_options == null)
+                    _options = (Options)GetDialogPage(typeof(Options));
+
+                return _options;
+            }
+        }
 
         protected override void Initialize()
         {
-            base.Initialize();
+            Instance = this;
 
-            Options = (Options)GetDialogPage(typeof(Options));
             AddCustomToolCommand.Initialize(this);
             SignBinaryCommand.Initialize(this);
+
+            base.Initialize();
         }
     }
 }

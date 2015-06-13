@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Microsoft.VisualStudio.Shell;
 
-namespace MadsKristensen.ExtensibilityTools.Settings
+namespace MadsKristensen.ExtensibilityTools
 {
     public class ExtensibilityOptions : DialogPage
     {

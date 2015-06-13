@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Windows.Threading;
-using MadsKristensen.ExtensibilityTools.Settings;
 using MadsKristensen.ExtensibilityTools.VSCT.Commands;
 using MadsKristensen.ExtensibilityTools.VSCT.Generator;
 using Microsoft.VisualStudio.Shell;
@@ -13,7 +11,7 @@ namespace MadsKristensen.ExtensibilityTools
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideOptionPage(typeof(ExtensibilityOptions), "Extensibility Tools", "General", 101, 101, true, new[] { "pkgdef", "vsct" })]
+    [ProvideOptionPage(typeof(ExtensibilityOptions), "Extensibility Tools", "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
@@ -21,7 +19,7 @@ namespace MadsKristensen.ExtensibilityTools
     public sealed class ExtensibilityToolsPackage : Package
     {
         public const string Version = "0.1";
-        public static ExtensibilityOptions Options;
+        public static ExtensibilityOptions Options { get; private set; }
 
         protected override void Initialize()
         {

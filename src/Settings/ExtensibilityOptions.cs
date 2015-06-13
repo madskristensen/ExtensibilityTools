@@ -58,14 +58,14 @@ namespace MadsKristensen.ExtensibilityTools
         [DefaultValue(true)]
         public bool VsctEnableIntellisense { get; set; }
 
-        //public override void SaveSettingsToStorage()
-        //{
-        //    if (!PkgdefEnableColorizer)
-        //    {
-        //        PkgdefShowIntellisense = false;
-        //    }
+        public override void SaveSettingsToStorage()
+        {
+            if (!PkgdefEnableColorizer)
+            {
+                PkgdefShowIntellisense = false;
+            }
 
-        //    base.SaveSettingsToStorage();
-        //}
+            base.SaveSettingsToStorage();
+        }
     }
 }

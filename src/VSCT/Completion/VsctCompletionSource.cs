@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Media;
 using System.Xml;
+using Microsoft.VisualStudio.Imaging;
+using Microsoft.VisualStudio.Imaging.Interop;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Language.StandardClassification;
+using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Operations;
@@ -24,6 +28,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
         private ImageSource _defaultGlyph;
         private ImageSource _builtInGlyph;
         private IGlyphService _glyphService;
+        private static IVsImageService2 _imageService;
 
         public VsctCompletionSource(ITextBuffer buffer, IClassifierAggregatorService classifier, ITextStructureNavigatorSelectorService navigator, IGlyphService glyphService)
         {
@@ -33,6 +38,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
             _glyphService = glyphService;
             _defaultGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupField, StandardGlyphItem.GlyphItemPublic);
             _builtInGlyph = glyphService.GetGlyph(StandardGlyphGroup.GlyphGroupProperty, StandardGlyphItem.TotalGlyphItems);
+            _imageService = ExtensibilityToolsPackage.GetGlobalService(typeof(SVsImageService)) as IVsImageService2;
         }
 
         public void AugmentCompletionSession(ICompletionSession session, IList<CompletionSet> completionSets)
@@ -100,6 +106,16 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                                 list.Add(CreateCompletion(key, key, _builtInGlyph, VsctBuiltInCache._dic[key]));
                             }
                         }
+                        else if (guid == "ImageCatalogGuid")
+                        {
+                            PropertyInfo[] monikers = typeof(KnownMonikers).GetProperties(BindingFlags.Static | BindingFlags.Public);
+                            foreach (var monikerName in monikers)
+                            {
+                                ImageMoniker moniker = (ImageMoniker)monikerName.GetValue(null, null);
+                                var glyph = GetImage(moniker);
+                                list.Add(CreateCompletion(monikerName.Name, monikerName.Name, glyph));
+                            }
+                        }
                         else
                         {
                             GetNameValueCompletion(list, doc, "//GuidSymbol[@name='" + guid + "']//IDSymbol");
@@ -121,6 +137,12 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                         extent = span.Span;
                         GetUsedListCompletion(list, doc, "//GuidSymbol[@name='" + guid + "']//IDSymbol");
                     }
+                    else if (current == "href")
+                    {
+                        list.Add(CreateCompletion("stdidcmd.h", "stdidcmd.h", _defaultGlyph));
+                        list.Add(CreateCompletion("vsshlids.h", "vsshlids.h", _defaultGlyph));
+                        list.Add(CreateCompletion("KnownImageIds.vsct", "KnownImageIds.vsct", _defaultGlyph));
+                    }
                 }
             }
 
@@ -129,6 +151,27 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                 var applicableTo = snapshot.CreateTrackingSpan(extent, SpanTrackingMode.EdgeInclusive);
                 completionSets.Add(new VsctCompletionSet("All", "All", applicableTo, list, Enumerable.Empty<Intel.Completion>()));
             }
+        }
+
+        public static ImageSource GetImage(ImageMoniker moniker)
+        {
+            ImageAttributes imageAttributes = new ImageAttributes();
+            imageAttributes.Flags = (uint)_ImageAttributesFlags.IAF_RequiredFlags;
+            imageAttributes.ImageType = (uint)_UIImageType.IT_Bitmap;
+            imageAttributes.Format = (uint)_UIDataFormat.DF_WPF;
+            imageAttributes.LogicalHeight = 16;
+            imageAttributes.LogicalWidth = 16;
+            imageAttributes.StructSize = Marshal.SizeOf(typeof(ImageAttributes));
+
+            IVsUIObject result = _imageService.GetImage(moniker, imageAttributes);
+
+            Object data;
+            result.get_Data(out data);
+
+            if (data == null)
+                return null;
+
+            return data as System.Windows.Media.Imaging.BitmapSource;
         }
 
         private static XmlDocument ReadXmlDocument(ITextSnapshot snapshot)

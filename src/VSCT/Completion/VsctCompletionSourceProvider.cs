@@ -20,10 +20,10 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
 
         [Import]
         IGlyphService GlyphService = null;
-        
+
         public ICompletionSource TryCreateCompletionSource(ITextBuffer textBuffer)
         {
-           return new VsctCompletionSource(textBuffer, ClassifierAggregatorService, NavigatorService, GlyphService);
+            return new VsctCompletionSource(textBuffer, ClassifierAggregatorService, NavigatorService, GlyphService);
         }
     }
 }

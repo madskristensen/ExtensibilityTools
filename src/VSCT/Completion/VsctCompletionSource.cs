@@ -106,7 +106,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                                 list.Add(CreateCompletion(key, key, _builtInGlyph, VsctBuiltInCache._dic[key]));
                             }
                         }
-                        else if (guid == "ImageCatalogGuid")
+                        else if (guid == "ImageCatalogGuid" && _imageService != null)
                         {
                             PropertyInfo[] monikers = typeof(KnownMonikers).GetProperties(BindingFlags.Static | BindingFlags.Public);
                             foreach (var monikerName in monikers)

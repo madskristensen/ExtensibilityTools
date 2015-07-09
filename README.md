@@ -33,7 +33,7 @@ GUID and Intellisense is now provided for all the corresponding IDs.
 
 ![VSCT Intellisense groups menus](art/vsct-intellisense-builtin.png)
 
-### ImageMoniker Intellisense
+#### ImageMoniker Intellisense
 Over 3500 images is available as ImageMonikers in the KnownMonikers
 collection. You can now see all the images directly inside
 Intellisense.

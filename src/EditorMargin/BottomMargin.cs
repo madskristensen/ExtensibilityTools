@@ -29,7 +29,6 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
             _foregroundBrush = new SolidColorBrush((Color)FindResource(VsColors.CaptionTextKey));
             _backgroundBrush = new SolidColorBrush((Color)FindResource(VsColors.ScrollBarBackgroundKey));
 
-            this.Height = 22;
             this.Background = _backgroundBrush;
             this.ClipToBounds = true;
 

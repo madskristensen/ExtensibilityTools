@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +18,7 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         private IWpfTextView _textView;
         private bool _isDisposed = false;
         private IClassifier _classifier;
-        private TextControl _lblClassification, _lblEncoding, _lblContentType;
+        private TextControl _lblClassification, _lblEncoding, _lblContentType, _lblSelection;
         private Brush _foregroundBrush, _backgroundBrush;
         private ITextDocument _doc;
 
@@ -43,8 +42,12 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
             _lblClassification = new TextControl("Classification");
             this.Children.Add(_lblClassification);
 
+            _lblSelection = new TextControl("Selection");
+            this.Children.Add(_lblSelection);
+
             UpdateClassificationLabel();
             UpdateContentTypeLabel();
+            UpdateContentSelectionLabel();
 
             if (documentService.TryGetTextDocument(textView.TextDataModel.DocumentBuffer, out _doc))
             {
@@ -64,6 +67,7 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         {
             UpdateClassificationLabel();
             UpdateContentTypeLabel();
+            UpdateContentSelectionLabel();
         }
 
         private void UpdateEncodingLabel(ITextDocument doc)
@@ -93,7 +97,7 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
                 _lblContentType.Value = buffer.ContentType.TypeName;
 
                 var typeNames = buffer.ContentType.BaseTypes.Select(t => t.DisplayName);
-                
+
                 if (typeNames.Any())
                 {
                     _lblContentType.SetTooltip("base types: " + string.Join(", ", typeNames));
@@ -136,6 +140,25 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
 
                     _lblClassification.SetTooltip(ctype.Classification);
                     _lblClassification.Value = name;
+                }
+
+            }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
+        }
+
+        private void UpdateContentSelectionLabel()
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                int start = _textView.Selection.Start.Position.Position;
+                int end = _textView.Selection.End.Position.Position;
+
+                if (end == start)
+                {
+                    _lblSelection.Value = start.ToString();
+                }
+                else
+                {
+                    _lblSelection.Value = $"{start}-{end} ({end - start} chars)";
                 }
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);

@@ -20,7 +20,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Generator
     [Guid("a6a34300-fa6b-4f86-a8ba-e1fea8d24922")]
     public sealed class VsctCodeGenerator : BaseCodeGenerator
     {
-        #region Public Name
+        #region Public Names
 
         /// <summary>
         /// Name of this generator.
@@ -36,8 +36,8 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Generator
 
         #region Comments
 
-        private const string DefaultGuidListClassName = "GuidList";
-        private const string DefaultPkgCmdIDListClassName = "PackageCommands";
+        private const string DefaultGuidListClassName = "PackageGuids";
+        private const string DefaultPkgCmdIDListClassName = "PackageIds";
         private const string ClassGuideListComment = "Helper class that exposes all GUIDs used across VS Package.";
         private const string ClassPkgCmdIDListComments = "Helper class that encapsulates all CommandIDs uses across VS Package.";
 
@@ -159,7 +159,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Generator
             {
                 xml.LoadXml(vsctContentFile);
 
-                // having XML loaded go throu and find:
+                // having XML loaded go through and find:
                 // CommandTable / Symbols / GuidSymbol* / IDSymbol*
                 if (xml.DocumentElement != null && xml.DocumentElement.Name == "CommandTable")
                     symbols = xml.DocumentElement["Symbols"];
@@ -180,7 +180,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Generator
                 {
                     try
                     {
-                        // go throu all GuidSymbol elements...
+                        // go through all GuidSymbol elements...
                         var value = symbol.Attributes["value"].Value;
                         var name = symbol.Attributes["name"].Value;
 
@@ -205,7 +205,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Generator
                     {
                         try
                         {
-                            // go throu all IDSymbol elements...
+                            // go through all IDSymbol elements...
                             ids.Add(new KeyValuePair<string, string>(i.Attributes["name"].Value, i.Attributes["value"].Value));
                         }
                         catch

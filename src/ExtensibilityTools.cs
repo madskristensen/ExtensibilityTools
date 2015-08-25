@@ -6,7 +6,7 @@ namespace MadsKristensen.ExtensibilityTools
     /// <summary>
     /// Helper class that exposes all GUIDs used across VS Package.
     /// </summary>
-    internal sealed partial class GuidList
+    internal sealed partial class PackageGuids
     {
         
         public const string guidExtensibilityToolsPkgString = "f8330d54-0469-43a7-8fc0-7f19febeb897";
@@ -21,7 +21,7 @@ namespace MadsKristensen.ExtensibilityTools
     /// <summary>
     /// Helper class that encapsulates all CommandIDs uses across VS Package.
     /// </summary>
-    internal sealed partial class PackageCommands
+    internal sealed partial class PackageIds
     {
         
         public const int cmdAddCustomTool = 0x0001;

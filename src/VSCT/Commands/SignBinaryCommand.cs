@@ -34,7 +34,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
         /// </summary>
         protected override void SetupCommands()
         {
-            AddCommand(GuidList.guidExtensibilityToolsCmdSet, PackageCommands.cmdSignBinary, ShowSignBinaryUI, CheckForExtensibilityPackageFlavorBeforeQueryStatus);
+            AddCommand(PackageGuids.guidExtensibilityToolsCmdSet, PackageIds.cmdSignBinary, ShowSignBinaryUI, CheckForExtensibilityPackageFlavorBeforeQueryStatus);
         }
 
         private void ShowSignBinaryUI(object sender, EventArgs e)

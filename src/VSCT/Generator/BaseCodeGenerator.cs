@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TextTemplating.VSHost;
 namespace MadsKristensen.ExtensibilityTools.VSCT.Generator
 {
     /// <summary>
-    /// Base class for any kids of code generators.
+    /// Base class for any kind of code generator.
     /// </summary>
     public abstract class BaseCodeGenerator : BaseCodeGeneratorWithSite
     {
@@ -57,7 +57,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Generator
         }
 
         /// <summary>
-        /// Returns the EnvDTE.ProjectItem object that corresponds to the project item the code  generator was called on.
+        /// Returns the EnvDTE.ProjectItem object that corresponds to the project item the code generator was called on.
         /// </summary>
         /// <returns>The EnvDTE.ProjectItem of the project item the code generator was called on</returns>
         protected ProjectItem GetProjectItem()

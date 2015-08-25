@@ -30,7 +30,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
         protected override void SetupCommands()
         {
-            AddCommand(GuidList.guidExtensibilityToolsCmdSet, PackageCommands.cmdAddCustomTool, ShowMessageBox, AddCustomToolItemBeforeQueryStatus);
+            AddCommand(PackageGuids.guidExtensibilityToolsCmdSet, PackageIds.cmdAddCustomTool, ShowMessageBox, AddCustomToolItemBeforeQueryStatus);
         }
 
         private void AddCustomToolItemBeforeQueryStatus(object sender, EventArgs e)

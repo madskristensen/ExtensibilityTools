@@ -15,7 +15,7 @@ namespace MadsKristensen.ExtensibilityTools
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    [Guid(GuidList.guidExtensibilityToolsPkgString)]
+    [Guid(PackageGuids.guidExtensibilityToolsPkgString)]
     public sealed class ExtensibilityToolsPackage : Package
     {
         public const string Version = "0.1";

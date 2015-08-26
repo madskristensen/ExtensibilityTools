@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="f8330d54-0469-43a7-8fc0-7f19febeb897" Version="1.1" Language="en-US" Publisher="Mads Kristensen" />
+    <Identity Id="f8330d54-0469-43a7-8fc0-7f19febeb897" Version="1.2" Language="en-US" Publisher="Mads Kristensen" />
     <DisplayName>Extensibility Tools 2015</DisplayName>
     <Description xml:space="preserve">An extension for making it easier to write Visual Studio extensions</Description>
     <License>Resources\LICENSE</License>

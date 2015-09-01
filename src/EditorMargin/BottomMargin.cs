@@ -125,6 +125,7 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
                 if (cspans.Count == 0)
                 {
                     _lblClassification.Value = "None";
+                    _lblClassification.SetTooltip("None");
                 }
                 else
                 {

@@ -7,12 +7,13 @@
 
   <Commands package="guidExtensibilityToolsPkg">
     <Groups>
-      <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0600">
+      <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0200">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
       </Group>
     </Groups>
+
     <Buttons>
-      <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0300" type="Button">
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0600" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>DefaultInvisible</CommandFlag>
@@ -30,7 +31,7 @@
         </Strings>
       </Button>
 
-      <Button guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0420" type="Button">
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0100" type="Button">
         <Parent guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup"/>
         <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
         <CommandFlag>IconIsMoniker</CommandFlag>
@@ -40,6 +41,12 @@
       </Button>
     </Buttons>
   </Commands>
+
+  <CommandPlacements>
+    <CommandPlacement guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0200">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
+    </CommandPlacement>
+  </CommandPlacements>
 
   <Symbols>
     <!-- This is the package guid. -->

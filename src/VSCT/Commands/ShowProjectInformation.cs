@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using EnvDTE;
+using System.Runtime.InteropServices;
 
 namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 {
@@ -55,7 +56,6 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
             sb.AppendLine($"FullName:\t\t {project.FullName}");
             sb.AppendLine($"FileName:\t\t {project.FileName}");
             sb.AppendLine($"Kind:\t\t\t {project.Kind}");
-            sb.AppendLine($"ExtenderCATID:\t {project.Properties}");
 
             if (project.Properties != null)
             {
@@ -67,10 +67,17 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
                 {
                     string displayValue = "<no value>";
 
-                    if (prop.Value != null && !string.IsNullOrWhiteSpace(prop.Value.ToString()))
-                        displayValue = prop.Value.ToString();
+                    try
+                    {
+                        if (prop.Value != null && !string.IsNullOrWhiteSpace(prop.Value.ToString()))
+                            displayValue = prop.Value.ToString();
 
-                    sb.AppendLine($"\t{prop.Name.PadRight(40, ' ')}:\t{displayValue}");
+                        sb.AppendLine($"\t{prop.Name.PadRight(50, ' ')}:\t{displayValue}");
+                    }
+                    catch (COMException)
+                    {
+                        // Certain properties throw when requesting their value. Ignore them.
+                    }
                 }
             }
 

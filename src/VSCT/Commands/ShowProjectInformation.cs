@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.IO;
 using System.Text;
 using EnvDTE;
@@ -54,6 +55,24 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
             sb.AppendLine($"FullName:\t\t {project.FullName}");
             sb.AppendLine($"FileName:\t\t {project.FileName}");
             sb.AppendLine($"Kind:\t\t\t {project.Kind}");
+            sb.AppendLine($"ExtenderCATID:\t {project.Properties}");
+
+            if (project.Properties != null)
+            {
+                sb.AppendLine();
+                sb.AppendLine("Properties:");
+                var properties = project.Properties.OfType<Property>().OrderBy(p => p.Name);
+
+                foreach (Property prop in properties)
+                {
+                    string displayValue = "<no value>";
+
+                    if (prop.Value != null && !string.IsNullOrWhiteSpace(prop.Value.ToString()))
+                        displayValue = prop.Value.ToString();
+
+                    sb.AppendLine($"\t{prop.Name.PadRight(40, ' ')}:\t{displayValue}");
+                }
+            }
 
             File.WriteAllText(fileName, sb.ToString(), Encoding.UTF8);
         }

@@ -17,6 +17,7 @@ namespace MadsKristensen.ExtensibilityTools
     /// </summary>
     internal sealed partial class PackageIds
     {
+        public const int ProjectMenuGroup = 0x03E8;
         public const int cmdAddCustomTool = 0x0001;
         public const int cmdSignBinary = 0x0002;
         public const int cmdShowInformation = 0x0003;

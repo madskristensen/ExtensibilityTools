@@ -6,8 +6,13 @@
   <Include href="KnownImageIds.vsct"/>
 
   <Commands package="guidExtensibilityToolsPkg">
+    <Groups>
+      <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+      </Group>
+    </Groups>
     <Buttons>
-      <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0600" type="Button">
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0300" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <CommandFlag>DefaultInvisible</CommandFlag>
@@ -26,7 +31,7 @@
       </Button>
 
       <Button guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0420" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD"/>
+        <Parent guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup"/>
         <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
@@ -42,6 +47,8 @@
 
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidExtensibilityToolsCmdSet" value="{5dbd2975-75e4-4f09-8b6d-1183b0c83762}">
+      <IDSymbol name="ProjectMenuGroup" value="1000" />
+
       <IDSymbol name="cmdAddCustomTool" value="1" />
       <IDSymbol name="cmdSignBinary" value="2" />
       <IDSymbol name="cmdShowInformation" value="3" />

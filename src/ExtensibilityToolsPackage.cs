@@ -27,6 +27,7 @@ namespace MadsKristensen.ExtensibilityTools
 
             AddCustomToolCommand.Initialize(this);
             SignBinaryCommand.Initialize(this);
+            ShowProjectInformation.Initialize(this);
 
             base.Initialize();
         }

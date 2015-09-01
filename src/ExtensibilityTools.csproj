@@ -178,6 +178,7 @@
     <Compile Include="Settings\ExtensibilityOptions.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="VSCT\Commands\ShowProjectInformation.cs" />
     <Compile Include="VSCT\Commands\AddCustomToolCommand.cs" />
     <Compile Include="VSCT\Commands\BaseCommand.cs" />
     <Compile Include="VSCT\Commands\SignBinaryCommand.cs" />
@@ -311,6 +312,7 @@
       <ResourceName>Menus.ctmenu</ResourceName>
       <Generator>VsctGenerator</Generator>
       <LastGenOutput>ExtensibilityTools.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>

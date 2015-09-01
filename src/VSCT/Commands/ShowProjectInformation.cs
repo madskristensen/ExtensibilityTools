@@ -62,6 +62,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
                 sb.AppendLine();
                 sb.AppendLine("Properties:");
                 var properties = project.Properties.OfType<Property>().OrderBy(p => p.Name);
+                int maxLength = properties.Max(p => p.Name.Length);
 
                 foreach (Property prop in properties)
                 {
@@ -72,7 +73,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
                         if (prop.Value != null && !string.IsNullOrWhiteSpace(prop.Value.ToString()))
                             displayValue = prop.Value.ToString();
 
-                        sb.AppendLine($"\t{prop.Name.PadRight(50, ' ')}:\t{displayValue}");
+                        sb.AppendLine($"\t{prop.Name.PadRight(maxLength, ' ')}\t:\t{displayValue}");
                     }
                     catch (COMException)
                     {

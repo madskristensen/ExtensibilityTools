@@ -7,7 +7,7 @@
 
   <Commands package="guidExtensibilityToolsPkg">
     <Groups>
-      <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0200">
+      <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0150">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
       </Group>
     </Groups>
@@ -36,7 +36,7 @@
         <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
         <CommandFlag>IconIsMoniker</CommandFlag>
         <Strings>
-          <ButtonText>Project Information...</ButtonText>
+          <ButtonText>Show Project Information</ButtonText>
         </Strings>
       </Button>
     </Buttons>

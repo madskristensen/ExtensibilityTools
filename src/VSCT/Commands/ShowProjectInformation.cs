@@ -4,6 +4,8 @@ using System.IO;
 using System.Text;
 using EnvDTE;
 using System.Runtime.InteropServices;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 {
@@ -71,7 +73,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
                     try
                     {
                         if (prop.Value != null && !string.IsNullOrWhiteSpace(prop.Value.ToString()))
-                            displayValue = prop.Value.ToString();
+                            displayValue = GetPropertyValue(prop);
 
                         sb.AppendLine($"\t{prop.Name.PadRight(maxLength, ' ')}\t:\t{displayValue}");
                     }
@@ -83,6 +85,35 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
             }
 
             File.WriteAllText(fileName, sb.ToString(), Encoding.UTF8);
+        }
+
+        private static string GetPropertyValue(Property prop)
+        {
+            if (prop.Value is string)
+            {
+                return prop.Value.ToString();
+            }
+
+            if (prop.Name == "Publish")
+            {
+                return "<Array of COM objects>";
+            }
+
+            var ienumerable = prop.Value as IEnumerable;
+
+            if (ienumerable != null)
+            {
+                List<string> list = new List<string>();
+                var e = ienumerable.GetEnumerator();
+                while (e.MoveNext())
+                {
+                    list.Add(e.Current.ToString());
+                }
+
+                return string.Join(", ", list);
+            }
+
+            return prop.Value.ToString();
         }
 
         private Project GetProject()

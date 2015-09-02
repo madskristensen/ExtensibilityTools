@@ -77,6 +77,12 @@ document. The hover tooltip shows the inheritance hierarchy of the
 
 ![Classifications](art/margin-classification.png)
 
+#### Selection
+Displays the start and end position of the editor selection as
+well as the total length of the selection.
+
+![Selection](art/margin-selection.png)
+
 ### Pkgdef files
 
 #### Syntax highlighting
@@ -107,3 +113,11 @@ Validates various common mistakes like unknown tokens and unclosed strings and b
 
 #### Formatting
 Format the entire document or just the selected lines.
+
+### Show Project Information
+A context-menu command is available on every project type that
+makes it very easy to see all the properties on said project.
+
+![Show Project Information](art/show-project-information.png)
+
+This makes it easy to troubleshoot and debug project related issues.

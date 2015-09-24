@@ -8,6 +8,31 @@ An extension built for and by Visual Studio extension writers.
 Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/ab39a092-1343-46e2-b0f1-6a3f91155aa6)
 or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8fc0-7f19febeb897/).
 
+### Features
+
+- VSCT files
+  - Intellisense for custom GUIDs
+  - Intellisense for custom IDs
+  - Intellisense for built-in groups and menus
+  - ImageMoniker Intellisense
+  - Snippets
+  - Auto-sync VSCT commands to C# class
+- Editor margin
+  - Shows document encoding
+  - Shows content type of active textbuffer
+  - Shows active classifications under caret
+  - Shows caret position and selection range
+- Dialog for digitally signing VSIXs
+- Pkgdef files
+  - Syntax highlighting
+  - Intellisense
+  - Snippets
+  - Brace matching
+  - Validation
+  - Formatting
+- Show Project information (for debug purposes)
+- Export `KnownMonikers` to PNG file
+
 ### VSCT files
 The Visual Studio Command Table leaves a lot to be desired in terms of
 both Intellisense and discoverability of even the most common use cases.

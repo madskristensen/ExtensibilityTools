@@ -1,65 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <Extern href="stdidcmd.h"/>
-  <Extern href="vsshlids.h"/>
-  <Include href="KnownImageIds.vsct"/>
+    <Extern href="stdidcmd.h"/>
+    <Extern href="vsshlids.h"/>
+    <Include href="KnownImageIds.vsct"/>
 
-  <Commands package="guidExtensibilityToolsPkg">
-    <Groups>
-      <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0150">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
-      </Group>
-    </Groups>
+    <Commands package="guidExtensibilityToolsPkg">
+        <Groups>
+            <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0150">
+                <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+            </Group>
+        </Groups>
 
-    <Buttons>
-      <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0600" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <CommandFlag>DefaultInvisible</CommandFlag>
-        <Strings>
-          <ButtonText>Auto-sync VSCT commands</ButtonText>
-        </Strings>
-      </Button>
+        <Buttons>
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0600" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Auto-sync VSCT commands</ButtonText>
+                </Strings>
+            </Button>
 
-      <Button guid="guidExtensibilityToolsCmdSet" id="cmdSignBinary" priority="0x0410" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD"/>
-        <CommandFlag>DynamicVisibility</CommandFlag>
-        <CommandFlag>DefaultInvisible</CommandFlag>
-        <Strings>
-          <ButtonText>Sign VSIX package...</ButtonText>
-        </Strings>
-      </Button>
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdSignBinary" priority="0x0410" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD"/>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Sign VSIX package...</ButtonText>
+                </Strings>
+            </Button>
 
-      <Button guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0100" type="Button">
-        <Parent guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup"/>
-        <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
-        <CommandFlag>IconIsMoniker</CommandFlag>
-        <Strings>
-          <ButtonText>Show Project Information</ButtonText>
-        </Strings>
-      </Button>
-    </Buttons>
-  </Commands>
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0100" type="Button">
+                <Parent guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup"/>
+                <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
+                <Strings>
+                    <ButtonText>Show Project Information</ButtonText>
+                </Strings>
+            </Button>
 
-  <CommandPlacements>
-    <CommandPlacement guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0200">
-      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
-    </CommandPlacement>
-  </CommandPlacements>
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdExportMoniker" priority="0x9500" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_EXT_TOOLS" />
+                <Icon guid="ImageCatalogGuid" id="ExportPerformanceReport" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
+                <Strings>
+                    <ButtonText>Export Image Moniker...</ButtonText>
+                </Strings>
+            </Button>
+        </Buttons>
+    </Commands>
 
-  <Symbols>
-    <!-- This is the package guid. -->
-    <GuidSymbol name="guidExtensibilityToolsPkg" value="{f8330d54-0469-43a7-8fc0-7f19febeb897}" />
+    <CommandPlacements>
+        <CommandPlacement guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0200">
+            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
+        </CommandPlacement>
+    </CommandPlacements>
 
-    <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidExtensibilityToolsCmdSet" value="{5dbd2975-75e4-4f09-8b6d-1183b0c83762}">
-      <IDSymbol name="ProjectMenuGroup" value="1000" />
+    <Symbols>
+        <!-- This is the package guid. -->
+        <GuidSymbol name="guidExtensibilityToolsPkg" value="{f8330d54-0469-43a7-8fc0-7f19febeb897}" />
 
-      <IDSymbol name="cmdAddCustomTool" value="1" />
-      <IDSymbol name="cmdSignBinary" value="2" />
-      <IDSymbol name="cmdShowInformation" value="3" />
-    </GuidSymbol>
-  </Symbols>
+        <!-- This is the guid used to group the menu commands together -->
+        <GuidSymbol name="guidExtensibilityToolsCmdSet" value="{5dbd2975-75e4-4f09-8b6d-1183b0c83762}">
+            <IDSymbol name="ProjectMenuGroup" value="1000" />
+
+            <IDSymbol name="cmdAddCustomTool" value="1" />
+            <IDSymbol name="cmdSignBinary" value="2" />
+            <IDSymbol name="cmdShowInformation" value="3" />
+            <IDSymbol name="cmdExportMoniker" value="4" />
+        </GuidSymbol>
+    </Symbols>
 
 </CommandTable>

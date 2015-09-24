@@ -128,3 +128,6 @@ You can now easily export any of the KnownMonikers from
 need it in.
 
 ![Export Knownmonikers](art/export-knownmonikers.png)
+
+The button to invoke the **Export Image Moniker** dialog is
+located in the top level **Tools** menu.

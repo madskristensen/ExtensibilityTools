@@ -19,7 +19,7 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
   - Auto-sync VSCT commands to C# class
 - **Editor margin**
   - Shows document encoding
-  - Shows content type of active textbuffer
+  - Shows content type of textbuffer under caret
   - Shows active classifications under caret
   - Shows caret position and selection range
 - Dialog for **digitally signing** VSIXs

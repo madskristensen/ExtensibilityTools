@@ -149,7 +149,7 @@ This makes it easy to troubleshoot and debug project related issues.
 
 ### Export KnownMonikers to file
 You can now easily export any of the KnownMonikers from
-`IvsImageService2` to a PNG file on disk in the size you
+`IVsImageService2` to a PNG file on disk in the size you
 need it in.
 
 ![Export Knownmonikers](art/export-knownmonikers.png)

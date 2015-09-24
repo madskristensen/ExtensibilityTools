@@ -19,7 +19,7 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
   - Auto-sync VSCT commands to C# class
 - **Editor margin**
   - Shows document encoding
-  - Shows content type of textbuffer under caret
+  - Shows content type of the `ITextBuffer` under caret
   - Shows active classifications under caret
   - Shows caret position and selection range
 - Dialog for **digitally signing** VSIXs
@@ -37,7 +37,7 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
 The Visual Studio Command Table leaves a lot to be desired in terms of
 both Intellisense and discoverability of even the most common use cases.
 
-This extension improves on that. 
+This extension improves on that.
 
 #### Intellisense for custom GUIDs
 Get Intellisense for symbols and groups through out the .vsct file
@@ -72,7 +72,7 @@ them and can be invoked by hitting the Tab key.
 ![VSCT snippets](art/vsct-snippets.gif)
 
 #### Auto-sync VSCT commands
-Auto-generate the `GuidList` and `PackageCommand` classes every time
+Auto-generate the `PackageGuids` and `PackageIds` classes every time
 you save the VSCT file. This keeps your code in sync with the VSCT file
 at all times.
 
@@ -92,7 +92,7 @@ Shows the encoding of the current document and more details on hover.
 ![Document encoding](art/margin-encoding.png)
 
 #### Content type
-Shows the content type of the textbuffer at the caret position. The
+Shows the content type of the `ITextBuffer` at the caret position. The
 over tooltip shows the name of the base content type.
 
 #### Classification
@@ -129,7 +129,7 @@ Hit `Tab` on the snippet you want and it will be inserted.
 ![Pkgdef snippets](art/pkgdef-snippets.gif)
 
 #### Brace matching
-Matches parantheses and square brackets.
+Matches parentheses and square brackets.
 
 #### Validation
 Validates various common mistakes like unknown tokens and unclosed strings and braces.

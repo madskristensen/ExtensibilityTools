@@ -10,28 +10,28 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
 
 ### Features
 
-- VSCT files
+- **VSCT files**
   - Intellisense for custom GUIDs
   - Intellisense for custom IDs
   - Intellisense for built-in groups and menus
   - ImageMoniker Intellisense
   - Snippets
   - Auto-sync VSCT commands to C# class
-- Editor margin
+- **Editor margin**
   - Shows document encoding
   - Shows content type of active textbuffer
   - Shows active classifications under caret
   - Shows caret position and selection range
-- Dialog for digitally signing VSIXs
-- Pkgdef files
+- Dialog for **digitally signing** VSIXs
+- **Pkgdef files**
   - Syntax highlighting
   - Intellisense
   - Snippets
   - Brace matching
   - Validation
   - Formatting
-- Show Project information (for debug purposes)
-- Export `KnownMonikers` to PNG file
+- **Show Project information** (for debug purposes)
+- **Export KnownMonikers to PNG file**
 
 ### VSCT files
 The Visual Studio Command Table leaves a lot to be desired in terms of

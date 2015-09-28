@@ -59,7 +59,7 @@
             </Grid.ColumnDefinitions>
 
             <Button x:Name="btnOk" Grid.Column="1" Content="Export..." Margin="0,0,10,0" HorizontalAlignment="Right" Width="75" Click="btnOk_Click"/>
-            <Button x:Name="btnCancel" Grid.Column="2" Content="Cancel" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
+            <Button x:Name="btnCancel" Grid.Column="2" Content="Close" IsCancel="True" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75"/>
         </Grid>
 
     </Grid>

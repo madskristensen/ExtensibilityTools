@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -19,30 +20,28 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         private bool _isDisposed = false;
         private IClassifier _classifier;
         private TextControl _lblClassification, _lblEncoding, _lblContentType, _lblSelection;
-        private Brush _foregroundBrush, _backgroundBrush;
         private ITextDocument _doc;
 
         public BottomMargin(IWpfTextView textView, IClassifierAggregatorService classifier, ITextDocumentFactoryService documentService)
         {
             _textView = textView;
             _classifier = classifier.GetClassifier(textView.TextBuffer);
-            _foregroundBrush = new SolidColorBrush((Color)FindResource(VsColors.CaptionTextKey));
-            _backgroundBrush = new SolidColorBrush((Color)FindResource(VsColors.ScrollBarBackgroundKey));
 
-            this.Background = _backgroundBrush;
-            this.ClipToBounds = true;
+            SetResourceReference(BackgroundProperty, EnvironmentColors.ScrollBarBackgroundBrushKey);
+
+            ClipToBounds = true;
 
             _lblEncoding = new TextControl("Encoding");
-            this.Children.Add(_lblEncoding);
+            Children.Add(_lblEncoding);
 
             _lblContentType = new TextControl("Content type");
-            this.Children.Add(_lblContentType);
+            Children.Add(_lblContentType);
 
             _lblClassification = new TextControl("Classification");
-            this.Children.Add(_lblClassification);
+            Children.Add(_lblClassification);
 
             _lblSelection = new TextControl("Selection");
-            this.Children.Add(_lblSelection);
+            Children.Add(_lblSelection);
 
             UpdateClassificationLabel();
             UpdateContentTypeLabel();

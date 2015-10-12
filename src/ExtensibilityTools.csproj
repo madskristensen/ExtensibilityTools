@@ -154,7 +154,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ExtensibilityTools.vsct</DependentUpon>
     </Compile>
-    <Compile Include="Guids.cs" />
     <Compile Include="ExtensibilityToolsPackage.cs" />
     <Compile Include="Misc\Commands\ExportImageMoniker.cs" />
     <Compile Include="Misc\Commands\ImageMonikerDialog.xaml.cs">

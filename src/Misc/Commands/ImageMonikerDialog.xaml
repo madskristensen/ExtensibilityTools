@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MadsKristensen.ExtensibilityTools.Misc.Commands"
         mc:Ignorable="d"
-        Title="Export Image Moniker" Height="280" Width="330" WindowStartupLocation="CenterOwner">
+        Title="Export Image Moniker" Height="280" Width="330" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />

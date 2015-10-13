@@ -182,6 +182,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Misc\Commands\ShowProjectInformation.cs" />
+    <Compile Include="ThemeColorsToolWindow\ImageMonikerConverter.cs" />
+    <Compile Include="ThemeColorsToolWindow\SwatchesWindow.cs" />
+    <Compile Include="ThemeColorsToolWindow\SwatchesWindowCommand.cs" />
+    <Compile Include="ThemeColorsToolWindow\SwatchesWindowControl.xaml.cs">
+      <DependentUpon>SwatchesWindowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ThemeColorsToolWindow\WpfUtilities.cs" />
     <Compile Include="VSCT\Commands\AddCustomToolCommand.cs" />
     <Compile Include="VSCT\Commands\BaseCommand.cs" />
     <Compile Include="VSCT\Commands\SignBinaryCommand.cs" />
@@ -330,6 +337,10 @@
     <Page Include="Misc\Commands\ImageMonikerDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ThemeColorsToolWindow\SwatchesWindowControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <PropertyGroup>

@@ -5,6 +5,7 @@ using MadsKristensen.ExtensibilityTools.VSCT.Generator;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextTemplating.VSHost;
+using MadsKristensen.ExtensibilityTools.ThemeColorsToolWindow;
 
 namespace MadsKristensen.ExtensibilityTools
 {
@@ -16,6 +17,7 @@ namespace MadsKristensen.ExtensibilityTools
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [Guid(PackageGuids.guidExtensibilityToolsPkgString)]
+    [ProvideToolWindow(typeof(SwatchesWindow))]
     public sealed class ExtensibilityToolsPackage : Package
     {
         public const string Version = "0.1";
@@ -29,6 +31,7 @@ namespace MadsKristensen.ExtensibilityTools
             SignBinaryCommand.Initialize(this);
             ShowProjectInformation.Initialize(this);
             ExportImageMoniker.Initialize(this);
+            SwatchesWindowCommand.Initialize(this);
 
             base.Initialize();
         }

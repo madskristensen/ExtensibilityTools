@@ -48,6 +48,13 @@
                     <ButtonText>Export Image Moniker...</ButtonText>
                 </Strings>
             </Button>
+
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdSwatchesWindow" priority="0x2000" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+                <Strings>
+                    <ButtonText>Theme Swatches</ButtonText>
+                </Strings>
+            </Button>
         </Buttons>
     </Commands>
 
@@ -69,6 +76,7 @@
             <IDSymbol name="cmdSignBinary" value="2" />
             <IDSymbol name="cmdShowInformation" value="3" />
             <IDSymbol name="cmdExportMoniker" value="4" />
+            <IDSymbol name="cmdSwatchesWindow" value="5" />
         </GuidSymbol>
     </Symbols>
 

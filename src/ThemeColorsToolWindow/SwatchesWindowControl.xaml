@@ -32,16 +32,18 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Search" Foreground="{DynamicResource {x:Static local:SwatchesWindow.TextBrushKey}}" />
         <TextBox Grid.Row="0" Grid.Column="1" TextChanged="TextBoxBase_OnTextChanged" Margin="0 2"
+                 Padding="0 0 20 0"
                  Foreground="{DynamicResource {x:Static local:SwatchesWindow.TextBoxTextBrushKey}}" 
                  Background="{DynamicResource {x:Static local:SwatchesWindow.TextBoxBackgroundBrushKey}}" 
                  BorderBrush="{DynamicResource {x:Static local:SwatchesWindow.TextBoxBorderBrushKey}}" />
+        <Image Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 4 0"
+               Source="{Binding Converter={StaticResource ImageMonikerConverter}, ConverterParameter={x:Static imaging:KnownMonikers.Search}}" Width="16" Height="16"/>
 
         <Label Grid.Row="1" Grid.Column="0" Content="Name" Foreground="{DynamicResource {x:Static local:SwatchesWindow.TextBrushKey}}" />
         <TextBox x:Name="BrushName" Grid.Row="1" Grid.Column="1" IsReadOnly="True" Margin="0 2" ContextMenu="{StaticResource CopyMenu}"
                  Foreground="{DynamicResource {x:Static local:SwatchesWindow.TextBoxTextBrushKey}}" 
                  Background="{DynamicResource {x:Static local:SwatchesWindow.TextBoxBackgroundBrushKey}}" 
                  BorderBrush="{DynamicResource {x:Static local:SwatchesWindow.TextBoxBorderBrushKey}}" />
-        <Image Grid.Row="1" Grid.Column="2" Source="{Binding Converter={StaticResource ImageMonikerConverter}, ConverterParameter={x:Static imaging:KnownMonikers.Search}}" Width="16" Height="16"/>
 
         <Label Grid.Row="2" Grid.Column="0" Content="XAML Namespace" Foreground="{DynamicResource {x:Static local:SwatchesWindow.TextBrushKey}}" />
         <TextBox x:Name="XamlNamespace" Grid.Row="2" Grid.Column="1" IsReadOnly="True" Margin="0 2" ContextMenu="{StaticResource CopyMenu}"

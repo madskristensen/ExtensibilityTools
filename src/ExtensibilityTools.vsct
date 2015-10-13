@@ -51,6 +51,8 @@
 
             <Button guid="guidExtensibilityToolsCmdSet" id="cmdSwatchesWindow" priority="0x2000" type="Button">
                 <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+                <Icon guid="ImageCatalogGuid" id="ColorPalette" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
                 <Strings>
                     <ButtonText>Theme Swatches</ButtonText>
                 </Strings>

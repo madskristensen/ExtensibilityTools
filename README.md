@@ -32,6 +32,7 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
   - Formatting
 - **Show Project information** (for debug purposes)
 - **Export KnownMonikers to PNG file**
+- **VS Theme color swatch window**
 
 ### VSCT files
 The Visual Studio Command Table leaves a lot to be desired in terms of
@@ -156,3 +157,17 @@ need it in.
 
 The button to invoke the **Export Image Moniker** dialog is
 located in the top level **Tools** menu.
+
+### Theme color swatch window
+To see all the VS environment colors available used in
+the Light, Blue and Dark theme, you can use the
+**Theme Swatches** window.
+
+Open it from **View -> Other Windows -> Theme Swatches**
+
+![Theme Swatches](art/theme-swatcher-command.png)
+
+The tool window lets you search for colors and provides an
+easy way to copy them into XAML or C#.
+
+![Theme Swatches](art/theme-swatches.png)

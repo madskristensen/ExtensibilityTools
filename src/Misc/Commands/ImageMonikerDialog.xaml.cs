@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -94,14 +98,63 @@ namespace MadsKristensen.ExtensibilityTools.Misc.Commands
 
             if (saved == System.Windows.Forms.DialogResult.OK)
             {
-                var encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(image));
-
-                using (var filestream = new FileStream(sfd.FileName, FileMode.Create))
-                    encoder.Save(filestream);
+                SaveBitmapToDisk(image, sfd.FileName);
             }
 
             return saved == System.Windows.Forms.DialogResult.OK;
+        }
+
+
+        private void btnExportAll_Click(object sender, RoutedEventArgs e)
+        {
+            var exportTargetFolder = GetFolderForExportAll();
+            if (string.IsNullOrWhiteSpace(exportTargetFolder))
+                return;
+
+            if (System.Windows.MessageBox.Show("Are you sure you want to export " + cbMonikers.Items.Count + " Image Monikers? This may take a while..", "Please confirm Image Monikers Export", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                int size = 175;
+                int.TryParse(txtSize.Text, out size);
+
+                foreach (var viewModel in cbMonikers.Items.OfType<ViewModel>())
+                {
+                    var image = GetImage(viewModel.Moniker, size);
+                    SaveBitmapToDisk(image,
+                        Path.Combine(exportTargetFolder, viewModel.Label + "_" + size + "x" + size + ".png"));
+                }
+            }
+        }
+
+        private static string GetFolderForExportAll()
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                dialog.RootFolder = Environment.SpecialFolder.MyComputer;
+                dialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                var dialogResult = dialog.ShowDialog();
+                
+                if(dialogResult == System.Windows.Forms.DialogResult.OK)
+                    return dialog.SelectedPath;
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        private static void SaveBitmapToDisk(BitmapSource image, string fileName)
+        {
+            var fileParentPath = Path.GetDirectoryName(fileName);
+
+            if(Directory.Exists(fileParentPath) == false)
+                Directory.CreateDirectory(fileParentPath);
+
+            using (var fileStream = new FileStream(fileName, FileMode.Create))
+            {
+                BitmapEncoder encoder = new PngBitmapEncoder();
+                encoder.Frames.Add(BitmapFrame.Create(image));
+                encoder.Save(fileStream);
+            }
         }
 
         public class ViewModel

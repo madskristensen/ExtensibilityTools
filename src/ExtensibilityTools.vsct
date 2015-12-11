@@ -57,6 +57,15 @@
                     <ButtonText>Theme Swatches</ButtonText>
                 </Strings>
             </Button>
+
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdActivityLog" priority="0x2000" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_VIEW_DEV_WINDOWS"/>
+                <Icon guid="ImageCatalogGuid" id="LogError" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
+                <Strings>
+                    <ButtonText>Activity Log</ButtonText>
+                </Strings>
+            </Button>
         </Buttons>
     </Commands>
 
@@ -79,6 +88,7 @@
             <IDSymbol name="cmdShowInformation" value="3" />
             <IDSymbol name="cmdExportMoniker" value="4" />
             <IDSymbol name="cmdSwatchesWindow" value="5" />
+            <IDSymbol name="cmdActivityLog" value="6" />
         </GuidSymbol>
     </Symbols>
 

@@ -33,6 +33,7 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
 - **Show Project information** (for debug purposes)
 - **Export KnownMonikers to PNG file**
 - **VS Theme color swatch window**
+- **View Activity Log**
 
 ### VSCT files
 The Visual Studio Command Table leaves a lot to be desired in terms of
@@ -171,3 +172,16 @@ The tool window lets you search for colors and provides an
 easy way to copy them into XAML or C#.
 
 ![Theme Swatches](art/theme-swatches.png)
+
+### View Activity Log
+Getting to the Visual Studio Activity Log can sometimes
+be a bit cumbersome when dealing with both the regular
+and the experimental instance.
+
+A menu command under the top level View menu let's you
+open the right Activity Log easily.
+
+![View Activity Log](art/activity-log.png)
+
+This will open the Activity Log in the Visual Studio
+web browser.

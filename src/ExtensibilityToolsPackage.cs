@@ -32,6 +32,7 @@ namespace MadsKristensen.ExtensibilityTools
             ShowProjectInformation.Initialize(this);
             ExportImageMoniker.Initialize(this);
             SwatchesWindowCommand.Initialize(this);
+            ShowActivityLog.Initialize(this);
 
             base.Initialize();
         }

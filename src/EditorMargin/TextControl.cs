@@ -8,7 +8,8 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
 {
     class TextControl : DockPanel
     {
-        private Label _lblName, _lblValue;
+        Label _lblName;
+        readonly Label _lblValue;
 
         public TextControl(string name, string value = "pending...")
         {

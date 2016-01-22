@@ -11,8 +11,8 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
 {
     class VsctCompletionSet : CompletionSet
     {
-        private List<Completion> _allCompletions;
-        private List<Completion> _filteredCompletions;
+        readonly List<Completion> _allCompletions;
+        List<Completion> _filteredCompletions;
 
         public VsctCompletionSet(string moniker, string displayName, ITrackingSpan applicableTo, List<Completion> completions, IEnumerable<Completion> completionBuilders)
             : base(moniker, displayName, applicableTo, completions, completionBuilders)

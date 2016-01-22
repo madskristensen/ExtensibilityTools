@@ -10,7 +10,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 {
     internal sealed class OutliningTagger : ITagger<IOutliningRegionTag>
     {
-        ITextBuffer buffer;
+        readonly ITextBuffer buffer;
         ITextSnapshot snapshot;
         IEnumerable<Region> regions;
         private bool _hasBufferchanged;
@@ -99,7 +99,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
                 if (!string.IsNullOrWhiteSpace(text) && text[0] == '[' && currentRegion == null)
                 {
-                    currentRegion = new Region()
+                    currentRegion = new Region
                     {
                         StartLine = line.LineNumber,
                         StartOffset = line.Start.Position
@@ -126,7 +126,7 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
 
                     if (!string.IsNullOrWhiteSpace(text) && text[0] == '[')
                     {
-                        currentRegion = new Region()
+                        currentRegion = new Region
                         {
                             StartLine = line.LineNumber,
                             StartOffset = line.Start.Position

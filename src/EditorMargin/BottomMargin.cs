@@ -16,11 +16,11 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
     {
         public const string MarginName = "Extensibility Tools Margin";
 
-        private IWpfTextView _textView;
-        private bool _isDisposed = false;
-        private IClassifier _classifier;
-        private TextControl _lblClassification, _lblEncoding, _lblContentType, _lblSelection;
-        private ITextDocument _doc;
+        readonly IWpfTextView _textView;
+        bool _isDisposed = false;
+        IClassifier _classifier;
+        TextControl _lblClassification, _lblEncoding, _lblContentType, _lblSelection;
+        readonly ITextDocument _doc;
 
         public BottomMargin(IWpfTextView textView, IClassifierAggregatorService classifier, ITextDocumentFactoryService documentService)
         {

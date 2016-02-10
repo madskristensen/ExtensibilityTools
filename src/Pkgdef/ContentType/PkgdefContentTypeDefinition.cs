@@ -19,5 +19,10 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         [ContentType(PkgdefContentType)]
         [FileExtension(".pkgdef")]
         public FileExtensionToContentTypeDefinition PkgdefFileExtension { get; set; }
+
+        [Export(typeof(FileExtensionToContentTypeDefinition))]
+        [ContentType(PkgdefContentType)]
+        [FileExtension(".pkgundef")]
+        public FileExtensionToContentTypeDefinition PkgundefFileExtension { get; set; }
     }
 }

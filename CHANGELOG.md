@@ -1,6 +1,7 @@
 # Roadmap
 
 - [x] Intellisense for `context` in `VisibilityItem`
+- [x] Support for `.pkgundef` files
 - [ ] Button to enable/disable VSIP logging
 
 Features that have a checkmark are complete and available for

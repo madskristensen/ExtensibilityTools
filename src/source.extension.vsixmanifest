@@ -6,6 +6,7 @@
         <Description xml:space="preserve">Contains numerous tools and helpers that makes it easier than ever to build Visual Studio extensions.</Description>
         <MoreInfo>https://github.com/madskristensen/ExtensibilityTools</MoreInfo>
         <License>Resources\LICENSE</License>
+        <ReleaseNotes>https://github.com/madskristensen/ExtensibilityTools/blob/master/CHANGELOG.md</ReleaseNotes>
         <Icon>Resources\Icon.png</Icon>
         <PreviewImage>Resources\Preview.png</PreviewImage>
         <Tags>VSIX, Extensibility, pkgdef, VSCT, Snippets, Encoding, Classification, ContentType, KnownMonikers</Tags>

@@ -143,6 +143,23 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                         list.Add(CreateCompletion("vsshlids.h", "vsshlids.h", _defaultGlyph));
                         list.Add(CreateCompletion("KnownImageIds.vsct", "KnownImageIds.vsct", _defaultGlyph));
                     }
+                    else if (current == "context")
+                    {
+                        list.Add(CreateCompletion("UICONTEXT_CodeWindow", "UICONTEXT_CodeWindow", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_Debugging", "UICONTEXT_Debugging", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_DesignMode", "UICONTEXT_DesignMode", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_Dragging", "UICONTEXT_Dragging", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_EmptySolution", "UICONTEXT_EmptySolution", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_FullScreenMode", "UICONTEXT_FullScreenMode", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_NoSolution", "UICONTEXT_NoSolution", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_NotBuildingAndNotDebugging", "UICONTEXT_NotBuildingAndNotDebugging", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_SolutionBuilding", "UICONTEXT_SolutionBuilding", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_SolutionExists", "UICONTEXT_SolutionExists", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_SolutionExistsAndNotBuildingAndNotDebugging", "UICONTEXT_SolutionExistsAndNotBuildingAndNotDebugging", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_SolutionHasMultipleProjects", "UICONTEXT_SolutionHasMultipleProjects", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_SolutionHasSingleProject", "UICONTEXT_SolutionHasSingleProject", _defaultGlyph));
+                        list.Add(CreateCompletion("UICONTEXT_ToolboxInitialized", "UICONTEXT_ToolboxInitialized", _defaultGlyph));
+                    }
                 }
             }
 

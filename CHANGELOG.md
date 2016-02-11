@@ -6,6 +6,14 @@
 - [x] Added infrastructure for item templates
   - [x] Added snippet file item template
 - [ ] Button to enable/disable VSIP logging
+- [ ] Edit project file without unloading
+- [ ] Edit solution file button
+- [ ] Solution file colorizer
+- [ ] New item templates for:
+  - [ ] TextViewCreationListener
+  - [ ] TextViewConnectionListener
+  - [ ] ITagger
+  - [ ] Pkgdef containing both snippets and icons
 
 Features that have a checkmark are complete and available for
 download in the

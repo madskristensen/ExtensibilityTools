@@ -2,7 +2,9 @@
 
 - [x] Intellisense for `context` in `VisibilityItem`
 - [x] Support for `.pkgundef` files
-- [x] XML snippet for setting correct `<StartProgram>`
+- [x] XML snippet for setting `<StartProgram />` in .csproj
+- [x] Added infrastructure for item templates
+  - [x] Added snippet file item template
 - [ ] Button to enable/disable VSIP logging
 
 Features that have a checkmark are complete and available for

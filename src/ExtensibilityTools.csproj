@@ -84,6 +84,10 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
+    <Reference Include="TemplateBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TemplateBuilder.1.1.4.6-beta\lib\TemplateBuilder.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -227,6 +231,13 @@
       <Link>Resources\LICENSE</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="ItemTemplates\Snippet\icon.png" />
+    <None Include="ItemTemplates\Snippet\preview.png" />
+    <None Include="ItemTemplates\Snippet\code.snippet" />
+    <None Include="ItemTemplates\Snippet\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ItemTemplates\Snippet\_Definitions\CSharp.vstemplate" />
     <Content Include="Pkgdef\Completion\Snippets\RegisterMenus.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -314,6 +325,8 @@
     <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-symbols.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <None Include="packages.config" />
+    <None Include="Properties\template-builder.props" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -347,11 +360,16 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
+  <PropertyGroup Label="TemplateBuilder">
+    <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\packages\TemplateBuilder.1.1.4.6-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(TemplateBuilderTargets)" Condition="Exists('$(TemplateBuilderTargets)')" Label="TemplateBuilder" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

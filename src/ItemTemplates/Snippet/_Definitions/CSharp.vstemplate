@@ -1,0 +1,16 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+    <TemplateData>
+        <DefaultName>code.snippet</DefaultName>
+        <Name>Snippet file</Name>
+        <Description>A Visual Studio snippet file</Description>
+        <ProjectType>CSharp</ProjectType>
+        <Icon>icon.png</Icon>
+        <PreviewImage>preview.png</PreviewImage>
+        <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+        <SortOrder>1000</SortOrder>
+    </TemplateData>
+    <TemplateContent>
+        <References />
+        <ProjectItem ReplaceParameters="false" TargetFileName="code.snippet">code.snippet</ProjectItem>
+    </TemplateContent>
+</VSTemplate>

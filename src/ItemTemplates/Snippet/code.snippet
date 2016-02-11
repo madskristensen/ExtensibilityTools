@@ -1,0 +1,28 @@
+﻿<CodeSnippet Format="1.1.0" xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <Header>
+        <Title>createElement</Title>
+        <Author>My name</Author>
+        <Shortcut>cel</Shortcut>
+        <Description>Code snippet for "createElement"</Description>
+        <SnippetTypes>
+            <SnippetType>Expansion</SnippetType>
+        </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Declarations>
+            <Literal>
+                <ID>object</ID>
+                <ToolTip>Parent element</ToolTip>
+                <Default>document</Default>
+            </Literal>
+            <Literal>
+                <ID>name</ID>
+                <ToolTip>The tagname of new element</ToolTip>
+                <Default>div</Default>
+            </Literal>
+        </Declarations>
+        <Code Language="JavaScript">
+            <![CDATA[$object$.createElement($name$);$end$]]>
+        </Code>
+    </Snippet>
+</CodeSnippet>

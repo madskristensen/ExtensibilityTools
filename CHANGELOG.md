@@ -5,9 +5,11 @@
 - [x] XML snippet for setting `<StartProgram />` in .csproj
 - [x] Added infrastructure for item templates
   - [x] Added snippet file item template
-- [ ] Button to enable/disable VSIP logging (#22)
+- [x] Button to enable/disable VSIP logging (#22)
+  - [ ] Add feature to [README.md](README.md)
 - [ ] Show all classification types rendered (#21)
 - [ ] Edit project file without unloading
+- [ ] Single File Generator for syncing .resx with vsixmanifest
 - [ ] Edit solution file button
 - [ ] Solution file colorizer
 - [ ] New item templates for:

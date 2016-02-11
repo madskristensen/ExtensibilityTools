@@ -163,6 +163,7 @@
     <Compile Include="Misc\Commands\ImageMonikerDialog.xaml.cs">
       <DependentUpon>ImageMonikerDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Misc\Commands\ToggleVsipLogging.cs" />
     <Compile Include="Misc\Commands\ShowActivityLog.cs" />
     <Compile Include="Pkgdef\Classify\PkgdefClassificationTypes.cs" />
     <Compile Include="Pkgdef\Classify\PkgdefClassifier.cs" />

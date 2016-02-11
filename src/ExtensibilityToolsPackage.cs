@@ -12,15 +12,16 @@ namespace MadsKristensen.ExtensibilityTools
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideOptionPage(typeof(ExtensibilityOptions), "Extensibility Tools", "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
+    [ProvideOptionPage(typeof(ExtensibilityOptions), Name, "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideAutoLoad(UIContextGuids80.NoSolution)]
     [Guid(PackageGuids.guidExtensibilityToolsPkgString)]
     [ProvideToolWindow(typeof(SwatchesWindow))]
     public sealed class ExtensibilityToolsPackage : Package
     {
         public const string Version = "0.1";
+        public const string Name = "Extensibility Tools";
         public static ExtensibilityOptions Options { get; private set; }
 
         protected override void Initialize()
@@ -33,6 +34,7 @@ namespace MadsKristensen.ExtensibilityTools
             ExportImageMoniker.Initialize(this);
             SwatchesWindowCommand.Initialize(this);
             ShowActivityLog.Initialize(this);
+            ToggleVsipLogging.Initialize(this);
 
             base.Initialize();
         }

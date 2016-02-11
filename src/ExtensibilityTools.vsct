@@ -66,6 +66,16 @@
                     <ButtonText>Activity Log</ButtonText>
                 </Strings>
             </Button>
+
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdVsipLogging" priority="0x2010" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_VIEW_DEV_WINDOWS"/>
+                <Icon guid="ImageCatalogGuid" id="CSExtension" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
+                <CommandFlag>TextChanges</CommandFlag>
+                <Strings>
+                    <ButtonText>Enable VSIP Logging</ButtonText>
+                </Strings>
+            </Button>
         </Buttons>
     </Commands>
 
@@ -83,12 +93,13 @@
         <GuidSymbol name="guidExtensibilityToolsCmdSet" value="{5dbd2975-75e4-4f09-8b6d-1183b0c83762}">
             <IDSymbol name="ProjectMenuGroup" value="1000" />
 
-            <IDSymbol name="cmdAddCustomTool" value="1" />
-            <IDSymbol name="cmdSignBinary" value="2" />
-            <IDSymbol name="cmdShowInformation" value="3" />
-            <IDSymbol name="cmdExportMoniker" value="4" />
-            <IDSymbol name="cmdSwatchesWindow" value="5" />
-            <IDSymbol name="cmdActivityLog" value="6" />
+            <IDSymbol name="cmdAddCustomTool" value="0x0001" />
+            <IDSymbol name="cmdSignBinary" value="0x0002" />
+            <IDSymbol name="cmdShowInformation" value="0x0003" />
+            <IDSymbol name="cmdExportMoniker" value="0x0004" />
+            <IDSymbol name="cmdSwatchesWindow" value="0x0005" />
+            <IDSymbol name="cmdActivityLog" value="0x0006" />
+            <IDSymbol name="cmdVsipLogging" value="0x0007" />
         </GuidSymbol>
     </Symbols>
 

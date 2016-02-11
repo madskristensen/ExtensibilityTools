@@ -5,7 +5,8 @@
 - [x] XML snippet for setting `<StartProgram />` in .csproj
 - [x] Added infrastructure for item templates
   - [x] Added snippet file item template
-- [ ] Button to enable/disable VSIP logging
+- [ ] Button to enable/disable VSIP logging (#22)
+- [ ] Show all classification types rendered (#21)
 - [ ] Edit project file without unloading
 - [ ] Edit solution file button
 - [ ] Solution file colorizer

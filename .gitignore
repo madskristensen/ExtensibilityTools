@@ -1,5 +1,7 @@
 *.suo
 *.user
+packages
+template-report.xml
 
 .vs
 bin

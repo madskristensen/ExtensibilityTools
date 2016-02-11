@@ -8,7 +8,7 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
 
 ---------------------------------------
 
-An extension built for and by Visual Studio extension writers.
+An extension built for and by Visual Studio extension authors.
 
 See the [changelog](CHANGELOG.MD) for changes and roadmap.
 
@@ -27,7 +27,7 @@ See the [changelog](CHANGELOG.MD) for changes and roadmap.
   - Shows active classifications under caret
   - Shows caret position and selection range
 - Dialog for **digitally signing** VSIXs
-- **Pkgdef files**
+- **Pkgdef/pkgundef files**
   - Syntax highlighting
   - Intellisense
   - Snippets
@@ -38,6 +38,8 @@ See the [changelog](CHANGELOG.MD) for changes and roadmap.
 - **Export KnownMonikers to PNG file**
 - **VS Theme color swatch window**
 - **View Activity Log**
+- **Item templates**
+  - Snippet file
 
 ### VSCT files
 The Visual Studio Command Table leaves a lot to be desired in terms of

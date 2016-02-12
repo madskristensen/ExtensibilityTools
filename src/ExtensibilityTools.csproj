@@ -159,6 +159,8 @@
       <DependentUpon>ExtensibilityTools.vsct</DependentUpon>
     </Compile>
     <Compile Include="ExtensibilityToolsPackage.cs" />
+    <None Include="ItemTemplates\BrowserLink\MyExtension.cs" />
+    <None Include="ItemTemplates\Editor Drop Handler\MyDropHandler.cs" />
     <Compile Include="Misc\Commands\ExportImageMoniker.cs" />
     <Compile Include="Misc\Commands\ImageMonikerDialog.xaml.cs">
       <DependentUpon>ImageMonikerDialog.xaml</DependentUpon>
@@ -244,6 +246,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="ItemTemplates\Snippet\_Definitions\CSharp.vstemplate" />
+    <None Include="ItemTemplates\BrowserLink\icon.png" />
+    <None Include="ItemTemplates\BrowserLink\MyExtension.js" />
+    <None Include="ItemTemplates\BrowserLink\_Definitions\CSharp.vstemplate" />
+    <None Include="ItemTemplates\BrowserLink\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ItemTemplates\Editor Drop Handler\icon.png" />
+    <None Include="ItemTemplates\Editor Drop Handler\_Definitions\CSharp.vstemplate" />
+    <None Include="ItemTemplates\Editor Drop Handler\_preprocess.xml">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Pkgdef\Completion\Snippets\RegisterMenus.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>

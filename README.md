@@ -40,6 +40,7 @@ See the [changelog](CHANGELOG.MD) for changes and roadmap.
 - **Export KnownMonikers to PNG file**
 - **VS Theme color swatch window**
 - **View Activity Log**
+- **Enable VSIP Logging**
 - **Item templates**
   - Snippet file
 
@@ -218,3 +219,20 @@ open the right Activity Log easily.
 
 This will open the Activity Log in the Visual Studio
 web browser.
+
+## Enable VSIP Logging
+VSIP Logging allows you to see GUIDs and command ids
+for menu commands. Just press **Ctrl+Shift** as you
+click a menu item or group with the mouse.
+
+![Enable VSIP Logging](art/vsiplogging.png)
+
+Read more about 
+[VSIP Logging](http://blogs.msdn.com/b/dr._ex/archive/2007/04/17/using-enablevsiplogging-to-identify-menus-and-commands-with-vs-2005-sp1.aspx).
+
+## Item Templates
+Several item templates are added to make it easier to
+create extension. These item templates all come with
+functionality that's easy to modify to your needs.
+
+![Item Templates](art/item-templates.png)

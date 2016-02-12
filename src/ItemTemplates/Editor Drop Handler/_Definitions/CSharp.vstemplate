@@ -1,0 +1,31 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <ProjectType>CSharp</ProjectType>
+    <DefaultName>MyDropHandler.cs</DefaultName>
+    <Name>Editor Drop Handler class</Name>
+    <Description>Used to control what happens when files are dragged on to the editor surface.</Description>
+    <Icon>icon.png</Icon>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <SortOrder>1000</SortOrder>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.Collections</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>System.ComponentModel.Composition</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>WindowsBase</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>PresentationCore</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true">MyDropHandler.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

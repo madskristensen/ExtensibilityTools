@@ -12,16 +12,13 @@ namespace MadsKristensen.ExtensibilityTools
     /// </summary>
     abstract class BaseCommand
     {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly DTE2 _dte;
-
         protected BaseCommand(IServiceProvider serviceProvider)
         {
             if (serviceProvider == null)
                 throw new ArgumentNullException(nameof(serviceProvider));
 
-            _serviceProvider = serviceProvider;
-            _dte = serviceProvider.GetService(typeof(SDTE)) as DTE2;
+            ServiceProvider = serviceProvider;
+            DTE = serviceProvider.GetService(typeof(SDTE)) as DTE2;
 
             SetupCommands();
         }
@@ -29,10 +26,9 @@ namespace MadsKristensen.ExtensibilityTools
         /// <summary>
         /// Gets the IDE object wrapper.
         /// </summary>
-        protected DTE2 DTE
-        {
-            get { return _dte; }
-        }
+        protected DTE2 DTE { get; }
+
+        protected IServiceProvider ServiceProvider { get; }
 
         /// <summary>
         /// Setups new menu command with handlers.
@@ -63,7 +59,7 @@ namespace MadsKristensen.ExtensibilityTools
         /// </summary>
         protected UIHierarchyItem GetSelectedItem()
         {
-            var items = (Array)_dte.ToolWindows.SolutionExplorer.SelectedItems;
+            var items = (Array)DTE.ToolWindows.SolutionExplorer.SelectedItems;
 
             foreach (UIHierarchyItem selItem in items)
             {
@@ -78,7 +74,7 @@ namespace MadsKristensen.ExtensibilityTools
         /// </summary>
         protected T GetService<T, S>() where T : class
         {
-            return _serviceProvider.GetService(typeof(S)) as T;
+            return ServiceProvider.GetService(typeof(S)) as T;
         }
 
         /// <summary>
@@ -86,7 +82,7 @@ namespace MadsKristensen.ExtensibilityTools
         /// </summary>
         protected T GetService<T>() where T : class
         {
-            return _serviceProvider.GetService(typeof(T)) as T;
+            return ServiceProvider.GetService(typeof(T)) as T;
         }
 
         /// <summary>

@@ -8,7 +8,7 @@
     <Commands package="guidExtensibilityToolsPkg">
         <Groups>
             <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0150">
-                <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+                <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
             </Group>
         </Groups>
 
@@ -41,7 +41,7 @@
             </Button>
 
             <Button guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0100" type="Button">
-                <Parent guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup"/>
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_UNLOADRELOAD"/>
                 <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
                 <CommandFlag>IconIsMoniker</CommandFlag>
                 <Strings>
@@ -89,8 +89,8 @@
     </Commands>
 
     <CommandPlacements>
-        <CommandPlacement guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0200">
-            <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
+        <CommandPlacement guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0150">
+            <Parent guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup"/>
         </CommandPlacement>
     </CommandPlacements>
 

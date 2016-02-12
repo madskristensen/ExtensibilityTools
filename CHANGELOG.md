@@ -5,24 +5,20 @@
 - [x] XML snippet for setting `<StartProgram />` in .csproj
 - [x] Added infrastructure for item templates
   - [x] Added snippet file item template
+  - [x] Added Browser Link extension template
+  - [x] Added Drop handler template
 - [x] Button to enable/disable VSIP logging (#22)
-  - [ ] Add feature to [README.md](README.md)
 - [ ] Show all classification types rendered (#21)
 - [ ] .pkgdef QuickInfo showing values of registry keys
-- [ ] Edit project file without unloading
 - [x] Single File Generator for syncing .resx with vsixmanifest
   - [x] Generate .ico from icon in .vsixmanifest
   - [ ] Generate .cs file from .vsixmanifest
-- [ ] Edit solution file button
-- [ ] Solution file colorizer
 - [ ] New item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener
   - [ ] ITagger
   - [ ] Pkgdef containing both snippets and icons
-  - [ ] Drop handler
   - [ ] Task Runner Explorer extension
-  - [ ] Browser Link extension
 
 Features that have a checkmark are complete and available for
 download in the

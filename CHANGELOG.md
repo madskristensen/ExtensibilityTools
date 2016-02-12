@@ -10,6 +10,7 @@
 - [x] Button to enable/disable VSIP logging (#22)
 - [ ] Show all classification types rendered (#21)
 - [ ] .pkgdef QuickInfo showing values of registry keys
+- [ ] .pkgdef Intellisense for registry keys
 - [x] Single File Generator for syncing .resx with vsixmanifest
   - [x] Generate .ico from icon in .vsixmanifest
   - [x] Generate .cs file from .vsixmanifest

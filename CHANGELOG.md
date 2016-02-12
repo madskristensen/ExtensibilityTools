@@ -20,6 +20,8 @@
   - [ ] ITagger
   - [ ] Pkgdef containing both snippets and icons
   - [ ] Task Runner Explorer extension
+- [ ] Add GitHub files to solution
+- [ ] Add AppVeyor file to solution
 
 Features that have a checkmark are complete and available for
 download in the

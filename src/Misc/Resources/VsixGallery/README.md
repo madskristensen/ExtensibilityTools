@@ -3,7 +3,7 @@
 <!-- Replace this badge with your own-->
 [![Build status](https://ci.appveyor.com/api/projects/status/hv6uyc059rqbc6fj?svg=true)](https://ci.appveyor.com/project/madskristensen/extensibilitytools)
 
-<!-- Update the VS Gallery link with the right one-->
+<!-- Update the VS Gallery link after you upload the VSIX-->
 Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/[GuidFromGallery])
 or get the [CI build](http://vsixgallery.com/extension/{ID}/).
 
@@ -20,13 +20,13 @@ See the [changelog](CHANGELOG.MD) for changes and roadmap.
   - Sub feature
 
 ### Feature 1
-Describe feature 1. Add screenshots/video/code samples etc.
+Describe feature 1. Add screenshots/code samples etc.
 
 ### Feature 2
-Describe feature 2. Add screenshots/video/code samples etc.
+Describe feature 2. Add screenshots/code samples etc.
 
 #### Sub feature
-Describe sub feature. Add screenshots/video/code samples etc.
+Describe sub feature. Add screenshots/code samples etc.
 
 ## License
 [Apache 2.0](LICENSE)

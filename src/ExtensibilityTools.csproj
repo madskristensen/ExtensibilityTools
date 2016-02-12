@@ -318,7 +318,7 @@
     <Content Include="Pkgdef\Completion\Snippets\MapFileExtensionToEditor.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Resources\Preview.png">
+    <Content Include="Shared\Resources\Preview.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Resource Include="source.extension.ico">
@@ -410,7 +410,7 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Icon.png">
+    <Content Include="Shared\Resources\Icon.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
   </ItemGroup>

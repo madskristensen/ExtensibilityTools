@@ -68,11 +68,11 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
                 {
                     var content = await ReplaceTokens(src, manifest);
 
+                    string manifestCs = Path.ChangeExtension(manifestFile, ".cs");
                     string versionFile = "{source.extension.cs}";
-                    string relative = Path.ChangeExtension(manifestFile.Replace(solutionRoot, string.Empty), ".cs").Trim('\\');
+                    string relative = manifestCs.Replace(solutionRoot, string.Empty).Trim('\\');
                     content = content.Replace(versionFile, relative);
 
-                    string manifestCs = Path.ChangeExtension(manifestFile, ".cs");
 
                     if (File.Exists(manifestCs))
                         content = content.Replace("#- ps: Vsix-TokenReplacement", "- ps: Vsix-TokenReplacement");
@@ -93,7 +93,7 @@ The files are:
 
   .gitattributes
   .gitignore
-  .appveyor.yml
+  appveyor.yml
   CHANGELOG.md
   CONTRIBUTING.md
   LICENSE

@@ -14,7 +14,7 @@ namespace MadsKristensen.ExtensibilityTools
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideOptionPage(typeof(ExtensibilityOptions), Vsix.Name, "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
+    [ProvideOptionPage(typeof(Options), Vsix.Name, "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
     [ProvideCodeGenerator(typeof(ResxFileGenerator), ResxFileGenerator.Name, ResxFileGenerator.Desription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
@@ -23,11 +23,11 @@ namespace MadsKristensen.ExtensibilityTools
     [ProvideToolWindow(typeof(SwatchesWindow))]
     public sealed class ExtensibilityToolsPackage : Package
     {
-        public static ExtensibilityOptions Options { get; private set; }
+        public static Options Options { get; private set; }
 
         protected override void Initialize()
         {
-            Options = (ExtensibilityOptions)GetDialogPage(typeof(ExtensibilityOptions));
+            Options = (Options)GetDialogPage(typeof(Options));
 
             // VSCT
             AddCustomToolCommand.Initialize(this);

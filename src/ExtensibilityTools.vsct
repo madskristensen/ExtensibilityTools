@@ -85,6 +85,17 @@
                     <ButtonText>Enable VSIP Logging</ButtonText>
                 </Strings>
             </Button>
+
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddVsixGallery" priority="0x2010" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_SOLUTION_ADD"/>
+                <Icon guid="ImageCatalogGuid" id="VisualStudioExpressWindows" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Add Support for VsixGallery.com...</ButtonText>
+                </Strings>
+            </Button>
         </Buttons>
     </Commands>
 
@@ -110,6 +121,7 @@
             <IDSymbol name="cmdActivityLog" value="0x0006" />
             <IDSymbol name="cmdVsipLogging" value="0x0007" />
             <IDSymbol name="cmdResxGenerator" value="0x0008" />
+            <IDSymbol name="cmdAddVsixGallery" value="0x0009" />
         </GuidSymbol>
     </Symbols>
 

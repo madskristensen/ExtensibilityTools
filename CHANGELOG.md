@@ -8,20 +8,21 @@
   - [x] Added Browser Link extension template
   - [x] Added Drop handler template
 - [x] Button to enable/disable VSIP logging (#22)
-- [ ] Show all classification types rendered (#21)
-- [ ] .pkgdef QuickInfo showing values of registry keys
-- [ ] .pkgdef Intellisense for registry keys
 - [x] Single File Generator for syncing .resx with vsixmanifest
   - [x] Generate .ico from icon in .vsixmanifest
   - [x] Generate .cs file from .vsixmanifest
+- [X] Add button to enable support for VsixGallery.com
+  - [ ] Add comments to appveyor.yml on how to get started
+  - [ ] Update readme.md to show this new feature
 - [ ] New item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener
   - [ ] ITagger
   - [ ] Pkgdef containing both snippets and icons
   - [ ] Task Runner Explorer extension
-- [ ] Add GitHub files to solution
-- [ ] Add AppVeyor file to solution
+- [ ] Show all classification types rendered (#21)
+- [ ] .pkgdef QuickInfo showing values of registry keys
+- [ ] .pkgdef Intellisense for registry keys
 
 Features that have a checkmark are complete and available for
 download in the

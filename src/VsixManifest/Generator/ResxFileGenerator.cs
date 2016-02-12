@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Drawing.Imaging;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Threading;
-using System.Xml;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -22,7 +20,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
         public const string Name = "VsixManifestGenerator";
         public const string Desription = "Automatically generates the .resx file based on the .vsixmanifest file values";
 
-        string _name, _description, _version, _id, _icon;
+        Manifest _manifest;
 
         public override string GetDefaultExtension()
         {
@@ -31,7 +29,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
 
         protected override byte[] GenerateCode(string inputFileName, string inputFileContent)
         {
-            ParseManifest(inputFileContent);
+            _manifest = VsixManifestParser.FromManifest(inputFileContent);
 
             var item = Dte.Solution.FindProjectItem(inputFileName);
 
@@ -75,7 +73,6 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
         private void GenerateClassFile(ProjectItem item)
         {
             string dir = Path.GetDirectoryName(InputFilePath);
-            string icon = Path.Combine(dir, _icon);
 
             string csFilename = Path.ChangeExtension(InputFilePath, ".cs");
 
@@ -84,10 +81,10 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             sb.AppendLine("{");
             sb.AppendLine("\tstatic class Vsix");
             sb.AppendLine("\t{");
-            sb.AppendLine($"\t\tpublic const string Id = \"{_id}\";");
-            sb.AppendLine($"\t\tpublic const string Name = \"{_name.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine($"\t\tpublic const string Description = \"{_description.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine($"\t\tpublic const string Version = \"{_version}\";");
+            sb.AppendLine($"\t\tpublic const string Id = \"{_manifest.ID}\";");
+            sb.AppendLine($"\t\tpublic const string Name = \"{_manifest.Name.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"\t\tpublic const string Description = \"{_manifest.Description.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"\t\tpublic const string Version = \"{_manifest.Version}\";");
             sb.AppendLine("\t}");
             sb.AppendLine("}");
 
@@ -98,11 +95,11 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
 
         private void GenerateIconFile(ProjectItem item)
         {
-            if (string.IsNullOrEmpty(_icon))
+            if (string.IsNullOrEmpty(_manifest.Icon))
                 return;
 
             string dir = Path.GetDirectoryName(InputFilePath);
-            string icon = Path.Combine(dir, _icon);
+            string icon = Path.Combine(dir, _manifest.Icon);
 
             string icoFilename = Path.ChangeExtension(InputFilePath, ".ico");
 
@@ -136,31 +133,16 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             return bitmap;
         }
 
-        void ParseManifest(string inputFileContent)
-        {
-            var xml = Regex.Replace(inputFileContent, "( xmlns(:\\w+)?)=\"([^\"]+)\"", string.Empty)
-                           .Replace(" d:", " ");
-
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml);
-
-            _name = (doc.SelectSingleNode("//Name") ?? doc.SelectSingleNode("//DisplayName"))?.InnerText ?? string.Empty;
-            _description = doc.SelectSingleNode("//Description")?.InnerText ?? string.Empty;
-            _version = doc.SelectSingleNode("//Version")?.InnerText ?? doc.SelectSingleNode("//Identity")?.Attributes["Version"]?.Value ?? string.Empty;
-            _id = (doc.SelectSingleNode("//Identity") ?? doc.SelectSingleNode("//Identifier"))?.Attributes["Id"]?.Value ?? string.Empty;
-            _icon = doc.SelectSingleNode("//Icon")?.InnerText ?? string.Empty;
-        }
-
         private byte[] GenerateResource()
         {
             using (var writer = new StringWriter())
             using (var resx = new ResXResourceWriter(writer))
             {
                 resx.AddAlias("System.Windows.Forms", new AssemblyName("System.Windows.Forms"));
-                resx.AddResource(new ResXDataNode("110", _name));
-                resx.AddResource(new ResXDataNode("112", _description));
+                resx.AddResource(new ResXDataNode("110", _manifest.Name));
+                resx.AddResource(new ResXDataNode("112", _manifest.Description));
 
-                if (!string.IsNullOrEmpty(_icon))
+                if (!string.IsNullOrEmpty(_manifest.Icon))
                 {
                     string iconFileName = Path.GetFileNameWithoutExtension(InputFilePath) + ".ico";
 

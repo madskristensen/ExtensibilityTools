@@ -3,6 +3,21 @@
   <PropertyGroup>
     <MinimumVisualStudioVersion>$(VisualStudioVersion)</MinimumVisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -159,6 +174,9 @@
       <DependentUpon>ExtensibilityTools.vsct</DependentUpon>
     </Compile>
     <Compile Include="ExtensibilityToolsPackage.cs" />
+    <Compile Include="Misc\Commands\AddVsixGallery.cs" />
+    <Compile Include="VsixManifest\Parser\Manifest.cs" />
+    <Compile Include="VsixManifest\Parser\VsixManifestParser.cs" />
     <None Include="ItemTemplates\BrowserLink\MyExtension.cs" />
     <None Include="ItemTemplates\Editor Drop Handler\MyDropHandler.cs" />
     <Compile Include="Misc\Commands\ExportImageMoniker.cs" />
@@ -351,6 +369,27 @@
     <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-symbols.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Misc\Resources\VsixGallery\.gitattributes">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Misc\Resources\VsixGallery\.gitignore">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Misc\Resources\VsixGallery\CHANGELOG.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Misc\Resources\VsixGallery\CONTRIBUTING.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Misc\Resources\VsixGallery\README.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Misc\Resources\VsixGallery\appveyor.yml">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Misc\Resources\VsixGallery\LICENSE">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\template-builder.props" />
     <None Include="source.extension.vsixmanifest">
@@ -385,7 +424,18 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>

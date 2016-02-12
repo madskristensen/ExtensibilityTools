@@ -22,7 +22,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
         public const string Name = "VsixManifestGenerator";
         public const string Desription = "Automatically generates the .resx file based on the .vsixmanifest file values";
 
-        string _name, _description, _icon;
+        string _name, _description, _version, _icon;
 
         public override string GetDefaultExtension()
         {
@@ -38,6 +38,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             if (item != null)
             {
                 GenerateIconFile(item);
+                GenerateClassFile(item);
                 SetBuildProperties(inputFileName, item);
             }
 
@@ -70,6 +71,27 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             }), DispatcherPriority.ApplicationIdle, null);
         }
 
+        // TODO: This should use CodeModel
+        private void GenerateClassFile(ProjectItem item)
+        {
+            string dir = Path.GetDirectoryName(InputFilePath);
+            string icon = Path.Combine(dir, _icon);
+
+            string csFilename = Path.ChangeExtension(InputFilePath, ".cs");
+
+            var sb = new StringBuilder();
+            sb.AppendLine("public static class Vsix");
+            sb.AppendLine("{");
+            sb.AppendLine($"\tpublic const string Name = \"{_name.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"\tpublic const string Description = \"{_description.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"\tpublic const string Version = \"{_version}\";");
+            sb.AppendLine("}");
+
+            FileHelpers.WriteFile(csFilename, sb.ToString());
+
+            item.ProjectItems.AddFromFile(csFilename);
+        }
+
         private void GenerateIconFile(ProjectItem item)
         {
             if (string.IsNullOrEmpty(_icon))
@@ -79,6 +101,8 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             string icon = Path.Combine(dir, _icon);
 
             string icoFilename = Path.ChangeExtension(InputFilePath, ".ico");
+
+            FileHelpers.RemoveReadonlyFlagFromFile(icoFilename);
 
             using (var stream = new FileStream(icoFilename, FileMode.Create))
             {
@@ -116,9 +140,10 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
 
-            _name = (doc.SelectSingleNode("//Name") ?? doc.SelectSingleNode("//DisplayName"))?.InnerText;
-            _description = doc.SelectSingleNode("//Description")?.InnerText;
-            _icon = doc.SelectSingleNode("//Icon")?.InnerText;
+            _name = (doc.SelectSingleNode("//Name") ?? doc.SelectSingleNode("//DisplayName"))?.InnerText ?? string.Empty;
+            _description = doc.SelectSingleNode("//Description")?.InnerText ?? string.Empty;
+            _version = (doc.SelectSingleNode("//Identity") ?? doc.SelectSingleNode("//Identifier"))?.Attributes["Id"]?.Value ?? string.Empty;
+            _icon = doc.SelectSingleNode("//Icon")?.InnerText ?? string.Empty;
         }
 
         private byte[] GenerateResource()

@@ -174,6 +174,11 @@ file in the .vsixmanifest's _Icon_ property and a new
 .ico file is automtically generated with the right dimensions
 for VS extensions.
 
+### Auto-sync C# class file
+A C# class file is also produced which contains a static
+class with various string constants such as Name, 
+Description and Version of the VSIX.
+
 
 ## Show Project Information
 A context-menu command is available on every project type that

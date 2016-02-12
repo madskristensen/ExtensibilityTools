@@ -190,6 +190,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Misc\Commands\ShowProjectInformation.cs" />
+    <Compile Include="Shared\Helpers\FileHelpers.cs" />
     <Compile Include="ThemeColorsToolWindow\ImageMonikerConverter.cs" />
     <Compile Include="ThemeColorsToolWindow\SwatchesWindow.cs" />
     <Compile Include="ThemeColorsToolWindow\SwatchesWindowCommand.cs" />

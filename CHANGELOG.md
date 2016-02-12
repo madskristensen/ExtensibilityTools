@@ -12,7 +12,7 @@
 - [ ] .pkgdef QuickInfo showing values of registry keys
 - [x] Single File Generator for syncing .resx with vsixmanifest
   - [x] Generate .ico from icon in .vsixmanifest
-  - [ ] Generate .cs file from .vsixmanifest
+  - [x] Generate .cs file from .vsixmanifest
 - [ ] New item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener

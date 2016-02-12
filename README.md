@@ -185,9 +185,10 @@ namespace MyExtension
 {
     public static class Vsix
     {
+        public const string Id = "f86b5aa5-733c-4e8f-8d3b-ea6f9b97b344";        
         public const string Name = "Name of VSIX";
-        public const string Name = "Description of VSIX";
-        public const string Name = "1.0";
+        public const string Description = "Description of VSIX";
+        public const string Version = "1.0";
     }
 }
 ```

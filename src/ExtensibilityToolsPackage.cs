@@ -12,9 +12,9 @@ using MadsKristensen.ExtensibilityTools.VsixManifest.Commands;
 namespace MadsKristensen.ExtensibilityTools
 {
     [PackageRegistration(UseManagedResourcesOnly = true)]
-    [InstalledProductRegistration("#110", "#112", Version, IconResourceID = 400)]
+    [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideOptionPage(typeof(ExtensibilityOptions), Name, "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
+    [ProvideOptionPage(typeof(ExtensibilityOptions), Vsix.Name, "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
     [ProvideCodeGenerator(typeof(ResxFileGenerator), ResxFileGenerator.Name, ResxFileGenerator.Desription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
@@ -23,8 +23,6 @@ namespace MadsKristensen.ExtensibilityTools
     [ProvideToolWindow(typeof(SwatchesWindow))]
     public sealed class ExtensibilityToolsPackage : Package
     {
-        public const string Version = "0.1";
-        public const string Name = "Extensibility Tools";
         public static ExtensibilityOptions Options { get; private set; }
 
         protected override void Initialize()

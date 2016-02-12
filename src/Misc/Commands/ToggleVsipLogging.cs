@@ -71,7 +71,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
         {
             string mode = willEnable ? "enabled" : "disabled";
             string text = $"VSIP Logging has now been {mode}, but will not take effect before Visual Studio has been restarted.\r\rDo you wish to restart now?";
-            return MessageBox.Show(text, ExtensibilityToolsPackage.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+            return MessageBox.Show(text, Vsix.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
         public const string Name = "VsixManifestGenerator";
         public const string Desription = "Automatically generates the .resx file based on the .vsixmanifest file values";
 
-        string _name, _description, _version, _icon;
+        string _name, _description, _version, _id, _icon;
 
         public override string GetDefaultExtension()
         {
@@ -84,6 +84,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             sb.AppendLine("{");
             sb.AppendLine("\tpublic static class Vsix");
             sb.AppendLine("\t{");
+            sb.AppendLine($"\t\tpublic const string Id = \"{_id}\";");
             sb.AppendLine($"\t\tpublic const string Name = \"{_name.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
             sb.AppendLine($"\t\tpublic const string Description = \"{_description.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
             sb.AppendLine($"\t\tpublic const string Version = \"{_version}\";");
@@ -145,7 +146,8 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
 
             _name = (doc.SelectSingleNode("//Name") ?? doc.SelectSingleNode("//DisplayName"))?.InnerText ?? string.Empty;
             _description = doc.SelectSingleNode("//Description")?.InnerText ?? string.Empty;
-            _version = (doc.SelectSingleNode("//Identity") ?? doc.SelectSingleNode("//Identifier"))?.Attributes["Id"]?.Value ?? string.Empty;
+            _version = doc.SelectSingleNode("//Version")?.InnerText ?? doc.SelectSingleNode("//Identity")?.Attributes["Version"]?.Value ?? string.Empty;
+            _id = (doc.SelectSingleNode("//Identity") ?? doc.SelectSingleNode("//Identifier"))?.Attributes["Id"]?.Value ?? string.Empty;
             _icon = doc.SelectSingleNode("//Icon")?.InnerText ?? string.Empty;
         }
 

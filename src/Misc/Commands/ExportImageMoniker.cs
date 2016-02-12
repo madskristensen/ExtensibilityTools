@@ -1,8 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Windows.Forms;
 using System.Windows.Interop;
-using System.Windows.Media.Imaging;
 using EnvDTE;
 using MadsKristensen.ExtensibilityTools.Misc.Commands;
 using Microsoft.VisualStudio.Shell.Interop;

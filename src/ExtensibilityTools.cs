@@ -25,5 +25,6 @@ namespace MadsKristensen.ExtensibilityTools
         public const int cmdSwatchesWindow = 0x0005;
         public const int cmdActivityLog = 0x0006;
         public const int cmdVsipLogging = 0x0007;
+        public const int cmdResxGenerator = 0x0008;
     }
 }

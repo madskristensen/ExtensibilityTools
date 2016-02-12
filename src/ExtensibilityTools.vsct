@@ -22,6 +22,15 @@
                 </Strings>
             </Button>
 
+            <Button guid="guidExtensibilityToolsCmdSet" id="cmdResxGenerator" priority="0x0600" type="Button">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
+                <Strings>
+                    <ButtonText>Auto-sync Resx and Icon files</ButtonText>
+                </Strings>
+            </Button>
+
             <Button guid="guidExtensibilityToolsCmdSet" id="cmdSignBinary" priority="0x0410" type="Button">
                 <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD"/>
                 <CommandFlag>DynamicVisibility</CommandFlag>
@@ -100,6 +109,7 @@
             <IDSymbol name="cmdSwatchesWindow" value="0x0005" />
             <IDSymbol name="cmdActivityLog" value="0x0006" />
             <IDSymbol name="cmdVsipLogging" value="0x0007" />
+            <IDSymbol name="cmdResxGenerator" value="0x0008" />
         </GuidSymbol>
     </Symbols>
 

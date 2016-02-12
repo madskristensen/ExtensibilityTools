@@ -196,7 +196,7 @@
     </Compile>
     <Compile Include="ThemeColorsToolWindow\WpfUtilities.cs" />
     <Compile Include="VSCT\Commands\AddCustomToolCommand.cs" />
-    <Compile Include="VSCT\Commands\BaseCommand.cs" />
+    <Compile Include="Shared\Commands\BaseCommand.cs" />
     <Compile Include="VSCT\Commands\SignBinaryCommand.cs" />
     <Compile Include="VSCT\Completion\VsctBuiltInCache.cs" />
     <Compile Include="VSCT\Completion\VsctCompletionController.cs" />
@@ -217,6 +217,8 @@
       <DependentUpon>SignForm.cs</DependentUpon>
     </Compile>
     <Compile Include="VSCT\VsctTextViewCreationListener.cs" />
+    <Compile Include="VsixManifest\Commands\AddResxGeneratorCommand.cs" />
+    <Compile Include="VsixManifest\Generator\ResxFileGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="VSCT\Signing\SignForm.resx">

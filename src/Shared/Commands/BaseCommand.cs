@@ -5,7 +5,7 @@ using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
-namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
+namespace MadsKristensen.ExtensibilityTools
 {
     /// <summary>
     /// Basic class to wrap code about executed menu command.
@@ -18,7 +18,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
         protected BaseCommand(IServiceProvider serviceProvider)
         {
             if (serviceProvider == null)
-                throw new ArgumentNullException("serviceProvider");
+                throw new ArgumentNullException(nameof(serviceProvider));
 
             _serviceProvider = serviceProvider;
             _dte = serviceProvider.GetService(typeof(SDTE)) as DTE2;

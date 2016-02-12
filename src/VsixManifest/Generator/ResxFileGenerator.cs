@@ -82,7 +82,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             var sb = new StringBuilder();
             sb.AppendLine($"namespace {FileNamespace}");
             sb.AppendLine("{");
-            sb.AppendLine("\tpublic static class Vsix");
+            sb.AppendLine("\tstatic class Vsix");
             sb.AppendLine("\t{");
             sb.AppendLine($"\t\tpublic const string Id = \"{_id}\";");
             sb.AppendLine($"\t\tpublic const string Name = \"{_name.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");

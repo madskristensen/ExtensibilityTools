@@ -1,6 +1,6 @@
 namespace MadsKristensen.ExtensibilityTools
 {
-	public static class Vsix
+	static class Vsix
 	{
 		public const string Id = "f8330d54-0469-43a7-8fc0-7f19febeb897";
 		public const string Name = "Extensibility Tools 2015";

@@ -80,11 +80,14 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             string csFilename = Path.ChangeExtension(InputFilePath, ".cs");
 
             var sb = new StringBuilder();
-            sb.AppendLine("public static class Vsix");
+            sb.AppendLine($"namespace {FileNamespace}");
             sb.AppendLine("{");
-            sb.AppendLine($"\tpublic const string Name = \"{_name.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine($"\tpublic const string Description = \"{_description.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine($"\tpublic const string Version = \"{_version}\";");
+            sb.AppendLine("\tpublic static class Vsix");
+            sb.AppendLine("\t{");
+            sb.AppendLine($"\t\tpublic const string Name = \"{_name.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"\t\tpublic const string Description = \"{_description.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"\t\tpublic const string Version = \"{_version}\";");
+            sb.AppendLine("\t}");
             sb.AppendLine("}");
 
             FileHelpers.WriteFile(csFilename, sb.ToString());

@@ -179,6 +179,18 @@ A C# class file is also produced which contains a static
 class with various string constants such as Name, 
 Description and Version of the VSIX.
 
+**Example:**
+```C#
+namespace MyExtension
+{
+    public static class Vsix
+    {
+        public const string Name = "Name of VSIX";
+        public const string Name = "Description of VSIX";
+        public const string Name = "1.0";
+    }
+}
+```
 
 ## Show Project Information
 A context-menu command is available on every project type that

@@ -179,6 +179,10 @@
     <Compile Include="Shared\Helpers\ProjectHelpers.cs" />
     <Compile Include="VsixManifest\Parser\Manifest.cs" />
     <Compile Include="VsixManifest\Parser\VsixManifestParser.cs" />
+    <Content Include="..\LICENSE">
+      <Link>Shared\Resources\LICENSE</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="ItemTemplates\BrowserLink\MyExtension.cs" />
     <None Include="ItemTemplates\Editor Drop Handler\MyDropHandler.cs" />
     <Compile Include="Misc\Commands\ExportImageMoniker.cs" />
@@ -259,10 +263,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\LICENSE">
-      <Link>Resources\LICENSE</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
     <None Include="ItemTemplates\Snippet\icon.png" />
     <None Include="ItemTemplates\Snippet\preview.png" />
     <None Include="ItemTemplates\Snippet\code.snippet" />

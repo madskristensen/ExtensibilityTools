@@ -43,7 +43,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             return GenerateResource();
         }
 
-        private void SetBuildProperties(string inputFileName, ProjectItem item)
+        void SetBuildProperties(string inputFileName, ProjectItem item)
         {
             Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
             {
@@ -88,6 +88,15 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             sb.AppendLine("\t}");
             sb.AppendLine("}");
 
+            // Don't write if it didn't change.
+            if (File.Exists(csFilename))
+            {
+                string current = File.ReadAllText(csFilename);
+
+                if (current == sb.ToString())
+                    return;
+            }
+
             FileHelpers.WriteFile(csFilename, sb.ToString());
 
             item.ProjectItems.AddFromFile(csFilename);
@@ -99,20 +108,27 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
                 return;
 
             string dir = Path.GetDirectoryName(InputFilePath);
-            string icon = Path.Combine(dir, _manifest.Icon);
+            var src = new FileInfo(Path.Combine(dir, _manifest.Icon));
 
-            string icoFilename = Path.ChangeExtension(InputFilePath, ".ico");
+            if (!src.Exists)
+                return;
 
-            FileHelpers.RemoveReadonlyFlagFromFile(icoFilename);
+            var dest = new FileInfo(Path.ChangeExtension(InputFilePath, ".ico"));
 
-            using (var stream = new FileStream(icoFilename, FileMode.Create))
+            // Don't proceed if previosly generated icon is newer than the source image
+            if (dest.Exists && src.LastWriteTime < dest.LastWriteTime)
+                return;
+
+            FileHelpers.RemoveReadonlyFlagFromFile(dest);
+
+            using (var stream = new FileStream(dest.FullName, FileMode.Create))
             {
-                var image = Image.FromFile(icon);
+                var image = Image.FromFile(src.FullName);
                 Icon ico = PngIconFromImage(image, 32);
                 ico.Save(stream);
             }
 
-            item.ProjectItems.AddFromFile(icoFilename);
+            item.ProjectItems.AddFromFile(dest.FullName);
         }
 
         public static Icon PngIconFromImage(Image img, int size = 16)

@@ -29,6 +29,8 @@ namespace MadsKristensen.ExtensibilityTools
         {
             Options = (Options)GetDialogPage(typeof(Options));
 
+            ProjectHelpers.Initialize(this);
+
             // VSCT
             AddCustomToolCommand.Initialize(this);
 

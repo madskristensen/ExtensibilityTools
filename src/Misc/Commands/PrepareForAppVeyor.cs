@@ -38,7 +38,10 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
             string solutionRoot = Path.GetDirectoryName(DTE.Solution.FullName);
             bool appVeyorExist = File.Exists(Path.Combine(solutionRoot, "appveyor.yml"));
 
-            button.Enabled = !appVeyorExist && PrepareForGitHub.IsButtonVisible();
+            var solutionHasVsixProjects = ProjectHelpers.GetAllProjectsInSolution().Any(p => p.IsExtensibilityProject());
+
+            button.Enabled = !appVeyorExist;
+            button.Visible = solutionHasVsixProjects;
         }
 
         async void Execute(object sender, EventArgs e)

@@ -55,21 +55,6 @@ namespace MadsKristensen.ExtensibilityTools
         }
 
         /// <summary>
-        /// Gets the currently selected solution item.
-        /// </summary>
-        protected UIHierarchyItem GetSelectedItem()
-        {
-            var items = (Array)DTE.ToolWindows.SolutionExplorer.SelectedItems;
-
-            foreach (UIHierarchyItem selItem in items)
-            {
-                return selItem;
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Gets the specific service.
         /// </summary>
         protected T GetService<T, S>() where T : class

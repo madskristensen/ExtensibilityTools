@@ -39,7 +39,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
         private void ShowInformation(object sender, EventArgs e)
         {
-            Project project = GetProject();
+            Project project = ProjectHelpers.GetSelectedItem() as Project;
 
             if (project == null)
                 return;
@@ -114,16 +114,6 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
             }
 
             return prop.Value.ToString();
-        }
-
-        private Project GetProject()
-        {
-            var item = GetSelectedItem();
-
-            if (item == null)
-                return null;
-
-            return item.Object as Project;
         }
     }
 }

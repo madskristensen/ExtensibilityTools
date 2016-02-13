@@ -46,8 +46,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
         private void BuildProjectToSign(object sender, EventArgs e)
         {
             Solution solution = DTE.Solution;
-            var selectedItem = GetSelectedItem();
-            Project project = selectedItem != null ? selectedItem.Object as Project : null;
+            var project = ProjectHelpers.GetSelectedItem() as Project;
 
             // build the whole solution or only the selected project the command was invoked against:
             if (project == null)
@@ -65,13 +64,8 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
         {
             OleMenuCommand button = (OleMenuCommand) sender;
             button.Visible = false;
-
-            UIHierarchyItem uiItem = GetSelectedItem();
-
-            if (uiItem == null)
-                return;
-
-            _project = uiItem.Object as Project;
+            
+            _project = ProjectHelpers.GetSelectedItem() as Project;
             if (_project == null)
                 return;
 

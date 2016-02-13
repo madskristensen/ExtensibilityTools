@@ -11,13 +11,10 @@
 - [x] Single File Generator for syncing .resx with vsixmanifest
   - [x] Generate .ico from icon in .vsixmanifest
   - [x] Generate .cs file from .vsixmanifest
-- [X] Add button to enable support for VsixGallery.com
-  - [ ] Add comments to appveyor.yml on how to get started
-  - [ ] Update readme.md to show this new feature
+- [x] Add button to enable support for VsixGallery.com
 - [ ] New item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener
-  - [ ] ITagger
   - [ ] Pkgdef containing both snippets and icons
   - [ ] Task Runner Explorer extension
 - [ ] Show all classification types rendered (#21)

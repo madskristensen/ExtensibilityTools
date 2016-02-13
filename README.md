@@ -36,6 +36,7 @@ See the [changelog](CHANGELOG.MD) for changes and roadmap.
 - **VsixManifest files**
   - Auto-sync to Resx file
   - Automatically create .ico file based on icon file
+- **Support for VsixGallery.com**
 - **Show Project information** (for debug purposes)
 - **Export KnownMonikers to PNG file**
 - **VS Theme color swatch window**
@@ -43,6 +44,8 @@ See the [changelog](CHANGELOG.MD) for changes and roadmap.
 - **Enable VSIP Logging**
 - **Item templates**
   - Snippet file
+  - Browser Link Provider class
+  - Editor drop handler
 
 ### VSCT files
 The Visual Studio Command Table leaves a lot to be desired in terms of
@@ -192,6 +195,30 @@ namespace MyExtension
     }
 }
 ```
+
+### Support for VsixGallery.com
+[VsixGallery.com](http://vsixgallery.com) is an open source
+gallery for Visual Studio extensions and is primarily used
+for hosting CI built extensions - a staging environment.
+
+There are two things that make automatic integration with
+VsixGallery.com easy. Put your code on GitHub and automate
+the build process with [AppVeyor](http://appveyor.com).
+
+It sounds like a lot of work, but it isn't. Right-click the
+solution node in Solution Explorer and click both of the
+buttons shown below.
+
+![vsixgallery.com](art/vsixgallery-context-menu.png)
+
+That will add some files to the solution folder that require
+almost no modifications by you. These files are AppVeyor.yml
+as well as common GitHub files such as CONTRIBUTION.md
+(tailored to VSIX development), CHANGELOG.md etc.
+
+Read more about 
+[adding your extension](http://vsixgallery.com/guide/dev/)
+to VsixGallery.
 
 ### Show Project Information
 A context-menu command is available on every project type that

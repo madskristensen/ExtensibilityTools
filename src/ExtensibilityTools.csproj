@@ -176,6 +176,7 @@
     <Compile Include="ExtensibilityToolsPackage.cs" />
     <Compile Include="Misc\Commands\PrepareForAppVeyor.cs" />
     <Compile Include="Misc\Commands\PrepareForGitHub.cs" />
+    <Compile Include="Shared\Helpers\ProjectHelpers.cs" />
     <Compile Include="VsixManifest\Parser\Manifest.cs" />
     <Compile Include="VsixManifest\Parser\VsixManifestParser.cs" />
     <None Include="ItemTemplates\BrowserLink\MyExtension.cs" />

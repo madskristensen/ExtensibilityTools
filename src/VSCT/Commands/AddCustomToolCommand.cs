@@ -37,13 +37,8 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
         {
             OleMenuCommand button = (OleMenuCommand) sender;
             button.Visible = false;
-
-            UIHierarchyItem uiItem = GetSelectedItem();
-
-            if (uiItem == null)
-                return;
-
-            _item = uiItem.Object as ProjectItem;
+            
+            _item = ProjectHelpers.GetSelectedItem() as ProjectItem;
             if (_item == null)
                 return;
 

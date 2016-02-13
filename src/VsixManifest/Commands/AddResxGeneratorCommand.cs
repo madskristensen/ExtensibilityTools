@@ -6,7 +6,7 @@ using VSLangProj;
 
 namespace MadsKristensen.ExtensibilityTools.VsixManifest.Commands
 {
-    sealed class AddResxGeneratorCommand: BaseCommand
+    sealed class AddResxGeneratorCommand : BaseCommand
     {
         private const string CUSTOM_TOOL_NAME = ResxFileGenerator.Name;
         private ProjectItem _item;
@@ -34,15 +34,11 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest.Commands
 
         private void BeforeQueryStatus(object sender, EventArgs e)
         {
-            OleMenuCommand button = (OleMenuCommand) sender;
+            OleMenuCommand button = (OleMenuCommand)sender;
             button.Visible = false;
 
-            UIHierarchyItem uiItem = GetSelectedItem();
+            _item = ProjectHelpers.GetSelectedItem() as ProjectItem;
 
-            if (uiItem == null)
-                return;
-
-            _item = uiItem.Object as ProjectItem;
             if (_item == null)
                 return;
 

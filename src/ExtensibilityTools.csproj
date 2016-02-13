@@ -174,7 +174,8 @@
       <DependentUpon>ExtensibilityTools.vsct</DependentUpon>
     </Compile>
     <Compile Include="ExtensibilityToolsPackage.cs" />
-    <Compile Include="Misc\Commands\AddVsixGallery.cs" />
+    <Compile Include="Misc\Commands\PrepareForAppVeyor.cs" />
+    <Compile Include="Misc\Commands\PrepareForGitHub.cs" />
     <Compile Include="VsixManifest\Parser\Manifest.cs" />
     <Compile Include="VsixManifest\Parser\VsixManifestParser.cs" />
     <None Include="ItemTemplates\BrowserLink\MyExtension.cs" />
@@ -369,25 +370,25 @@
     <Content Include="VSCT\Snippets\XML\Extensibility Tools\vsct-symbols.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Misc\Resources\VsixGallery\.gitattributes">
+    <Content Include="Misc\Resources\GitHub\.gitattributes">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Misc\Resources\VsixGallery\.gitignore">
+    <Content Include="Misc\Resources\GitHub\.gitignore">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Misc\Resources\VsixGallery\CHANGELOG.md">
+    <Content Include="Misc\Resources\GitHub\CHANGELOG.md">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Misc\Resources\VsixGallery\CONTRIBUTING.md">
+    <Content Include="Misc\Resources\GitHub\CONTRIBUTING.md">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Misc\Resources\VsixGallery\README.md">
+    <Content Include="Misc\Resources\GitHub\README.md">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Misc\Resources\VsixGallery\appveyor.yml">
+    <Content Include="Misc\Resources\AppVeyor\AppVeyor.yml">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Misc\Resources\VsixGallery\LICENSE">
+    <Content Include="Misc\Resources\GitHub\LICENSE">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <None Include="packages.config" />

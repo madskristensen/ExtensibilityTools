@@ -39,7 +39,10 @@ namespace MadsKristensen.ExtensibilityTools
             SwatchesWindowCommand.Initialize(this);
             ShowActivityLog.Initialize(this);
             ToggleVsipLogging.Initialize(this);
-            AddVsixGallery.Initialize(this);
+
+            // Solution node
+            PrepareForGitHub.Initialize(this);
+            PrepareForAppVeyor.Initialize(this);
 
             // Vsix Manifest
             AddResxGeneratorCommand.Initialize(this);

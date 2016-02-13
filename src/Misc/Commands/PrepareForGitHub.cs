@@ -13,37 +13,34 @@ using Microsoft.VisualStudio.Shell.Interop;
 
 namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 {
-    sealed class AddVsixGallery : BaseCommand
+    sealed class PrepareForGitHub : BaseCommand
     {
         Package _package;
-        static readonly string[] _visible = { "appveyor.yml", "CHANGELOG.md", "README.md" };
+        static readonly string[] _visible = { "CHANGELOG.md", "README.md" };
 
-        private AddVsixGallery(Package package)
+        private PrepareForGitHub(Package package)
        : base(package)
         {
             _package = package;
         }
 
-        public static AddVsixGallery Instance { get; private set; }
+        public static PrepareForGitHub Instance { get; private set; }
 
         public static void Initialize(Package package)
         {
-            Instance = new AddVsixGallery(package);
+            Instance = new PrepareForGitHub(package);
         }
 
         protected override void SetupCommands()
         {
-            AddCommand(PackageGuids.guidExtensibilityToolsCmdSet, PackageIds.cmdAddVsixGallery, Execute, BeforeQueryStatus);
+            AddCommand(PackageGuids.guidSolutionCmdSet, PackageIds.cmdGitHubPrepare, Execute, BeforeQueryStatus);
         }
 
         void BeforeQueryStatus(object sender, EventArgs e)
         {
             var button = (OleMenuCommand)sender;
 
-            string solutionRoot = Path.GetDirectoryName(DTE.Solution.FullName);
-            bool appVeyorExist = File.Exists(Path.Combine(solutionRoot, "appveyor.yml"));
-
-            button.Visible = !appVeyorExist && IsButtonVisible();
+            button.Enabled = IsButtonVisible();
         }
 
         async void Execute(object sender, EventArgs e)
@@ -57,7 +54,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
             string assembly = Assembly.GetExecutingAssembly().Location;
             string root = Path.GetDirectoryName(assembly);
-            string dir = Path.Combine(root, "Misc\\Resources\\VsixGallery");
+            string dir = Path.Combine(root, "Misc\\Resources\\GitHub");
 
             foreach (var src in Directory.EnumerateFiles(dir))
             {
@@ -68,19 +65,10 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
                 {
                     var content = await ReplaceTokens(src, manifest);
 
-                    string manifestCs = Path.ChangeExtension(manifestFile, ".cs");
-                    string versionFile = "{source.extension.cs}";
-                    string relative = manifestCs.Replace(solutionRoot, string.Empty).Trim('\\');
-                    content = content.Replace(versionFile, relative);
-
-
-                    if (File.Exists(manifestCs))
-                        content = content.Replace("#- ps: Vsix-TokenReplacement", "- ps: Vsix-TokenReplacement");
-
                     File.WriteAllText(dest, content);
 
                     if (_visible.Contains(fileName))
-                        AddFileToSolutionFolder(dest);
+                        AddFileToSolutionFolder(dest, (Solution2)DTE.Solution);
                 }
             }
         }
@@ -93,7 +81,6 @@ The files are:
 
   .gitattributes
   .gitignore
-  appveyor.yml
   CHANGELOG.md
   CONTRIBUTING.md
   LICENSE
@@ -104,9 +91,8 @@ Files that already exist will not be overridden. Do you wish to continue?";
             return MessageBox.Show(message, Vsix.Name, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
         }
 
-        void AddFileToSolutionFolder(string file)
+        public static void AddFileToSolutionFolder(string file, Solution2 solution)
         {
-            Solution2 solution = (Solution2)DTE.Solution;
             Project currentProject = null;
 
             foreach (Project project in solution.Projects)
@@ -124,7 +110,7 @@ Files that already exist will not be overridden. Do you wish to continue?";
             currentProject.ProjectItems.AddFromFile(file);
         }
 
-        private bool IsButtonVisible()
+        public static bool IsButtonVisible()
         {
             IVsSolution solution = (IVsSolution)Package.GetGlobalService(typeof(IVsSolution));
 
@@ -197,7 +183,7 @@ Files that already exist will not be overridden. Do you wish to continue?";
             return obj as Project;
         }
 
-        static async System.Threading.Tasks.Task<string> ReplaceTokens(string file, Manifest manifest)
+        public static async System.Threading.Tasks.Task<string> ReplaceTokens(string file, Manifest manifest)
         {
             using (var reader = new StreamReader(file))
             {

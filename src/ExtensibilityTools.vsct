@@ -10,7 +10,20 @@
             <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0150">
                 <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
             </Group>
+
+            <Group guid="guidSolutionCmdSet" id="MenuGroup" priority="0x0150">
+                <Parent guid="guidSolutionCmdSet" id="Menu"/>
+            </Group>
         </Groups>
+
+        <Menus>
+            <Menu guid="guidSolutionCmdSet" id="Menu" priority="0x0200" type="Menu">
+                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_SOLUTION_ADD" />
+                <Strings>
+                    <ButtonText>Extensibility Tools</ButtonText>
+                </Strings>
+            </Menu>
+        </Menus>
 
         <Buttons>
             <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0600" type="Button">
@@ -86,14 +99,26 @@
                 </Strings>
             </Button>
 
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddVsixGallery" priority="0x2010" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_SOLUTION_ADD"/>
+            <!-- Solution node -->
+            <Button guid="guidSolutionCmdSet" id="cmdGitHubPrepare" priority="0x0100" type="Button">
+                <Parent guid="guidSolutionCmdSet" id="MenuGroup"/>
+                <Icon guid="ImageCatalogGuid" id="Git" />
+                <CommandFlag>IconIsMoniker</CommandFlag>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultDisabled</CommandFlag>
+                <Strings>
+                    <ButtonText>Prepare for GitHub...</ButtonText>
+                </Strings>
+            </Button>
+
+            <Button guid="guidSolutionCmdSet" id="cmdAppVeyorPrepare" priority="0x0200" type="Button">
+                <Parent guid="guidSolutionCmdSet" id="MenuGroup"/>
                 <Icon guid="ImageCatalogGuid" id="VisualStudioExpressWindows" />
                 <CommandFlag>IconIsMoniker</CommandFlag>
                 <CommandFlag>DynamicVisibility</CommandFlag>
-                <CommandFlag>DefaultInvisible</CommandFlag>
+                <CommandFlag>DefaultDisabled</CommandFlag>
                 <Strings>
-                    <ButtonText>Add Support for VsixGallery.com...</ButtonText>
+                    <ButtonText>Prepare for AppVeyor...</ButtonText>
                 </Strings>
             </Button>
         </Buttons>
@@ -121,7 +146,13 @@
             <IDSymbol name="cmdActivityLog" value="0x0006" />
             <IDSymbol name="cmdVsipLogging" value="0x0007" />
             <IDSymbol name="cmdResxGenerator" value="0x0008" />
-            <IDSymbol name="cmdAddVsixGallery" value="0x0009" />
+        </GuidSymbol>
+
+        <GuidSymbol name="guidSolutionCmdSet" value="{f4f37d70-d3e8-40be-a76e-7abef91a332c}">
+            <IDSymbol name="Menu" value="0x1000" />
+            <IDSymbol name="MenuGroup" value="0x0100" />
+            <IDSymbol name="cmdGitHubPrepare" value="0x0001" />
+            <IDSymbol name="cmdAppVeyorPrepare" value="0x0002" />
         </GuidSymbol>
     </Symbols>
 

@@ -15,7 +15,6 @@
 - [ ] New item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener
-  - [ ] Pkgdef containing both snippets and icons
   - [ ] Task Runner Explorer extension
 - [ ] Show all classification types rendered (#21)
 - [ ] .pkgdef QuickInfo showing values of registry keys

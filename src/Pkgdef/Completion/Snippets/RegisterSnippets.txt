@@ -1,3 +1,3 @@
-﻿// Available languages are: Basic, C/C++, CSharp, CSS, HTML, JavaScript, SQL_SSDT or XML
-[$RootKey$\Languages\CodeExpansions\JavaScript\Paths] 
-"MyName"="$PackageFolder$\Relative\Folder\Path" 
+﻿// Available languages are: Basic, C/C++, CSharp, CSS, HTML, JSON, JavaScript, SQL_SSDT or XML
+[$RootKey$\Languages\CodeExpansions\JavaScript\Paths]
+"MyName"="$PackageFolder$\Relative\Folder\Path"

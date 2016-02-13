@@ -108,11 +108,42 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             using (var stream = new FileStream(icoFilename, FileMode.Create))
             {
                 var image = Image.FromFile(icon);
-                var bitmap = (Bitmap)ImageResize(image, 32, 32);
-                Icon.FromHandle(bitmap.GetHicon()).Save(stream);
+                Icon ico = PngIconFromImage(image, 32);
+                ico.Save(stream);
             }
 
             item.ProjectItems.AddFromFile(icoFilename);
+        }
+
+        public static Icon PngIconFromImage(Image img, int size = 16)
+        {
+            byte[] pngiconheader = { 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            using (Bitmap bmp = new Bitmap(img, new Size(size, size)))
+            {
+                byte[] png;
+                using (var fs = new System.IO.MemoryStream())
+                {
+                    bmp.Save(fs, ImageFormat.Png);
+                    fs.Position = 0;
+                    png = fs.ToArray();
+                }
+
+                using (var fs = new MemoryStream())
+                {
+                    if (size >= 256) size = 0;
+                    pngiconheader[6] = (byte)size;
+                    pngiconheader[7] = (byte)size;
+                    pngiconheader[14] = (byte)(png.Length & 255);
+                    pngiconheader[15] = (byte)(png.Length / 256);
+                    pngiconheader[18] = (byte)(pngiconheader.Length);
+
+                    fs.Write(pngiconheader, 0, pngiconheader.Length);
+                    fs.Write(png, 0, png.Length);
+                    fs.Position = 0;
+                    return new Icon(fs);
+                }
+            }
         }
 
         public static Image ImageResize(Image SourceImage, Int32 NewHeight, Int32 NewWidth)

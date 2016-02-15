@@ -85,6 +85,8 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             sb.AppendLine($"\t\tpublic const string Name = \"{_manifest.Name.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
             sb.AppendLine($"\t\tpublic const string Description = \"{_manifest.Description.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
             sb.AppendLine($"\t\tpublic const string Version = \"{_manifest.Version}\";");
+            sb.AppendLine($"\t\tpublic const string Author = \"{_manifest.Author.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"\t\tpublic const string Tags = \"{_manifest.Tags.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
             sb.AppendLine("\t}");
             sb.AppendLine("}");
 

@@ -4,11 +4,11 @@ using System.Resources;
 using System.Runtime.InteropServices;
 using MadsKristensen.ExtensibilityTools;
 
-[assembly: AssemblyTitle("Extensibility Tools")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle(Vsix.Name)]
+[assembly: AssemblyDescription(Vsix.Description)]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Mads Kristensen")]
-[assembly: AssemblyProduct("Extensibility Tools")]
+[assembly: AssemblyProduct(Vsix.Name)]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

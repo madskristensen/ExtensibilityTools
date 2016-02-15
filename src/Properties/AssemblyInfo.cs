@@ -7,7 +7,7 @@ using MadsKristensen.ExtensibilityTools;
 [assembly: AssemblyTitle(Vsix.Name)]
 [assembly: AssemblyDescription(Vsix.Description)]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Mads Kristensen")]
+[assembly: AssemblyCompany(Vsix.Author)]
 [assembly: AssemblyProduct(Vsix.Name)]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]

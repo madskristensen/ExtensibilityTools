@@ -1,18 +1,6 @@
 # Roadmap
 
-- [x] Intellisense for `context` in `VisibilityItem`
-- [x] Support for `.pkgundef` files
-- [x] XML snippet for setting `<StartProgram />` in .csproj
-- [x] Added infrastructure for item templates
-  - [x] Added snippet file item template
-  - [x] Added Browser Link extension template
-  - [x] Added Drop handler template
-- [x] Button to enable/disable VSIP logging (#22)
-- [x] Single File Generator for syncing .resx with vsixmanifest
-  - [x] Generate .ico from icon in .vsixmanifest
-  - [x] Generate .cs file from .vsixmanifest
-- [x] Add button to enable support for VsixGallery.com
-- [ ] New item templates for:
+- [ ] Create new item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener
   - [ ] Task Runner Explorer extension
@@ -28,6 +16,23 @@ download in the
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+
+## 1.6
+
+**2016-02-15**
+
+- [x] Intellisense for `context` in `VisibilityItem`
+- [x] Support for `.pkgundef` files
+- [x] XML snippet for setting `<StartProgram />` in .csproj
+- [x] Added infrastructure for item templates
+  - [x] Added snippet file item template
+  - [x] Added Browser Link extension template
+  - [x] Added Drop handler template
+- [x] Button to enable/disable VSIP logging (#22)
+- [x] Single File Generator for syncing .resx with vsixmanifest
+  - [x] Generate .ico from icon in .vsixmanifest
+  - [x] Generate .cs file from .vsixmanifest
+- [x] Add buttons to enable support for VsixGallery.com
 
 ## 1.5
 

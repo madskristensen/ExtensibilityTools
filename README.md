@@ -286,5 +286,5 @@ functionality that's easy to modify to your needs.
 [Apache 2.0](LICENSE)
 
 ## Contribute
-Check out the [contribution guidelines](CONTRIBUTION.md)
+Check out the [contribution guidelines](.github/CONTRIBUTION.md)
 if you want to contribute to this project.

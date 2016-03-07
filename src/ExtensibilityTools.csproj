@@ -392,6 +392,9 @@
     <Content Include="Misc\Resources\GitHub\LICENSE">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Misc\Resources\GitHub\ISSUE_TEMPLATE.md">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\template-builder.props" />
     <None Include="source.extension.vsixmanifest">

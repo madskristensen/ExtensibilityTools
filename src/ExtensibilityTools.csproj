@@ -386,7 +386,7 @@
     <Content Include="Misc\Resources\GitHub\README.md">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Misc\Resources\AppVeyor\AppVeyor.yml">
+    <Content Include="Misc\Resources\AppVeyor\aappVeyor.yml">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Misc\Resources\GitHub\LICENSE">

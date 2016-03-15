@@ -11,7 +11,7 @@ or get the [CI build](http://vsixgallery.com/extension/{ID}/).
 
 {Description}
 
-See the [changelog](CHANGELOG.MD) for changes and roadmap.
+See the [changelog](CHANGELOG.md) for changes and roadmap.
 
 ## Features
 

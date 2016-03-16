@@ -145,6 +145,7 @@ namespace MadsKristensen.ExtensibilityTools.Vsct
                     }
                     else if (current == "context")
                     {
+                        list.Add(CreateCompletion("GUID_TextEditorFactory", "GUID_TextEditorFactory", _defaultGlyph));
                         list.Add(CreateCompletion("UICONTEXT_CodeWindow", "UICONTEXT_CodeWindow", _defaultGlyph));
                         list.Add(CreateCompletion("UICONTEXT_Debugging", "UICONTEXT_Debugging", _defaultGlyph));
                         list.Add(CreateCompletion("UICONTEXT_DesignMode", "UICONTEXT_DesignMode", _defaultGlyph));

@@ -49,6 +49,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             manifest.GettingStartedUrl = ParseNode(doc, "GettingStartedGuide", false);
             manifest.Icon = ParseNode(doc, "Icon", false);
             manifest.ID = ParseNode(doc, "Identity", true, "Id");
+            manifest.Language = ParseNode(doc, "Identity", true, "Language");
             manifest.License = ParseNode(doc, "License", false);
             manifest.MoreInfoUrl = ParseNode(doc, "MoreInfo", false);
             manifest.Name = ParseNode(doc, "DisplayName", true);
@@ -65,6 +66,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             manifest.GettingStartedUrl = ParseNode(doc, "GettingStartedGuide", false);
             manifest.Icon = ParseNode(doc, "Icon", false);
             manifest.ID = ParseNode(doc, "Identifier", true, "Id");
+            manifest.Language = "en-US";
             manifest.License = ParseNode(doc, "License", false);
             manifest.MoreInfoUrl = ParseNode(doc, "MoreInfo", false);
             manifest.Name = ParseNode(doc, "Name", true);

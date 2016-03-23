@@ -6,6 +6,7 @@ using EnvDTE;
 using System.Runtime.InteropServices;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 {
@@ -34,7 +35,9 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
         private void BeforeQueryStatus(object sender, EventArgs e)
         {
-            /* Nothing to do here */
+            Project project = ProjectHelpers.GetSelectedItem() as Project;
+
+            ((OleMenuCommand)sender).Visible = project != null;
         }
 
         private void ShowInformation(object sender, EventArgs e)

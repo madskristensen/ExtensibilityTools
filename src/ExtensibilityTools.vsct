@@ -57,6 +57,8 @@
                 <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_UNLOADRELOAD"/>
                 <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
                 <CommandFlag>IconIsMoniker</CommandFlag>
+                <CommandFlag>DynamicVisibility</CommandFlag>
+                <CommandFlag>DefaultInvisible</CommandFlag>
                 <Strings>
                     <ButtonText>Show Project Information</ButtonText>
                 </Strings>

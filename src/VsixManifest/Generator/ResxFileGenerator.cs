@@ -72,37 +72,46 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
         // TODO: This should use CodeModel
         private void GenerateClassFile(ProjectItem item)
         {
-            string dir = Path.GetDirectoryName(InputFilePath);
-
             string csFilename = Path.ChangeExtension(InputFilePath, ".cs");
 
-            var sb = new StringBuilder();
-            sb.AppendLine($"namespace {FileNamespace}");
-            sb.AppendLine("{");
-            sb.AppendLine("\tstatic class Vsix");
-            sb.AppendLine("\t{");
-            sb.AppendLine($"\t\tpublic const string Id = \"{_manifest.ID}\";");
-            sb.AppendLine($"\t\tpublic const string Name = \"{_manifest.Name?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine($"\t\tpublic const string Description = \"{_manifest.Description?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine($"\t\tpublic const string Language = \"{_manifest.Language}\";");
-            sb.AppendLine($"\t\tpublic const string Version = \"{_manifest.Version}\";");
-            sb.AppendLine($"\t\tpublic const string Author = \"{_manifest.Author?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine($"\t\tpublic const string Tags = \"{_manifest.Tags?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine("\t}");
-            sb.AppendLine("}");
+            string fileContent = GenerateClass();
 
             // Don't write if it didn't change.
             if (File.Exists(csFilename))
             {
                 string current = File.ReadAllText(csFilename);
 
-                if (current == sb.ToString())
+                if (current == fileContent)
                     return;
             }
 
-            FileHelpers.WriteFile(csFilename, sb.ToString());
+            FileHelpers.WriteFile(csFilename, fileContent);
 
             item.ProjectItems.AddFromFile(csFilename);
+        }
+
+        private string GenerateClass()
+        {
+            int indentSize = Convert.ToInt32(Dte.Properties["TextEditor", "CSharp"].Item("TabSize").Value);
+            bool useTabs = Convert.ToBoolean(Dte.Properties["TextEditor", "CSharp"].Item("InsertTabs").Value);
+
+            Func<int, string> indent = amt => new string(useTabs ? '\t' : ' ', indentSize * amt);
+
+            var sb = new StringBuilder();
+            sb.AppendLine($"namespace {FileNamespace}");
+            sb.AppendLine("{");
+            sb.AppendLine($"{indent(1)}static class Vsix");
+            sb.AppendLine($"{indent(1)}{{");
+            sb.AppendLine($"{indent(2)}public const string Id = \"{_manifest.ID}\";");
+            sb.AppendLine($"{indent(2)}public const string Name = \"{_manifest.Name?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"{indent(2)}public const string Description = \"{_manifest.Description?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"{indent(2)}public const string Language = \"{_manifest.Language}\";");
+            sb.AppendLine($"{indent(2)}public const string Version = \"{_manifest.Version}\";");
+            sb.AppendLine($"{indent(2)}public const string Author = \"{_manifest.Author?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"{indent(2)}public const string Tags = \"{_manifest.Tags?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"{indent(1)}}}");
+            sb.AppendLine("}");
+            return sb.ToString();
         }
 
         private void GenerateIconFile(ProjectItem item)

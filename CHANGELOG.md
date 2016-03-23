@@ -17,6 +17,17 @@ download in the
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
+## 1.7
+
+**2016-03-23**
+
+- [x] Added GUID_TextEditorFactory to completion
+- [x] Added Language to vsixmanifest class generator
+- [x] Hide button when project is unloaded
+- [x] Use indent settings for VsixManifest generator
+- [x] Added contribution guidelines to readme.md
+- [x] Added GitHub issue template
+
 ## 1.6
 
 **2016-02-15**

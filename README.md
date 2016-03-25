@@ -9,7 +9,7 @@ or get the [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8
 
 An extension built for and by Visual Studio extension authors.
 
-See the [changelog](CHANGELOG.MD) for changes and roadmap.
+See the [changelog](CHANGELOG.md) for changes and roadmap.
 
 ## Features
 

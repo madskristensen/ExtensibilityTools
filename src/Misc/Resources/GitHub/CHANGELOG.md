@@ -14,14 +14,14 @@ on the official Visual Studio extension gallery.
 
 ## 1.1
 
-**2016-02-13**
+**{ChangeLogDate2}**
 
 - [x] Feature 3
 - [x] Feature 4
 
 ## 1.0
 
-**2016-01-21**
+**{ChangeLogDate1}**
 
 - [x] Initial release
 - [x] Feature 1

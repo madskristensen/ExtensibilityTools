@@ -54,6 +54,12 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
             var manifestFile = Directory.EnumerateFiles(solutionRoot, "*.vsixmanifest", SearchOption.AllDirectories).FirstOrDefault();
             var manifest = await VsixManifestParser.FromFileAsync(manifestFile);
 
+            var additionalInfo = new Dictionary<string, string>
+            {
+                ["ChangeLogDate1"] = DateTime.Now.ToString("yyyy-MM-dd"),
+                ["ChangeLogDate2"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")
+            };
+
             string assembly = Assembly.GetExecutingAssembly().Location;
             string root = Path.GetDirectoryName(assembly);
             string dir = Path.Combine(root, "Misc\\Resources\\GitHub");
@@ -65,7 +71,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
                 if (!File.Exists(dest))
                 {
-                    var content = await ReplaceTokens(src, manifest);
+                    var content = await ReplaceTokens(src, manifest, additionalInfo);
 
                     File.WriteAllText(dest, content);
 
@@ -112,7 +118,7 @@ Files that already exist will not be overridden. Do you wish to continue?";
             currentProject.ProjectItems.AddFromFile(file);
         }
 
-        public static async System.Threading.Tasks.Task<string> ReplaceTokens(string file, Manifest manifest)
+        public static async System.Threading.Tasks.Task<string> ReplaceTokens(string file, Manifest manifest, Dictionary<string, string> additionalInfo = null)
         {
             using (var reader = new StreamReader(file))
             {
@@ -128,6 +134,14 @@ Files that already exist will not be overridden. Do you wish to continue?";
 
                         if (value != null)
                             content = content.Replace("{" + property.Name + "}", value.ToString());
+                    }
+                }
+
+                if (additionalInfo != null)
+                {
+                    foreach (var keyValuePair in additionalInfo)
+                    {
+                        content = content.Replace("{" + keyValuePair.Key + "}", keyValuePair.Value);
                     }
                 }
 

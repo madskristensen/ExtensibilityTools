@@ -33,6 +33,9 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
         void BeforeQueryStatus(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(DTE.Solution?.FullName))
+                return;
+
             var button = (OleMenuCommand)sender;
 
             string solutionRoot = Path.GetDirectoryName(DTE.Solution.FullName);

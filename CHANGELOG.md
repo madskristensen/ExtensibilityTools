@@ -17,6 +17,15 @@ download in the
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
+## 1.8
+
+**2016-03-23**
+
+- [x] Support for VS15
+- [x] Fixed crashing bug for PTVS
+- [x] Support for .vsixmanifest in sub folder
+- [x] Fixed crashing bug when no solution was loaded
+
 ## 1.7
 
 **2016-03-23**

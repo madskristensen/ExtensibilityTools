@@ -282,9 +282,9 @@ functionality that's easy to modify to your needs.
 
 ![Item Templates](art/item-templates.png)
 
+## Contribute
+Check out the [contribution guidelines](.github/CONTRIBUTING.md)
+if you want to contribute to this project.
+
 ## License
 [Apache 2.0](LICENSE)
-
-## Contribute
-Check out the [contribution guidelines](.github/CONTRIBUTION.md)
-if you want to contribute to this project.

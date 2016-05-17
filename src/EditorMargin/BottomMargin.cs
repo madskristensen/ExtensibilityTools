@@ -72,15 +72,22 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                byte[] preamble = doc.Encoding.GetPreamble();
-                string bom = preamble != null && preamble.Length > 2 ? " - BOM" : string.Empty;
+                try
+                {
+                    byte[] preamble = doc.Encoding.GetPreamble();
+                    string bom = preamble != null && preamble.Length > 2 ? " - BOM" : string.Empty;
 
-                _lblEncoding.Value = doc.Encoding.EncodingName + bom;
-                _lblEncoding.SetTooltip("Codepage:         " + doc.Encoding.CodePage + Environment.NewLine +
-                                        "Windows codepage: " + doc.Encoding.CodePage + Environment.NewLine +
-                                        "Header name:      " + doc.Encoding.HeaderName + Environment.NewLine +
-                                        "Body name:        " + doc.Encoding.BodyName,
-                                        true);
+                    _lblEncoding.Value = doc.Encoding.EncodingName + bom;
+                    _lblEncoding.SetTooltip("Codepage:         " + doc.Encoding.CodePage + Environment.NewLine +
+                                            "Windows codepage: " + doc.Encoding.CodePage + Environment.NewLine +
+                                            "Header name:      " + doc.Encoding.HeaderName + Environment.NewLine +
+                                            "Body name:        " + doc.Encoding.BodyName,
+                                            true);
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.Write(ex);
+                }
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
         }

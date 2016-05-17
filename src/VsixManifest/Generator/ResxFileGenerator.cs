@@ -125,7 +125,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             if (string.IsNullOrEmpty(_manifest.Icon))
                 return;
 
-            string dir = Path.GetDirectoryName(InputFilePath);
+            var dir = item.ContainingProject.Properties.Item("FullPath").Value.ToString();
             var src = new FileInfo(Path.Combine(dir, _manifest.Icon));
 
             if (!src.Exists)

@@ -132,7 +132,7 @@ namespace MadsKristensen.ExtensibilityTools.Misc.Commands
                 dialog.RootFolder = Environment.SpecialFolder.MyComputer;
                 dialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 var dialogResult = dialog.ShowDialog();
-                
+
                 if(dialogResult == System.Windows.Forms.DialogResult.OK)
                     return dialog.SelectedPath;
                 else

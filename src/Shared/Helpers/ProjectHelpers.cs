@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
 using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -11,12 +13,14 @@ namespace MadsKristensen.ExtensibilityTools
     static class ProjectHelpers
     {
         const string _extensibilityProjectGuid = "{82b43b9b-a64c-4715-b499-d71e9ca2bd60}";
+        public static DTE2 DTE;
 
         static IServiceProvider _serviceProvider;
 
         public static void Initialize(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
+            DTE = (DTE2)serviceProvider.GetService(typeof(DTE));
         }
 
         public static bool IsExtensibilityProject(this Project project)
@@ -128,6 +132,82 @@ namespace MadsKristensen.ExtensibilityTools
             object obj;
             hierarchy.GetProperty(VSConstants.VSITEMID_ROOT, (int)__VSHPROPID.VSHPROPID_ExtObject, out obj);
             return obj as Project;
+        }
+
+        public static void CheckFileOutOfSourceControl(string file)
+        {
+            if (!File.Exists(file) || DTE.Solution.FindProjectItem(file) == null)
+                return;
+
+            if (DTE.SourceControl.IsItemUnderSCC(file) && !DTE.SourceControl.IsItemCheckedOut(file))
+                DTE.SourceControl.CheckOutItem(file);
+
+            FileInfo info = new FileInfo(file);
+            info.IsReadOnly = false;
+        }
+
+        public static void AddFileToProject(this Project project, string file, string itemType = null)
+        {
+            if (!File.Exists(file))
+                return;
+
+            if (DTE.Solution.FindProjectItem(file) == null)
+            {
+                ProjectItem item = project.ProjectItems.AddFromFile(file);
+                item.SetItemType(itemType);
+            }
+        }
+
+        public static void SetItemType(this ProjectItem item, string itemType)
+        {
+            try
+            {
+                if (item == null || item.ContainingProject == null)
+                    return;
+
+                item.Properties.Item("ItemType").Value = itemType;
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+            }
+        }
+
+        public static string GetRootFolder(this Project project)
+        {
+            if (project == null || string.IsNullOrEmpty(project.FullName))
+                return null;
+
+            string fullPath;
+
+            try
+            {
+                fullPath = project.Properties.Item("FullPath").Value as string;
+            }
+            catch (ArgumentException)
+            {
+                try
+                {
+                    // MFC projects don't have FullPath, and there seems to be no way to query existence
+                    fullPath = project.Properties.Item("ProjectDirectory").Value as string;
+                }
+                catch (ArgumentException)
+                {
+                    // Installer projects have a ProjectPath.
+                    fullPath = project.Properties.Item("ProjectPath").Value as string;
+                }
+            }
+
+            if (string.IsNullOrEmpty(fullPath))
+                return File.Exists(project.FullName) ? Path.GetDirectoryName(project.FullName) : null;
+
+            if (Directory.Exists(fullPath))
+                return fullPath;
+
+            if (File.Exists(fullPath))
+                return Path.GetDirectoryName(fullPath);
+
+            return null;
         }
     }
 }

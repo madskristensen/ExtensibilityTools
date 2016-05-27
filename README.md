@@ -46,6 +46,7 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
   - Snippet file
   - Browser Link Provider class
   - Editor drop handler
+- Create **ImageManifest** files
 
 ### VSCT files
 The Visual Studio Command Table leaves a lot to be desired in terms of
@@ -281,6 +282,15 @@ create extension. These item templates all come with
 functionality that's easy to modify to your needs.
 
 ![Item Templates](art/item-templates.png)
+
+### Create Image Manifest files
+Right-click any .png or .xaml files and invoke the
+*Generate Image Manifest* command from the context menu.
+
+This will ask you where to put the .imagemanifest file and
+then generate it. If a .imagemanifest file already exist,
+the guid will remain the same but the sources and IDs will
+be updated. 
 
 ## Contribute
 Check out the [contribution guidelines](.github/CONTRIBUTING.md)

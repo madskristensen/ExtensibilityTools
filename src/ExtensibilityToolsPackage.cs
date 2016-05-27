@@ -29,6 +29,7 @@ namespace MadsKristensen.ExtensibilityTools
         {
             Options = (Options)GetDialogPage(typeof(Options));
 
+            Logger.Initialize(this, Vsix.Name);
             ProjectHelpers.Initialize(this);
 
             // VSCT
@@ -48,6 +49,9 @@ namespace MadsKristensen.ExtensibilityTools
 
             // Vsix Manifest
             AddResxGeneratorCommand.Initialize(this);
+
+            // Image Manifest
+            AddImageManifestCommand.Initialize(this);
 
             base.Initialize();
         }

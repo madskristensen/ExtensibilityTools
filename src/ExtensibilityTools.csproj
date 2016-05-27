@@ -174,8 +174,10 @@
       <DependentUpon>ExtensibilityTools.vsct</DependentUpon>
     </Compile>
     <Compile Include="ExtensibilityToolsPackage.cs" />
+    <Compile Include="ImageManifest\Commands\AddImageManifestCommand.cs" />
     <Compile Include="Misc\Commands\PrepareForAppVeyor.cs" />
     <Compile Include="Misc\Commands\PrepareForGitHub.cs" />
+    <Compile Include="Shared\Helpers\Logger.cs" />
     <Compile Include="Shared\Helpers\ProjectHelpers.cs" />
     <Compile Include="VsixManifest\Parser\Manifest.cs" />
     <Compile Include="VsixManifest\Parser\VsixManifestParser.cs" />
@@ -281,6 +283,13 @@
     <None Include="ItemTemplates\Editor Drop Handler\_preprocess.xml">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="ImageManifest\icon.pkgdef">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="ImageManifest\Tools\ManifestFromResources.exe">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Pkgdef\Completion\Snippets\RegisterMenus.txt">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
@@ -441,6 +450,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>

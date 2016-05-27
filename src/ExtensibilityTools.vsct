@@ -1,161 +1,174 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-    <Extern href="stdidcmd.h"/>
-    <Extern href="vsshlids.h"/>
-    <Include href="KnownImageIds.vsct"/>
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Include href="KnownImageIds.vsct"/>
 
-    <Commands package="guidExtensibilityToolsPkg">
-        <Groups>
-            <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0150">
-                <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
-            </Group>
+  <Commands package="guidExtensibilityToolsPkg">
+    <Groups>
+      <Group guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup" priority="0x0150">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBPROJECT"/>
+      </Group>
 
-            <Group guid="guidSolutionCmdSet" id="MenuGroup" priority="0x0150">
-                <Parent guid="guidSolutionCmdSet" id="Menu"/>
-            </Group>
-        </Groups>
+      <Group guid="guidSolutionCmdSet" id="MenuGroup" priority="0x0150">
+        <Parent guid="guidSolutionCmdSet" id="Menu"/>
+      </Group>
+    </Groups>
 
-        <Menus>
-            <Menu guid="guidSolutionCmdSet" id="Menu" priority="0x0200" type="Menu">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_SOLUTION_ADD" />
-                <Strings>
-                    <ButtonText>Extensibility Tools</ButtonText>
-                </Strings>
-            </Menu>
-        </Menus>
+    <Menus>
+      <Menu guid="guidSolutionCmdSet" id="Menu" priority="0x0200" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_SOLUTION_ADD" />
+        <Strings>
+          <ButtonText>Extensibility Tools</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
 
-        <Buttons>
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0600" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
-                <CommandFlag>DynamicVisibility</CommandFlag>
-                <CommandFlag>DefaultInvisible</CommandFlag>
-                <Strings>
-                    <ButtonText>Auto-sync VSCT commands</ButtonText>
-                </Strings>
-            </Button>
+    <Buttons>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdAddCustomTool" priority="0x0600" type="Button">
 
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdResxGenerator" priority="0x0600" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
-                <CommandFlag>DynamicVisibility</CommandFlag>
-                <CommandFlag>DefaultInvisible</CommandFlag>
-                <Strings>
-                    <ButtonText>Auto-sync Resx and Icon files</ButtonText>
-                </Strings>
-            </Button>
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Auto-sync VSCT commands</ButtonText>
+        </Strings>
+      </Button>
 
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdSignBinary" priority="0x0410" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD"/>
-                <CommandFlag>DynamicVisibility</CommandFlag>
-                <CommandFlag>DefaultInvisible</CommandFlag>
-                <Strings>
-                    <ButtonText>Sign VSIX package...</ButtonText>
-                </Strings>
-            </Button>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdResxGenerator" priority="0x0600" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Auto-sync Resx and Icon files</ButtonText>
+        </Strings>
+      </Button>
 
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0100" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_UNLOADRELOAD"/>
-                <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
-                <CommandFlag>IconIsMoniker</CommandFlag>
-                <CommandFlag>DynamicVisibility</CommandFlag>
-                <CommandFlag>DefaultInvisible</CommandFlag>
-                <Strings>
-                    <ButtonText>Show Project Information</ButtonText>
-                </Strings>
-            </Button>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdCreateImageManifest" priority="0x0600" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_ITEM_INCLUDEEXCLUDE"/>
+        <Icon guid="ImageCatalogGuid" id="ManifestFile"/>
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Generate Image Manifest</ButtonText>
+        </Strings>
+      </Button>
 
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdExportMoniker" priority="0x9500" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_EXT_TOOLS" />
-                <Icon guid="ImageCatalogGuid" id="ExportPerformanceReport" />
-                <CommandFlag>IconIsMoniker</CommandFlag>
-                <Strings>
-                    <ButtonText>Export Image Moniker...</ButtonText>
-                </Strings>
-            </Button>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdSignBinary" priority="0x0410" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_BUILD"/>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Sign VSIX package...</ButtonText>
+        </Strings>
+      </Button>
 
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdSwatchesWindow" priority="0x2000" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
-                <Icon guid="ImageCatalogGuid" id="ColorPalette" />
-                <CommandFlag>IconIsMoniker</CommandFlag>
-                <Strings>
-                    <ButtonText>Theme Swatches</ButtonText>
-                </Strings>
-            </Button>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_UNLOADRELOAD"/>
+        <Icon guid="ImageCatalogGuid" id="StatusInformationNoColor" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultInvisible</CommandFlag>
+        <Strings>
+          <ButtonText>Show Project Information</ButtonText>
+        </Strings>
+      </Button>
 
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdActivityLog" priority="0x2000" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_VIEW_DEV_WINDOWS"/>
-                <Icon guid="ImageCatalogGuid" id="LogError" />
-                <CommandFlag>IconIsMoniker</CommandFlag>
-                <Strings>
-                    <ButtonText>Activity Log</ButtonText>
-                </Strings>
-            </Button>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdExportMoniker" priority="0x9500" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_EXT_TOOLS" />
+        <Icon guid="ImageCatalogGuid" id="ExportPerformanceReport" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Export Image Moniker...</ButtonText>
+        </Strings>
+      </Button>
 
-            <Button guid="guidExtensibilityToolsCmdSet" id="cmdVsipLogging" priority="0x2010" type="Button">
-                <Parent guid="guidSHLMainMenu" id="IDG_VS_VIEW_DEV_WINDOWS"/>
-                <Icon guid="ImageCatalogGuid" id="CSExtension" />
-                <CommandFlag>IconIsMoniker</CommandFlag>
-                <CommandFlag>TextChanges</CommandFlag>
-                <Strings>
-                    <ButtonText>Enable VSIP Logging</ButtonText>
-                </Strings>
-            </Button>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdSwatchesWindow" priority="0x2000" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+        <Icon guid="ImageCatalogGuid" id="ColorPalette" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Theme Swatches</ButtonText>
+        </Strings>
+      </Button>
 
-            <!-- Solution node -->
-            <Button guid="guidSolutionCmdSet" id="cmdGitHubPrepare" priority="0x0100" type="Button">
-                <Parent guid="guidSolutionCmdSet" id="MenuGroup"/>
-                <Icon guid="ImageCatalogGuid" id="Git" />
-                <CommandFlag>IconIsMoniker</CommandFlag>
-                <CommandFlag>DynamicVisibility</CommandFlag>
-                <CommandFlag>DefaultDisabled</CommandFlag>
-                <Strings>
-                    <ButtonText>Prepare for GitHub...</ButtonText>
-                </Strings>
-            </Button>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdActivityLog" priority="0x2000" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_VIEW_DEV_WINDOWS"/>
+        <Icon guid="ImageCatalogGuid" id="LogError" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <Strings>
+          <ButtonText>Activity Log</ButtonText>
+        </Strings>
+      </Button>
 
-            <Button guid="guidSolutionCmdSet" id="cmdAppVeyorPrepare" priority="0x0200" type="Button">
-                <Parent guid="guidSolutionCmdSet" id="MenuGroup"/>
-                <Icon guid="ImageCatalogGuid" id="VisualStudioExpressWindows" />
-                <CommandFlag>IconIsMoniker</CommandFlag>
-                <CommandFlag>DynamicVisibility</CommandFlag>
-                <CommandFlag>DefaultDisabled</CommandFlag>
-                <Strings>
-                    <ButtonText>Prepare for AppVeyor...</ButtonText>
-                </Strings>
-            </Button>
-        </Buttons>
-    </Commands>
+      <Button guid="guidExtensibilityToolsCmdSet" id="cmdVsipLogging" priority="0x2010" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_VIEW_DEV_WINDOWS"/>
+        <Icon guid="ImageCatalogGuid" id="CSExtension" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
+        <Strings>
+          <ButtonText>Enable VSIP Logging</ButtonText>
+        </Strings>
+      </Button>
 
-    <CommandPlacements>
-        <CommandPlacement guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0150">
-            <Parent guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup"/>
-        </CommandPlacement>
-    </CommandPlacements>
+      <!-- Solution node -->
+      <Button guid="guidSolutionCmdSet" id="cmdGitHubPrepare" priority="0x0100" type="Button">
+        <Parent guid="guidSolutionCmdSet" id="MenuGroup"/>
+        <Icon guid="ImageCatalogGuid" id="Git" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>Prepare for GitHub...</ButtonText>
+        </Strings>
+      </Button>
 
-    <Symbols>
-        <!-- This is the package guid. -->
-        <GuidSymbol name="guidExtensibilityToolsPkg" value="{f8330d54-0469-43a7-8fc0-7f19febeb897}" />
+      <Button guid="guidSolutionCmdSet" id="cmdAppVeyorPrepare" priority="0x0200" type="Button">
+        <Parent guid="guidSolutionCmdSet" id="MenuGroup"/>
+        <Icon guid="ImageCatalogGuid" id="VisualStudioExpressWindows" />
+        <CommandFlag>IconIsMoniker</CommandFlag>
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>DefaultDisabled</CommandFlag>
+        <Strings>
+          <ButtonText>Prepare for AppVeyor...</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
 
-        <!-- This is the guid used to group the menu commands together -->
-        <GuidSymbol name="guidExtensibilityToolsCmdSet" value="{5dbd2975-75e4-4f09-8b6d-1183b0c83762}">
-            <IDSymbol name="ProjectMenuGroup" value="1000" />
+  <CommandPlacements>
+    <CommandPlacement guid="guidExtensibilityToolsCmdSet" id="cmdShowInformation" priority="0x0150">
+      <Parent guid="guidExtensibilityToolsCmdSet" id="ProjectMenuGroup"/>
+    </CommandPlacement>
+  </CommandPlacements>
 
-            <IDSymbol name="cmdAddCustomTool" value="0x0001" />
-            <IDSymbol name="cmdSignBinary" value="0x0002" />
-            <IDSymbol name="cmdShowInformation" value="0x0003" />
-            <IDSymbol name="cmdExportMoniker" value="0x0004" />
-            <IDSymbol name="cmdSwatchesWindow" value="0x0005" />
-            <IDSymbol name="cmdActivityLog" value="0x0006" />
-            <IDSymbol name="cmdVsipLogging" value="0x0007" />
-            <IDSymbol name="cmdResxGenerator" value="0x0008" />
-        </GuidSymbol>
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidExtensibilityToolsPkg" value="{f8330d54-0469-43a7-8fc0-7f19febeb897}" />
 
-        <GuidSymbol name="guidSolutionCmdSet" value="{f4f37d70-d3e8-40be-a76e-7abef91a332c}">
-            <IDSymbol name="Menu" value="0x1000" />
-            <IDSymbol name="MenuGroup" value="0x0100" />
-            <IDSymbol name="cmdGitHubPrepare" value="0x0001" />
-            <IDSymbol name="cmdAppVeyorPrepare" value="0x0002" />
-        </GuidSymbol>
-    </Symbols>
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidExtensibilityToolsCmdSet" value="{5dbd2975-75e4-4f09-8b6d-1183b0c83762}">
+      <IDSymbol name="ProjectMenuGroup" value="1000" />
+
+      <IDSymbol name="cmdAddCustomTool" value="0x0001" />
+      <IDSymbol name="cmdSignBinary" value="0x0002" />
+      <IDSymbol name="cmdShowInformation" value="0x0003" />
+      <IDSymbol name="cmdExportMoniker" value="0x0004" />
+      <IDSymbol name="cmdSwatchesWindow" value="0x0005" />
+      <IDSymbol name="cmdActivityLog" value="0x0006" />
+      <IDSymbol name="cmdVsipLogging" value="0x0007" />
+      <IDSymbol name="cmdResxGenerator" value="0x0008" />
+      <IDSymbol name="cmdCreateImageManifest" value="0x0009" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidSolutionCmdSet" value="{f4f37d70-d3e8-40be-a76e-7abef91a332c}">
+      <IDSymbol name="Menu" value="0x1000" />
+      <IDSymbol name="MenuGroup" value="0x0100" />
+      <IDSymbol name="cmdGitHubPrepare" value="0x0001" />
+      <IDSymbol name="cmdAppVeyorPrepare" value="0x0002" />
+    </GuidSymbol>
+  </Symbols>
 
 </CommandTable>

@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Add file icon for .imagemanifest files
+- [x] Generation of .imagemanifest files
 - [ ] Create new item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener

@@ -146,16 +146,19 @@ namespace MadsKristensen.ExtensibilityTools
             info.IsReadOnly = false;
         }
 
-        public static void AddFileToProject(this Project project, string file, string itemType = null)
+        public static ProjectItem AddFileToProject(this Project project, string file, string itemType = null)
         {
             if (!File.Exists(file))
-                return;
+                return null;
 
             if (DTE.Solution.FindProjectItem(file) == null)
             {
                 ProjectItem item = project.ProjectItems.AddFromFile(file);
                 item.SetItemType(itemType);
+                return item;
             }
+
+            return null;
         }
 
         public static void SetItemType(this ProjectItem item, string itemType)

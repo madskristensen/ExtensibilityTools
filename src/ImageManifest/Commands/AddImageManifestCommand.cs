@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace MadsKristensen.ExtensibilityTools
 {
@@ -63,35 +64,59 @@ namespace MadsKristensen.ExtensibilityTools
 
         private void Execute(object sender, EventArgs e)
         {
-            if (!_selectedFiles.Any())
-                return;
-
-            var project = ProjectHelpers.DTE.Solution.FindProjectItem(_selectedFiles.First())?.ContainingProject;
             string fileName;
 
-            if (!GetFileName(Path.GetDirectoryName(_selectedFiles.First()), out fileName))
+            if (!TryGetFileName(Path.GetDirectoryName(_selectedFiles.First()), out fileName))
                 return;
 
             ProjectHelpers.CheckFileOutOfSourceControl(fileName);
-            string rootFolder = project.GetRootFolder();
 
-            if (!GenerateManifest(project, fileName))
+            var project = ProjectHelpers.DTE.Solution.FindProjectItem(_selectedFiles.First())?.ContainingProject;
+
+            if (!TryGenerateManifest(project, fileName))
                 return;
 
-            project.AddFileToProject(fileName, "Content");
-
-            foreach (var file in _selectedFiles)
-            {
-                var item = ProjectHelpers.DTE.Solution.FindProjectItem(_selectedFiles.First());
-                item.SetItemType("Resource");
-            }
+            IncludeManifestInProjectAndVsix(project, fileName);
+            SetInputImagesAsResource(fileName, project);
 
             ProjectHelpers.DTE.ItemOperations.OpenFile(fileName);
             ProjectHelpers.DTE.ExecuteCommand("SolutionExplorer.SyncWithActiveDocument");
         }
 
-        private bool GenerateManifest(Project project, string fileName)
+        private void SetInputImagesAsResource(string fileName, Project project)
         {
+            foreach (var file in _selectedFiles)
+            {
+                var item = ProjectHelpers.DTE.Solution.FindProjectItem(file);
+                item.SetItemType("Resource");
+            }
+        }
+
+        private static void IncludeManifestInProjectAndVsix(Project project, string fileName)
+        {
+            var item = project.AddFileToProject(fileName, "Content");
+
+            IVsSolution solution = (IVsSolution)Package.GetGlobalService(typeof(SVsSolution));
+
+            IVsHierarchy hierarchy;
+            solution.GetProjectOfUniqueName(item.ContainingProject.UniqueName, out hierarchy);
+
+            IVsBuildPropertyStorage buildPropertyStorage = hierarchy as IVsBuildPropertyStorage;
+
+            if (buildPropertyStorage != null)
+            {
+                uint itemId;
+                hierarchy.ParseCanonicalName(fileName, out itemId);
+
+                buildPropertyStorage.SetItemAttribute(itemId, "IncludeInVSIX", "true");
+            }
+        }
+
+        private bool TryGenerateManifest(Project project, string fileName)
+        {
+            if (project == null)
+                return false;
+
             try
             {
                 string assembly = Assembly.GetExecutingAssembly().Location;
@@ -130,7 +155,7 @@ namespace MadsKristensen.ExtensibilityTools
             return false;
         }
 
-        private bool GetFileName(string initialDirectory, out string fileName)
+        private bool TryGetFileName(string initialDirectory, out string fileName)
         {
             fileName = null;
 

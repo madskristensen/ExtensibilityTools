@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 
 namespace MadsKristensen.ExtensibilityTools
@@ -74,7 +75,7 @@ namespace MadsKristensen.ExtensibilityTools
             ProjectHelpers.CheckFileOutOfSourceControl(fileName);
             string rootFolder = project.GetRootFolder();
 
-            if (!GenerateManifest(rootFolder, fileName))
+            if (!GenerateManifest(project, fileName))
                 return;
 
             project.AddFileToProject(fileName, "Content");
@@ -89,7 +90,7 @@ namespace MadsKristensen.ExtensibilityTools
             ProjectHelpers.DTE.ExecuteCommand("SolutionExplorer.SyncWithActiveDocument");
         }
 
-        private bool GenerateManifest(string rootFolder, string fileName)
+        private bool GenerateManifest(Project project, string fileName)
         {
             try
             {
@@ -98,10 +99,10 @@ namespace MadsKristensen.ExtensibilityTools
                 string toolsDir = Path.Combine(root, "ImageManifest\\Tools");
 
                 string images = string.Join(";", _selectedFiles);
-                string assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+                string assemblyName = project.Properties.Item("AssemblyName").Value.ToString();
                 string manifestName = Path.GetFileName(fileName);
 
-                string args = $"/manifest:\"{manifestName}\" /resources:\"{images}\" /assembly:{assemblyName} /guidName:{Path.GetFileNameWithoutExtension(fileName)}Guid /rootPath:\"{rootFolder}\\\"";
+                string args = $"/manifest:\"{manifestName}\" /resources:\"{images}\" /assembly:{assemblyName} /guidName:{Path.GetFileNameWithoutExtension(fileName)}Guid /rootPath:\"{project.GetRootFolder()}\\\"";
 
                 var start = new ProcessStartInfo
                 {

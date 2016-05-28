@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using EnvDTE;
 using EnvDTE80;
@@ -93,7 +94,7 @@ namespace MadsKristensen.ExtensibilityTools
 
             foreach (IVsHierarchy hier in GetProjectsInSolution(solution))
             {
-                EnvDTE.Project project = GetDTEProject(hier);
+                Project project = GetDTEProject(hier);
                 if (project != null)
                     yield return project;
             }
@@ -151,14 +152,15 @@ namespace MadsKristensen.ExtensibilityTools
             if (!File.Exists(file))
                 return null;
 
-            if (DTE.Solution.FindProjectItem(file) == null)
+            var item = DTE.Solution.FindProjectItem(file);
+
+            if (item == null)
             {
-                ProjectItem item = project.ProjectItems.AddFromFile(file);
+                item = project.ProjectItems.AddFromFile(file);
                 item.SetItemType(itemType);
-                return item;
             }
 
-            return null;
+            return item;
         }
 
         public static void SetItemType(this ProjectItem item, string itemType)
@@ -211,6 +213,30 @@ namespace MadsKristensen.ExtensibilityTools
                 return Path.GetDirectoryName(fullPath);
 
             return null;
+        }
+
+        ///<summary>Gets the paths to all files included in the selection, including files within selected folders.</summary>
+        public static IEnumerable<string> GetSelectedFilePaths()
+        {
+            return GetSelectedItemPaths()
+                .SelectMany(p => Directory.Exists(p)
+                                 ? Directory.EnumerateFiles(p, "*", SearchOption.AllDirectories)
+                                 : new[] { p }
+                           );
+        }
+
+
+        ///<summary>Gets the full paths to the currently selected item(s) in the Solution Explorer.</summary>
+        public static IEnumerable<string> GetSelectedItemPaths()
+        {
+            var items = (Array)DTE.ToolWindows.SolutionExplorer.SelectedItems;
+            foreach (UIHierarchyItem selItem in items)
+            {
+                var item = selItem.Object as ProjectItem;
+
+                if (item != null && item.Properties != null)
+                    yield return item.Properties.Item("FullPath").Value.ToString();
+            }
         }
     }
 }

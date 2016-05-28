@@ -14,6 +14,7 @@ namespace MadsKristensen.ExtensibilityTools
     sealed class AddImageManifestCommand : BaseCommand
     {
         private List<string> _selectedFiles = new List<string>();
+        private string[] _allowed = { ".PNG", ".XAML" };
 
         private AddImageManifestCommand(IServiceProvider serviceProvider)
             : base(serviceProvider)
@@ -40,26 +41,15 @@ namespace MadsKristensen.ExtensibilityTools
             OleMenuCommand button = (OleMenuCommand)sender;
             button.Visible = button.Enabled = false;
 
-            var allowed = new[] { ".PNG", ".XAML" };
+            var files = ProjectHelpers.GetSelectedFilePaths();
+
+            if (!files.Any())
+                return;
+
             _selectedFiles.Clear();
+            _selectedFiles.AddRange(files.Where(f => _allowed.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase)));
 
-            for (int i = 1; i <= ProjectHelpers.DTE.SelectedItems.Count; i++)
-            {
-                string file = ProjectHelpers.DTE.SelectedItems.Item(i).ProjectItem?.FileNames[1];
-
-                if (!string.IsNullOrEmpty(file))
-                {
-                    string ext = Path.GetExtension(file);
-
-                    if (!allowed.Contains(ext, StringComparer.OrdinalIgnoreCase))
-                        return;
-
-                    if (!_selectedFiles.Contains(file))
-                        _selectedFiles.Add(file);
-                }
-            }
-
-            button.Visible = button.Enabled = true;
+            button.Visible = button.Enabled = _selectedFiles.Any();
         }
 
         private void Execute(object sender, EventArgs e)

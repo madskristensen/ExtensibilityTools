@@ -75,7 +75,7 @@ namespace MadsKristensen.ExtensibilityTools
 
         private void SetInputImagesAsResource(string fileName, Project project)
         {
-            foreach (var file in _selectedFiles)
+            foreach (var file in _selectedFiles.Where(f => Path.GetExtension(f).Equals(".png", StringComparison.OrdinalIgnoreCase)))
             {
                 var item = ProjectHelpers.DTE.Solution.FindProjectItem(file);
                 item.SetItemType("Resource");

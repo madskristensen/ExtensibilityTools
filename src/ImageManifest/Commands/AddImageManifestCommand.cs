@@ -54,26 +54,26 @@ namespace MadsKristensen.ExtensibilityTools
 
         private void Execute(object sender, EventArgs e)
         {
-            string fileName;
+            string manifestFileName;
 
-            if (!TryGetFileName(Path.GetDirectoryName(_selectedFiles.First()), out fileName))
+            if (!TryGetFileName(Path.GetDirectoryName(_selectedFiles.First()), out manifestFileName))
                 return;
 
-            ProjectHelpers.CheckFileOutOfSourceControl(fileName);
+            ProjectHelpers.CheckFileOutOfSourceControl(manifestFileName);
 
             var project = ProjectHelpers.DTE.Solution.FindProjectItem(_selectedFiles.First())?.ContainingProject;
 
-            if (!TryGenerateManifest(project, fileName))
+            if (!TryGenerateManifest(project, manifestFileName))
                 return;
 
-            IncludeManifestInProjectAndVsix(project, fileName);
-            SetInputImagesAsResource(fileName, project);
+            IncludeManifestInProjectAndVsix(project, manifestFileName);
+            SetInputImagesAsResource(project);
 
-            ProjectHelpers.DTE.ItemOperations.OpenFile(fileName);
+            ProjectHelpers.DTE.ItemOperations.OpenFile(manifestFileName);
             ProjectHelpers.DTE.ExecuteCommand("SolutionExplorer.SyncWithActiveDocument");
         }
 
-        private void SetInputImagesAsResource(string fileName, Project project)
+        private void SetInputImagesAsResource(Project project)
         {
             foreach (var file in _selectedFiles.Where(f => Path.GetExtension(f).Equals(".png", StringComparison.OrdinalIgnoreCase)))
             {

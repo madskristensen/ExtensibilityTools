@@ -48,11 +48,11 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
                 Label label = new Label();
                 label.Content = tooltip;
                 label.FontFamily = new FontFamily("Lucida Console");
-                _lblValue.ToolTip = label;
+                ToolTip = label;
             }
             else
             {
-                _lblValue.ToolTip = tooltip;
+                ToolTip = tooltip;
             }
         }
     }

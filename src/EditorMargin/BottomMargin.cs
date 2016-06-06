@@ -105,7 +105,8 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
 
                 if (typeNames.Any())
                 {
-                    _lblContentType.SetTooltip("base types: " + string.Join(", ", typeNames));
+                    _lblContentType.SetTooltip("base types: " + string.Join(", ", typeNames) + Environment.NewLine +
+                                               "Snapshot: " + buffer.CurrentSnapshot.Version);
                 }
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);

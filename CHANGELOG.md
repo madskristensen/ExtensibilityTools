@@ -2,6 +2,8 @@
 
 - [x] Add file icon for .imagemanifest files
 - [x] Generation of .imagemanifest files
+- [x] Show snapshot version in bottom margin (#37)
+- [x] Tooltips in bottom margin shows on category label
 - [ ] Create new item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener

@@ -48,7 +48,7 @@ namespace MadsKristensen.ExtensibilityTools
 
             _selectedFiles.Clear();
             _selectedFiles.AddRange(files.Where(f => _allowed.Contains(Path.GetExtension(f), StringComparer.OrdinalIgnoreCase)));
-
+            
             button.Visible = button.Enabled = _selectedFiles.Any();
         }
 
@@ -113,7 +113,7 @@ namespace MadsKristensen.ExtensibilityTools
                 string root = Path.GetDirectoryName(assembly);
                 string toolsDir = Path.Combine(root, "ImageManifest\\Tools");
 
-                string images = string.Join(";", _selectedFiles);
+                string images = string.Join(";", _selectedFiles.Select(f => PackageUtilities.MakeRelative(fileName, f)));
                 string assemblyName = project.Properties.Item("AssemblyName").Value.ToString();
                 string manifestName = Path.GetFileName(fileName);
 
@@ -124,7 +124,7 @@ namespace MadsKristensen.ExtensibilityTools
                     WorkingDirectory = Path.GetDirectoryName(fileName),
                     CreateNoWindow = true,
                     UseShellExecute = false,
-                    FileName = Path.Combine(toolsDir, "ManifestFromResources.exe"),
+                    FileName = Path.Combine("c:\\users\\madsk", "ManifestFromResources.exe"),
                     Arguments = args
                 };
 

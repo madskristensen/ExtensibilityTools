@@ -1,9 +1,5 @@
 # Roadmap
 
-- [x] Add file icon for .imagemanifest files
-- [x] Generation of .imagemanifest files
-- [x] Show snapshot version in bottom margin (#37)
-- [x] Tooltips in bottom margin shows on category label
 - [ ] Create new item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener
@@ -20,6 +16,16 @@ download in the
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+
+## 1.9
+
+**2016-06-24**
+
+- [x] Add file icon for .imagemanifest files
+- [x] Generation of .imagemanifest files
+- [x] Show snapshot version in bottom margin (#37)
+- [x] Tooltips in bottom margin shows on category label
+- [x] Installs for AllUsers so it works in Experimental Instance
 
 ## 1.8
 

@@ -124,7 +124,7 @@ namespace MadsKristensen.ExtensibilityTools
                     WorkingDirectory = Path.GetDirectoryName(fileName),
                     CreateNoWindow = true,
                     UseShellExecute = false,
-                    FileName = Path.Combine("c:\\users\\madsk", "ManifestFromResources.exe"),
+                    FileName = Path.Combine(toolsDir, "ManifestFromResources.exe"),
                     Arguments = args
                 };
 

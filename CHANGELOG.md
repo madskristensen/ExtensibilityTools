@@ -7,8 +7,6 @@
 - [ ] Show all classification types rendered (#21)
 - [ ] .pkgdef QuickInfo showing values of registry keys
 - [ ] .pkgdef Intellisense for registry keys
-- [x] Performance improvements in .pkgdef classifier
-- [x] Background package load
 
 Features that have a checkmark are complete and available for
 download in the
@@ -19,9 +17,12 @@ download in the
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
-## 1.9
+## 1.10
 
-**2016-06-24**
+- [x] Performance improvements in .pkgdef classifier
+- [x] Background package load
+
+## 1.9
 
 - [x] Add file icon for .imagemanifest files
 - [x] Generation of .imagemanifest files
@@ -31,16 +32,12 @@ on the official Visual Studio extension gallery.
 
 ## 1.8
 
-**2016-03-23**
-
 - [x] Support for VS15
 - [x] Fixed crashing bug for PTVS
 - [x] Support for .vsixmanifest in sub folder
 - [x] Fixed crashing bug when no solution was loaded
 
 ## 1.7
-
-**2016-03-23**
 
 - [x] Added GUID_TextEditorFactory to completion
 - [x] Added Language to .vsixmanifest class generator
@@ -50,8 +47,6 @@ on the official Visual Studio extension gallery.
 - [x] Added GitHub issue template
 
 ## 1.6
-
-**2016-02-15**
 
 - [x] Intellisense for `context` in `VisibilityItem`
 - [x] Support for `.pkgundef` files
@@ -67,8 +62,6 @@ on the official Visual Studio extension gallery.
 - [x] Add buttons to enable support for VsixGallery.com
 
 ## 1.5
-
-**2016-01-21**
 
 - [x] **VSCT files**
   - [x] Intellisense for custom GUIDs

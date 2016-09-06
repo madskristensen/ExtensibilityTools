@@ -408,8 +408,8 @@
     <None Include="Properties\template-builder.props" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
-      <LastGenOutput>source.extension.resx</LastGenOutput>
       <Generator>VsixManifestGenerator</Generator>
+      <LastGenOutput>source.extension.resx</LastGenOutput>
     </None>
     <Content Include="VSCT\Snippets\XML\Extensibility Tools\proj-startup.snippet">
       <IncludeInVSIX>true</IncludeInVSIX>

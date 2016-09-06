@@ -26,13 +26,14 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span2)
         {
             IList<ClassificationSpan> list = new List<ClassificationSpan>();
-            var lines = span2.Snapshot.Lines;
+
+            var lines = span2.Snapshot.Lines.Where(l => l.Start >= span2.Start && l.End <= span2.End);
 
             foreach (var line in lines)
             {
                 SnapshotSpan span = line.Extent;
-                string text = span.GetText();                
-                bool isCommentLine = false;
+                string text = span.GetText();
+                bool isCommentLine = false, isRegistryPath = false;
 
                 foreach (Match match in Variables.Comment.Matches(text))
                 {
@@ -46,16 +47,21 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
                 if (isCommentLine)
                     continue;
 
-                foreach (Match match in Variables.Keyword.Matches(text))
-                {
-                    SnapshotSpan keywordSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
-                    list.Add(new ClassificationSpan(keywordSpan, _keyword));
-                }
 
                 foreach (Match match in Variables.RegistryPath.Matches(text))
                 {
                     SnapshotSpan regSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
                     list.Add(new ClassificationSpan(regSpan, _registryPath));
+                    isRegistryPath = true;
+                }
+
+                if (isRegistryPath)
+                    return list;
+
+                foreach (Match match in Variables.Keyword.Matches(text))
+                {
+                    SnapshotSpan keywordSpan = new SnapshotSpan(span.Snapshot, span.Start + match.Index, match.Length);
+                    list.Add(new ClassificationSpan(keywordSpan, _keyword));
                 }
 
                 foreach (Match match in Variables.String.Matches(text))

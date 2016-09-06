@@ -1,4 +1,4 @@
-# Roadmap
+# Road map
 
 - [ ] Create new item templates for:
   - [ ] TextViewCreationListener
@@ -7,12 +7,13 @@
 - [ ] Show all classification types rendered (#21)
 - [ ] .pkgdef QuickInfo showing values of registry keys
 - [ ] .pkgdef Intellisense for registry keys
+- [x] Performance improvements in .pkgdef classifier
 
 Features that have a checkmark are complete and available for
 download in the
 [nightly build](http://vsixgallery.com/extension/f8330d54-0469-43a7-8fc0-7f19febeb897/).
 
-# Changelog
+# Change log
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
@@ -41,7 +42,7 @@ on the official Visual Studio extension gallery.
 **2016-03-23**
 
 - [x] Added GUID_TextEditorFactory to completion
-- [x] Added Language to vsixmanifest class generator
+- [x] Added Language to .vsixmanifest class generator
 - [x] Hide button when project is unloaded
 - [x] Use indent settings for VsixManifest generator
 - [x] Added contribution guidelines to readme.md
@@ -59,7 +60,7 @@ on the official Visual Studio extension gallery.
   - [x] Added Browser Link extension template
   - [x] Added Drop handler template
 - [x] Button to enable/disable VSIP logging (#22)
-- [x] Single File Generator for syncing .resx with vsixmanifest
+- [x] Single File Generator for syncing .resx with .vsixmanifest
   - [x] Generate .ico from icon in .vsixmanifest
   - [x] Generate .cs file from .vsixmanifest
 - [x] Add buttons to enable support for VsixGallery.com

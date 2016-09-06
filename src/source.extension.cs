@@ -11,7 +11,7 @@ namespace MadsKristensen.ExtensibilityTools
         public const string Name = "Extensibility Tools";
         public const string Description = "Contains numerous tools and helpers that makes it easier than ever to build Visual Studio extensions.";
         public const string Language = "en-US";
-        public const string Version = "1.9";
+        public const string Version = "1.10";
         public const string Author = "Mads Kristensen";
         public const string Tags = "VSIX, Extensibility, pkgdef, VSCT, Snippets, Encoding, Classification, ContentType, KnownMonikers";
     }

@@ -8,6 +8,7 @@
 - [ ] .pkgdef QuickInfo showing values of registry keys
 - [ ] .pkgdef Intellisense for registry keys
 - [x] Performance improvements in .pkgdef classifier
+- [x] Background package load
 
 Features that have a checkmark are complete and available for
 download in the

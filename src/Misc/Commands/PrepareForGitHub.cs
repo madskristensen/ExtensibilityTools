@@ -53,13 +53,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
             string solutionRoot = Path.GetDirectoryName(DTE.Solution.FullName);
             var manifestFile = Directory.EnumerateFiles(solutionRoot, "*.vsixmanifest", SearchOption.AllDirectories).FirstOrDefault();
             var manifest = await VsixManifestParser.FromFileAsync(manifestFile);
-
-            var additionalInfo = new Dictionary<string, string>
-            {
-                ["ChangeLogDate1"] = DateTime.Now.ToString("yyyy-MM-dd"),
-                ["ChangeLogDate2"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")
-            };
-
+            
             string assembly = Assembly.GetExecutingAssembly().Location;
             string root = Path.GetDirectoryName(assembly);
             string dir = Path.Combine(root, "Misc\\Resources\\GitHub");
@@ -71,7 +65,7 @@ namespace MadsKristensen.ExtensibilityTools.VSCT.Commands
 
                 if (!File.Exists(dest))
                 {
-                    var content = await ReplaceTokens(src, manifest, additionalInfo);
+                    var content = await ReplaceTokens(src, manifest);
 
                     File.WriteAllText(dest, content);
 

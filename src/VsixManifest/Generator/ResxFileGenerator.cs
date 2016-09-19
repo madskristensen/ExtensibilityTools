@@ -110,7 +110,7 @@ namespace MadsKristensen.ExtensibilityTools.VsixManifest
             sb.AppendLine($"{indent(1)}{{");
             sb.AppendLine($"{indent(2)}public const string Id = \"{_manifest.ID}\";");
             sb.AppendLine($"{indent(2)}public const string Name = \"{_manifest.Name?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
-            sb.AppendLine($"{indent(2)}public const string Description = \"{_manifest.Description?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");
+            sb.AppendLine($"{indent(2)}public const string Description = @\"{_manifest.Description}\";");
             sb.AppendLine($"{indent(2)}public const string Language = \"{_manifest.Language}\";");
             sb.AppendLine($"{indent(2)}public const string Version = \"{_manifest.Version}\";");
             sb.AppendLine($"{indent(2)}public const string Author = \"{_manifest.Author?.Replace("\\", "\\\\").Replace("\"", "\\\"")}\";");

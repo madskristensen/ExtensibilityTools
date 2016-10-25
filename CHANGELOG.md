@@ -1,5 +1,6 @@
 # Road map
 
+- [x] Added TextView role names to bottom margin
 - [ ] Create new item templates for:
   - [ ] TextViewCreationListener
   - [ ] TextViewConnectionListener

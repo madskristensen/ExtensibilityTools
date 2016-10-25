@@ -2,9 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using Microsoft.VisualStudio.PlatformUI;
-using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
@@ -19,7 +17,7 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         readonly IWpfTextView _textView;
         bool _isDisposed = false;
         IClassifier _classifier;
-        TextControl _lblClassification, _lblEncoding, _lblContentType, _lblSelection;
+        TextControl _lblClassification, _lblEncoding, _lblContentType, _lblSelection, _lblRoles;
         readonly ITextDocument _doc;
 
         public BottomMargin(IWpfTextView textView, IClassifierAggregatorService classifier, ITextDocumentFactoryService documentService)
@@ -43,9 +41,13 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
             _lblSelection = new TextControl("Selection");
             Children.Add(_lblSelection);
 
+            _lblRoles = new TextControl("Roles");
+            Children.Add(_lblRoles);
+
             UpdateClassificationLabel();
             UpdateContentTypeLabel();
             UpdateContentSelectionLabel();
+            UpdateRolesLabel();
 
             if (documentService.TryGetTextDocument(textView.TextDataModel.DocumentBuffer, out _doc))
             {
@@ -169,6 +171,23 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
                 }
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
+        }
+
+        private void UpdateRolesLabel()
+        {
+            if (_textView.Roles.Any())
+            {
+                var roles = _textView.Roles.Select(r => r);
+                var content = string.Join(Environment.NewLine, roles);
+
+                _lblRoles.SetTooltip(content);
+                _lblRoles.Value = roles.Last();
+            }
+            else
+            {
+                _lblRoles.Value = "n/a";
+                _lblRoles.ToolTip = null;
+            }
         }
 
         private ITextBuffer GetTextBuffer(out SnapshotPoint? point)

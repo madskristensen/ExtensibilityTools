@@ -175,19 +175,23 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
 
         private void UpdateRolesLabel()
         {
-            if (_textView.Roles.Any())
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                var roles = _textView.Roles.Select(r => r);
-                var content = string.Join(Environment.NewLine, roles);
+                if (_textView.Roles.Any())
+                {
+                    var roles = _textView.Roles.Select(r => r);
+                    var content = string.Join(Environment.NewLine, roles);
 
-                _lblRoles.SetTooltip(content);
-                _lblRoles.Value = roles.Last();
-            }
-            else
-            {
-                _lblRoles.Value = "n/a";
-                _lblRoles.ToolTip = null;
-            }
+                    _lblRoles.SetTooltip(content);
+                    _lblRoles.Value = roles.Last();
+                }
+                else
+                {
+                    _lblRoles.Value = "n/a";
+                    _lblRoles.ToolTip = null;
+                }
+
+            }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
         }
 
         private ITextBuffer GetTextBuffer(out SnapshotPoint? point)

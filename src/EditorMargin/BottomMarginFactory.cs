@@ -22,6 +22,9 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
 
         public IWpfTextViewMargin CreateMargin(IWpfTextViewHost wpfTextViewHost, IWpfTextViewMargin marginContainer)
         {
+            if (wpfTextViewHost == null || _classifierService == null || _documentService == null)
+                return null;
+
             if (ExtensibilityToolsPackage.Options == null || !ExtensibilityToolsPackage.Options.ShowBottomMargin)
                 return null;
 

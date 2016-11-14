@@ -11,14 +11,14 @@ using Microsoft.VisualStudio.TextTemplating.VSHost;
 
 namespace MadsKristensen.ExtensibilityTools
 {
-    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(Options), Vsix.Name, "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
     [ProvideCodeGenerator(typeof(ResxFileGenerator), ResxFileGenerator.Name, ResxFileGenerator.Desription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
+    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [Guid(PackageGuids.guidExtensibilityToolsPkgString)]
     [ProvideToolWindow(typeof(SwatchesWindow))]
     public sealed class ExtensibilityToolsPackage : Package

@@ -50,13 +50,16 @@ namespace MadsKristensen.ExtensibilityTools.Misc.Commands
 
         public static BitmapSource GetImage(ImageMoniker moniker, int size)
         {
-            ImageAttributes imageAttributes = new ImageAttributes();
-            imageAttributes.Flags = (uint)_ImageAttributesFlags.IAF_RequiredFlags;
-            imageAttributes.ImageType = (uint)_UIImageType.IT_Bitmap;
-            imageAttributes.Format = (uint)_UIDataFormat.DF_WPF;
-            imageAttributes.LogicalHeight = size;
-            imageAttributes.LogicalWidth = size;
-            imageAttributes.StructSize = Marshal.SizeOf(typeof(ImageAttributes));
+            var imageAttributes = new ImageAttributes
+            {
+                Flags = (uint)_ImageAttributesFlags.IAF_RequiredFlags,
+                ImageType = (uint)_UIImageType.IT_Bitmap,
+                Format = (uint)_UIDataFormat.DF_WPF,
+                Dpi = 96,
+                LogicalHeight = size,
+                LogicalWidth = size,
+                StructSize = Marshal.SizeOf(typeof(ImageAttributes)),
+            };
 
             IVsUIObject result = _imageService.GetImage(moniker, imageAttributes);
 
@@ -133,7 +136,7 @@ namespace MadsKristensen.ExtensibilityTools.Misc.Commands
                 dialog.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 var dialogResult = dialog.ShowDialog();
 
-                if(dialogResult == System.Windows.Forms.DialogResult.OK)
+                if (dialogResult == System.Windows.Forms.DialogResult.OK)
                     return dialog.SelectedPath;
                 else
                 {
@@ -146,7 +149,7 @@ namespace MadsKristensen.ExtensibilityTools.Misc.Commands
         {
             var fileParentPath = Path.GetDirectoryName(fileName);
 
-            if(Directory.Exists(fileParentPath) == false)
+            if (Directory.Exists(fileParentPath) == false)
                 Directory.CreateDirectory(fileParentPath);
 
             using (var fileStream = new FileStream(fileName, FileMode.Create))

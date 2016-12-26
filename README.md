@@ -173,7 +173,7 @@ files is updated accordingly as well.
 Icon files (.ico) are always hard to create and maintain,
 so this feature will auto-generate it for you automatically.
 
-All there is required is that you've referenced an image
+All that is required is that you've referenced an image
 file in the .vsixmanifest's _Icon_ property and a new
 .ico file is automtically generated with the right dimensions
 for VS extensions.

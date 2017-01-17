@@ -10,7 +10,7 @@ namespace MadsKristensen.ExtensibilityTools.ThemeColorsToolWindow
     {
         public static ImageSource GetImage(this ImageMoniker imageMoniker)
         {
-            IVsImageService2 vsIconService = ServiceProvider.GlobalProvider.GetService(typeof(SVsImageService)) as IVsImageService2;
+            var vsIconService = ServiceProvider.GlobalProvider.GetService(typeof(SVsImageService)) as IVsImageService2;
 
             ImageAttributes imageAttributes = new ImageAttributes();
             imageAttributes.Flags = (uint)_ImageAttributesFlags.IAF_RequiredFlags;

@@ -11,9 +11,10 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace MadsKristensen.ExtensibilityTools.Pkgdef
 {
-    class PkgdefErrorTagger : ITagger<IErrorTag>
+    class PkgdefErrorTagger : ITagger<IErrorTag>, IDisposable
     {
         private IClassifier _classifier;
+        private bool _disposed = false;
         private ErrorListProvider _errorlist;
         private ITextDocument _document;
         private IWpfTextView _view;
@@ -169,6 +170,16 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         {
             add { }
             remove { }
+        }
+
+        public void Dispose()
+        {
+            if (!_disposed)
+            {
+                _disposed = true;
+
+                (_classifier as IDisposable)?.Dispose();
+            }
         }
     }
 

@@ -264,6 +264,8 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
 
                 _doc.FileActionOccurred -= FileChangedOnDisk;
                 _textView.Caret.PositionChanged -= CaretPositionChanged;
+
+                (_classifier as IDisposable)?.Dispose();
             }
         }
     }

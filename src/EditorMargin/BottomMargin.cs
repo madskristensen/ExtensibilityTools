@@ -118,37 +118,44 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (_textView.TextBuffer.CurrentSnapshot.Length <= 1)
-                    return;
-
-                SnapshotPoint? point;
-                ITextBuffer buffer = GetTextBuffer(out point);
-                int position = point.Value.Position;
-
-                if (position == buffer.CurrentSnapshot.Length)
-                    position = position - 1;
-
-                var span = new SnapshotSpan(buffer.CurrentSnapshot, position, 1);
-                var cspans = _classifier.GetClassificationSpans(span);
-
-                if (cspans.Count == 0)
+                try
                 {
-                    _lblClassification.Value = "None";
-                    _lblClassification.SetTooltip("None");
-                }
-                else
-                {
-                    var ctype = cspans[0].ClassificationType;
-                    string name = ctype.Classification;
+                    if (_textView.TextBuffer.CurrentSnapshot.Length <= 1)
+                        return;
 
-                    if (name.Contains(" - "))
+                    SnapshotPoint? point;
+                    ITextBuffer buffer = GetTextBuffer(out point);
+                    int position = point.Value.Position;
+
+                    if (position == buffer.CurrentSnapshot.Length)
+                        position = position - 1;
+
+                    var span = new SnapshotSpan(buffer.CurrentSnapshot, position, 1);
+                    var cspans = _classifier.GetClassificationSpans(span);
+
+                    if (cspans.Count == 0)
                     {
-                        int index = name.IndexOf(" - ", StringComparison.Ordinal);
-                        name = name.Substring(0, index).Trim();
+                        _lblClassification.Value = "None";
+                        _lblClassification.SetTooltip("None");
                     }
+                    else
+                    {
+                        var ctype = cspans[0].ClassificationType;
+                        string name = ctype.Classification;
 
-                    _lblClassification.SetTooltip(ctype.Classification);
-                    _lblClassification.Value = name;
+                        if (name.Contains(" - "))
+                        {
+                            int index = name.IndexOf(" - ", StringComparison.Ordinal);
+                            name = name.Substring(0, index).Trim();
+                        }
+
+                        _lblClassification.SetTooltip(ctype.Classification);
+                        _lblClassification.Value = name;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(ex);
                 }
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
@@ -158,16 +165,23 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                int start = _textView.Selection.Start.Position.Position;
-                int end = _textView.Selection.End.Position.Position;
+                try
+                {
+                    int start = _textView.Selection.Start.Position.Position;
+                    int end = _textView.Selection.End.Position.Position;
 
-                if (end == start)
-                {
-                    _lblSelection.Value = start.ToString();
+                    if (end == start)
+                    {
+                        _lblSelection.Value = start.ToString();
+                    }
+                    else
+                    {
+                        _lblSelection.Value = $"{start}-{end} ({end - start} chars)";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    _lblSelection.Value = $"{start}-{end} ({end - start} chars)";
+                    Logger.Log(ex);
                 }
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);
@@ -177,18 +191,25 @@ namespace MadsKristensen.ExtensibilityTools.EditorMargin
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (_textView.Roles.Any())
+                try
                 {
-                    var roles = _textView.Roles.Select(r => r);
-                    var content = string.Join(Environment.NewLine, roles);
+                    if (_textView.Roles.Any())
+                    {
+                        var roles = _textView.Roles.Select(r => r);
+                        var content = string.Join(Environment.NewLine, roles);
 
-                    _lblRoles.SetTooltip(content);
-                    _lblRoles.Value = roles.Last();
+                        _lblRoles.SetTooltip(content);
+                        _lblRoles.Value = roles.Last();
+                    }
+                    else
+                    {
+                        _lblRoles.Value = "n/a";
+                        _lblRoles.ToolTip = null;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    _lblRoles.Value = "n/a";
-                    _lblRoles.ToolTip = null;
+                    Logger.Log(ex);
                 }
 
             }), System.Windows.Threading.DispatcherPriority.ApplicationIdle, null);

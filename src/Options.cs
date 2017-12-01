@@ -9,7 +9,7 @@ namespace MadsKristensen.ExtensibilityTools
         [DisplayName("Show editor margin")]
         [Description("The editor margin shows information about the encoding, textbuffers and classifications.")]
         [DefaultValue(true)]
-        public bool ShowBottomMargin { get; set; } = true;
+        public bool ShowBottomMargin { get; set; }
 
         [Category("Pkgdef editor")]
         [DisplayName("Enable Intellisense")]

@@ -1,36 +1,61 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using MadsKristensen.ExtensibilityTools.ThemeColorsToolWindow;
 using MadsKristensen.ExtensibilityTools.VSCT.Commands;
 using MadsKristensen.ExtensibilityTools.VSCT.Generator;
 using MadsKristensen.ExtensibilityTools.VsixManifest;
 using MadsKristensen.ExtensibilityTools.VsixManifest.Commands;
+using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TextTemplating.VSHost;
+using Task = System.Threading.Tasks.Task;
 
 namespace MadsKristensen.ExtensibilityTools
 {
-    [PackageRegistration(UseManagedResourcesOnly = true)]
+    [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(typeof(Options), Vsix.Name, "General", 101, 102, true, new[] { "pkgdef", "vsct" })]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
     [ProvideCodeGenerator(typeof(VsctCodeGenerator), VsctCodeGenerator.GeneratorName, VsctCodeGenerator.GeneratorDescription, true, ProjectSystem = ProvideCodeGeneratorAttribute.VisualBasicProjectGuid)]
     [ProvideCodeGenerator(typeof(ResxFileGenerator), ResxFileGenerator.Name, ResxFileGenerator.Desription, true, ProjectSystem = ProvideCodeGeneratorAttribute.CSharpProjectGuid)]
-    [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
+    [ProvideAutoLoad(VSConstants.UICONTEXT.ShellInitialized_string, PackageAutoLoadFlags.BackgroundLoad)]
     [Guid(PackageGuids.guidExtensibilityToolsPkgString)]
     [ProvideToolWindow(typeof(SwatchesWindow))]
-    public sealed class ExtensibilityToolsPackage : Package
+    public sealed class ExtensibilityToolsPackage : AsyncPackage
     {
-        public static Options Options { get; private set; }
+        private static Options _options;
+        private static object _syncRoot = new object();
 
-        protected override void Initialize()
+        public static Options Options
         {
-            Options = (Options)GetDialogPage(typeof(Options));
+            get
+            {
+                if (_options == null)
+                {
+                    lock (_syncRoot)
+                    {
+                        if (_options == null)
+                        {
+                            EnsurePackageLoaded();
+                        }
+                    }
+                }
 
-            Logger.Initialize(this, Vsix.Name);
-            ProjectHelpers.Initialize(this);
+                return _options;
+            }
+        }
+
+        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        {
+            await ProjectHelpers.InitializeAsync(this);
+            await Logger.InitializeAsync(this, Vsix.Name);
+
+            await JoinableTaskFactory.SwitchToMainThreadAsync();
+
+            _options = (Options)GetDialogPage(typeof(Options));
 
             // VSCT
             AddCustomToolCommand.Initialize(this);
@@ -52,6 +77,16 @@ namespace MadsKristensen.ExtensibilityTools
 
             // Image Manifest
             AddImageManifestCommand.Initialize(this);
+        }
+
+        private static void EnsurePackageLoaded()
+        {
+            var shell = (IVsShell)GetGlobalService(typeof(SVsShell));
+
+            if (shell.IsPackageLoaded(ref PackageGuids.guidExtensibilityToolsPkg, out IVsPackage package) != VSConstants.S_OK)
+            {
+                ErrorHandler.Succeeded(shell.LoadPackage(ref PackageGuids.guidExtensibilityToolsPkg, out package));
+            }
         }
     }
 }

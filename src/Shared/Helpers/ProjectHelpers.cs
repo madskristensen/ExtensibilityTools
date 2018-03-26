@@ -8,6 +8,7 @@ using EnvDTE80;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Task = System.Threading.Tasks.Task;
 
 namespace MadsKristensen.ExtensibilityTools
 {
@@ -18,10 +19,10 @@ namespace MadsKristensen.ExtensibilityTools
 
         static IServiceProvider _serviceProvider;
 
-        public static void Initialize(IServiceProvider serviceProvider)
+        public static async Task InitializeAsync(AsyncPackage serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            DTE = (DTE2)serviceProvider.GetService(typeof(DTE));
+            DTE = await serviceProvider.GetServiceAsync(typeof(DTE)) as DTE2;
         }
 
         public static bool IsExtensibilityProject(this Project project)

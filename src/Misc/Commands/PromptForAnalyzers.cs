@@ -41,7 +41,7 @@ namespace MadsKristensen.ExtensibilityTools
 
         private static bool ShouldCheckInstallation(Solution solution)
         {
-            if (!ExtensibilityToolsPackage.Options.PromptForAnalyzers  || !solution.IsOpen)
+            if (!ExtensibilityToolsPackage.Options.PromptForAnalyzers || !solution.IsOpen)
             {
                 return false;
             }
@@ -80,7 +80,7 @@ namespace MadsKristensen.ExtensibilityTools
             IEnumerable<Project> projects = ProjectHelpers.GetAllProjectsInSolution(solution);
             var candidateProjects = new List<Project>();
 
-            foreach (Project project in projects)
+            foreach (Project project in projects.Where(p => p.Kind == "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}")) // .NET project kind
             {
                 if (project.IsExtensibilityProject(solution) && !IsPackageInstalled(project))
                 {

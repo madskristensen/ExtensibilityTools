@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel.Composition;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Text;
@@ -24,12 +24,15 @@ namespace MadsKristensen.ExtensibilityTools.Pkgdef
         {
             if (!ExtensibilityToolsPackage.Options.PkgdefEnableValidation)
                 return null;
-
-            var errorlist = buffer.Properties.GetProperty(typeof(ErrorListProvider)) as ErrorListProvider;
-            var view = buffer.Properties.GetProperty(typeof(IWpfTextView)) as IWpfTextView;
+                
+            if (!buffer.Properties.TryGetProperty(typeof(ErrorListProvider), out ErrorListProvider errorlist))
+                return null;
+                
+            if (!buffer.Properties.TryGetProperty(typeof(IWpfTextView), out IWpfTextView view))
+                return null;
 
             ITextDocument document;
-            if (TextDocumentFactoryService.TryGetTextDocument(buffer, out document) && errorlist != null)
+            if (TextDocumentFactoryService.TryGetTextDocument(buffer, out document) && errorlist != null && view != null)
             {
                 return new PkgdefErrorTagger(view, _classifierAggregatorService, errorlist, document) as ITagger<T>;
             }

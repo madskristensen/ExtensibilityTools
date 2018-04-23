@@ -132,7 +132,7 @@ namespace MadsKristensen.ExtensibilityTools
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            string msg = $"{projects.Count()} VSIX projects in this solution aren't using the VSSDK Analyzers NuGet package.\r\rDo you wish to install it now?";
+            string msg = $"One or more VSIX projects in this solution aren't using the Microsoft.VisualStudio.SDK.Analyzers NuGet package.\r\rDo you wish to install it now?";
 
             MessageBoxResult answer = MessageBox.Show(msg, Vsix.Name, MessageBoxButton.OKCancel, MessageBoxImage.Question);
 

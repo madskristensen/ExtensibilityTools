@@ -88,19 +88,20 @@ namespace MadsKristensen.ExtensibilityTools
                 }
             }
 
+            _history.Add(_dte.Solution?.FileName);
+
             if (candidateProjects.Count == 0)
             {
                 return;
             }
 
-            _history.Add(_dte.Solution?.FileName);
             await PromptToInstallAsync(candidateProjects).ConfigureAwait(false);
 
             string configFile = GetConfigFilePath(_dte.Solution);
             PackageUtilities.EnsureOutputPath(Path.GetDirectoryName(configFile));
             try
             {
-                File.WriteAllText(configFile, "true");
+                File.WriteAllText(configFile, "1");
             }
             catch (Exception ex)
             {

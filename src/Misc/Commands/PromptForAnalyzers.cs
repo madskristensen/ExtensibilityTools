@@ -88,6 +88,11 @@ namespace MadsKristensen.ExtensibilityTools
                 }
             }
 
+            if (candidateProjects.Count == 0)
+            {
+                return;
+            }
+
             _history.Add(_dte.Solution?.FileName);
             await PromptToInstallAsync(candidateProjects).ConfigureAwait(false);
 
@@ -106,7 +111,7 @@ namespace MadsKristensen.ExtensibilityTools
         private static string GetConfigFilePath(Solution solution)
         {
             string dir = Path.GetDirectoryName(solution.FileName);
-            return Path.Combine(dir, ".vs", "prompt.txt");
+            return Path.Combine(dir, ".vs", "VSSDK.Analyzers.txt");
         }
 
         private static bool IsPackageInstalled(Project project)
@@ -126,7 +131,7 @@ namespace MadsKristensen.ExtensibilityTools
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            string msg = $"{projects.Count()} VSIX projects in this solution aren't use the new VSSDK Analyzers NuGet package.\r\rDo you wish to install it now?";
+            string msg = $"{projects.Count()} VSIX projects in this solution aren't using the new VSSDK Analyzers NuGet package.\r\rDo you wish to install it now?";
 
             MessageBoxResult answer = MessageBox.Show(msg, Vsix.Name, MessageBoxButton.OKCancel, MessageBoxImage.Question);
 

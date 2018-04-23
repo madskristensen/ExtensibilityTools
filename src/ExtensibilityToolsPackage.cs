@@ -77,6 +77,9 @@ namespace MadsKristensen.ExtensibilityTools
 
             // Image Manifest
             AddImageManifestCommand.Initialize(this);
+
+            // SDK Analyzers
+            await PromptForAnalyzers.InitializeAsync(this);
         }
 
         private static void EnsurePackageLoaded()

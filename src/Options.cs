@@ -11,6 +11,12 @@ namespace MadsKristensen.ExtensibilityTools
         [DefaultValue(false)]
         public bool ShowBottomMargin { get; set; }
 
+        [Category("General")]
+        [DisplayName("Prompt to install analyzer")]
+        [Description("Specify if you want to be prompted to install the VSSDK Analyzer NuGet package.")]
+        [DefaultValue(false)]
+        public bool PromptForAnalyzers { get; set; } = true;
+
         [Category("Pkgdef editor")]
         [DisplayName("Enable Intellisense")]
         [Description("Any open .pkgdef files must be reopened for the setting to take effect.")]

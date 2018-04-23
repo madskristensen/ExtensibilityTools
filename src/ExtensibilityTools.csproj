@@ -56,6 +56,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.ComponentModelHost, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.VisualStudio.ComponentModelHost.14.0.25424\lib\net45\Microsoft.VisualStudio.ComponentModelHost.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=14.0.0.0" />
     <Reference Include="Microsoft.VisualStudio.Editor, Version=14.0.0.0" />
     <Reference Include="Microsoft.VisualStudio.ImageCatalog, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -91,6 +94,10 @@
       <ForceIncludeInVsix>true</ForceIncludeInVsix>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Threading, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NuGet.VisualStudio, Version=3.5.0.1996, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuGet.VisualStudio.3.5.0\lib\net45\NuGet.VisualStudio.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -147,6 +154,7 @@
     <Compile Include="ImageManifest\Commands\AddImageManifestCommand.cs" />
     <Compile Include="Misc\Commands\PrepareForAppVeyor.cs" />
     <Compile Include="Misc\Commands\PrepareForGitHub.cs" />
+    <Compile Include="Misc\Commands\PromptForAnalyzers.cs" />
     <Compile Include="Shared\Helpers\Logger.cs" />
     <Compile Include="Shared\Helpers\ProjectHelpers.cs" />
     <Compile Include="VsixManifest\Parser\Manifest.cs" />

@@ -25,12 +25,12 @@ namespace MadsKristensen.ExtensibilityTools
             DTE = await serviceProvider.GetServiceAsync(typeof(DTE)) as DTE2;
         }
 
-        public static bool IsExtensibilityProject(this Project project)
+        public static bool IsExtensibilityProject(this Project project, IVsSolution solution = null)
         {
             if (project == null)
                 return false;
 
-            var solution = (IVsSolution)_serviceProvider.GetService(typeof(IVsSolution));
+            solution = solution ?? (IVsSolution)_serviceProvider.GetService(typeof(IVsSolution));
 
             if (solution == null)
                 return false;
@@ -89,9 +89,9 @@ namespace MadsKristensen.ExtensibilityTools
             return selectedObject;
         }
 
-        public static IEnumerable<Project> GetAllProjectsInSolution()
+        public static IEnumerable<Project> GetAllProjectsInSolution(IVsSolution solution = null)
         {
-            var solution = (IVsSolution)_serviceProvider.GetService(typeof(IVsSolution));
+            solution = solution ?? (IVsSolution)_serviceProvider.GetService(typeof(IVsSolution));
 
             foreach (IVsHierarchy hier in GetProjectsInSolution(solution))
             {

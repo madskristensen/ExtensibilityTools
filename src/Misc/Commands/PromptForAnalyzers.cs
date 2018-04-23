@@ -41,7 +41,7 @@ namespace MadsKristensen.ExtensibilityTools
 
         private static bool ShouldCheckInstallation(Solution solution)
         {
-            if (!ExtensibilityToolsPackage.Options.PromptForAnalyzers || !solution.IsOpen)
+            if (!ExtensibilityToolsPackage.Options.PromptForAnalyzers || string.IsNullOrEmpty(solution.FileName) || !solution.IsOpen)
             {
                 return false;
             }

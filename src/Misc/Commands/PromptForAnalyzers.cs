@@ -145,7 +145,7 @@ namespace MadsKristensen.ExtensibilityTools
                 {
                     foreach (Project project in projects)
                     {
-                        installer.InstallLatestPackage(null, project, _nugetId, true, false);
+                        installer.InstallLatestPackage(null, project, _nugetId, false, false);
                     }
                 }
                 catch (Exception ex)

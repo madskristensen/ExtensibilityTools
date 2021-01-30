@@ -1,5 +1,14 @@
 # Extensibility Tools for Visual Studio
 
+Updated to support VS 2019, I updated this extension to modify the VuePack2017.
+
+> NOTE: when restoring nuget, might need to update `Microsoft.VisualStudio.TextTemplating.VSHost.14.0` to version 13.2.25407 to successful compile.
+
+_packages.config_
+```xml
+<package id="Microsoft.VisualStudio.TextTemplating.VSHost.14.0" version="14.3.25407" targetFramework="net45" />
+```
+
 [![Build status](https://ci.appveyor.com/api/projects/status/hv6uyc059rqbc6fj?svg=true)](https://ci.appveyor.com/project/madskristensen/extensibilitytools)
 
 Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/ab39a092-1343-46e2-b0f1-6a3f91155aa6)

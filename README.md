@@ -2,7 +2,7 @@
 
 Updated to support VS 2019, I updated this extension to modify the VuePack2017.
 
-> NOTE: when restoring nuget, might need to update `Microsoft.VisualStudio.TextTemplating.VSHost.14.0` to version 13.2.25407 to successful compile.
+> NOTE: when restoring nuget, might need to update `Microsoft.VisualStudio.TextTemplating.VSHost.14.0` to version below to successful compile.
 
 _packages.config_
 ```xml
